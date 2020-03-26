@@ -4,6 +4,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public final class Main extends Application {
@@ -21,9 +25,29 @@ public final class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../javafx/Gui.fxml"));
-        primaryStage.setTitle(Integer.toString(SudokuDisplayFields(puzzle)));
-        primaryStage.setScene(new Scene(root, 300, 275));
+//        Parent root = FXMLLoader.load(getClass().getResource("../javafx/Gui.fxml"));
+//        primaryStage.setTitle("Welcome to version " + Integer.toString(SudokuDisplayFields(puzzle)));
+//
+//        Text t = new Text();
+//        t.setText("This is a text sample");
+//        Button butt = new Button();
+//        butt.setText("Klick mich");
+//
+//        GridPane grid = new GridPane();
+//        grid.setHgap(5);
+//        grid.setVgap(5);
+//        grid.add(butt, 0, 0);
+//        grid.add(t, 0, 1);
+//        grid.setGridLinesVisible(false);
+//
+//
+//        primaryStage.setScene(new Scene(root, 300, 275));
+//        primaryStage.show();
+
+        final TextField textField = new TextField( Integer.toString(SudokuDisplayFields(puzzle))  + " Schokoladenkuchen");
+
+
+        primaryStage.setScene( new javafx.scene.Scene( textField ));
         primaryStage.show();
     }
 
