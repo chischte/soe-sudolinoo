@@ -19,8 +19,9 @@
     <children>
         <HBox GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="3"
               alignment="BASELINE_CENTER" styleClass="header">
-            <Label text="Hello world" />
+            <Label text="Sudoku" />
         </HBox>
+        
         <Label styleClass="label" text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
         <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="2"/>
         <HBox spacing="10" alignment="bottom_right"

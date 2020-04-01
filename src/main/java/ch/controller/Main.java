@@ -44,21 +44,21 @@ public final class Main extends Application {
         // Define grid pane
         Stage window = primaryStage;
         window.setTitle("Solve This Sudoku");
-        GridPane gpLayout = new GridPane();
-        gpLayout.setPadding(new Insets(20, 20, 20, 20));
-        gpLayout.setHgap(8);
-        gpLayout.setVgap(8);
+        GridPane gridPane = new GridPane();
+        gridPane.setPadding(new Insets(20, 20, 20, 20));
+        gridPane.setHgap(8);
+        gridPane.setVgap(8);
 
         // Define boxes
-        VBox outerBox = new VBox(0);
-        VBox buttonBox = new VBox();
+        VBox outerVBox = new VBox(0);
+        VBox buttonVBox = new VBox();
         createdByMsg.setPadding(new Insets(10, 0, 0, 0));
-        buttonBox.setAlignment(Pos.CENTER);
-        buttonBox.getChildren().addAll(getGameButton, solveButton, createdByMsg);
-        outerBox.getChildren().addAll(gpLayout, buttonBox);
+        buttonVBox.setAlignment(Pos.CENTER);
+        buttonVBox.getChildren().addAll(getGameButton, solveButton, createdByMsg);
+        outerVBox.getChildren().addAll(gridPane, buttonVBox);
 
         // Define window size
-        window.setScene(new Scene(outerBox, 350, 450));
+        window.setScene(new Scene(outerVBox, 350, 450));
         window.show();
 
 
@@ -66,7 +66,7 @@ public final class Main extends Application {
         for (int row = 0; row < fieldsize.length; row++) {
             for (int col = 0; col < fieldsize[0].length; col++) {
                 fieldsize[row][col] = new TextField();
-                gpLayout.getChildren().add(fieldsize[row][col]);
+                gridPane.getChildren().add(fieldsize[row][col]);
                 GridPane.setConstraints(fieldsize[row][col], row, col);
             }
         }
