@@ -5,7 +5,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.Scene;
@@ -26,7 +25,7 @@ public final class Main extends Application {
     };
 
 
-    private Button[][] numberOfFields = new Button[9][9];
+    private Button[][] sudokuFields = new Button[9][9];
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -62,23 +61,24 @@ public final class Main extends Application {
 
 
         // Create text fields
-        for (int row = 0; row < numberOfFields.length; row++) {
-            for (int col = 0; col < numberOfFields[0].length; col++) {
-                numberOfFields[row][col] = new Button();
-                gridPane.getChildren().add(numberOfFields[row][col]);
-                GridPane.setConstraints(numberOfFields[row][col], row, col);
+        for (int row = 0; row < sudokuFields.length; row++) {
+            for (int col = 0; col < sudokuFields[0].length; col++) {
+                sudokuFields[row][col] = new Button();
+                sudokuFields[row][col].setStyle("-fx-background-color: POWDERBLUE; -fx-font-weight: bold");
+                gridPane.getChildren().add(sudokuFields[row][col]);
+                GridPane.setConstraints(sudokuFields[row][col], row, col);
             }
         }
 
 
         // Fill text fields with numbers
-        for (int row = 0; row < numberOfFields.length; row++) {
-            for (int col = 0; col < numberOfFields[0].length; col++) {
+        for (int row = 0; row < sudokuFields.length; row++) {
+            for (int col = 0; col < sudokuFields[0].length; col++) {
                 // Leave fields with value 0 empty
                 if (puzzle[row][col] != 0) {
-                    numberOfFields[row][col].setText(puzzle[col][row] + "");
+                    sudokuFields[row][col].setText(puzzle[col][row] + "");
                 } else {
-                    numberOfFields[row][col].setText("  ");
+                    sudokuFields[row][col].setText("  ");
                 }
             }
         }
