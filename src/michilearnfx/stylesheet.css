@@ -1,0 +1,14 @@
+.header {
+    -fx-font-size: 20px;
+    -fx-background-color:  #1e90ff;
+    -fx-font-weight: bold;
+}
+
+.layout {
+    -fx-background-color: #40cc75;
+}
+
+.label{
+    -fx-font-family: Consolas;
+    -fx-font-weight: bold;
+}

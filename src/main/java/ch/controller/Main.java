@@ -1,6 +1,7 @@
 package main.java.ch.controller;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -77,6 +78,7 @@ public final class Main extends Application {
                 fieldsize[row][col].setText(puzzle[col][row] + "");
             }
         }
+
 
     }
 
