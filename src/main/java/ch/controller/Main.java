@@ -35,13 +35,13 @@ public final class Main extends Application {
         // Button to get a new Sudoku
         Button getGameButton = new Button("Get Sudoku");
 
-        // Button für die Eingabe
+        // Button to solve the Sudoku
         Button solveButton = new Button("Solve Sudoku");
 
-        //Komentar bei der Ausgabe
+        // Add a created by comment
         Label createdByMsg = new Label("Created by Roland Jaggi, Michael Wettstein, Joel Iselin");
 
-        // Das grundgerüst für die ausgabe
+        // Define grid pane
         Stage window = primaryStage;
         window.setTitle("Solve This Sudoku");
         GridPane gpLayout = new GridPane();
@@ -49,19 +49,20 @@ public final class Main extends Application {
         gpLayout.setHgap(8);
         gpLayout.setVgap(8);
 
-        VBox v = new VBox(0);
-        VBox v2 = new VBox();
+        // Define boxes
+        VBox outerBox = new VBox(0);
+        VBox buttonBox = new VBox();
         createdByMsg.setPadding(new Insets(10, 0, 0, 0));
-        v2.setAlignment(Pos.CENTER);
-        v2.getChildren().addAll(getGameButton,solveButton, createdByMsg);
-        v.getChildren().addAll(gpLayout, v2);
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.getChildren().addAll(getGameButton, solveButton, createdByMsg);
+        outerBox.getChildren().addAll(gpLayout, buttonBox);
 
-        // Grösse von dem Anzeige Fenser
-        window.setScene(new Scene(v, 350, 450));
+        // Define window size
+        window.setScene(new Scene(outerBox, 350, 450));
         window.show();
 
 
-        // Schleife um die Textfelder zu erstellen
+        // Create text fields
         for (int row = 0; row < fieldsize.length; row++) {
             for (int col = 0; col < fieldsize[0].length; col++) {
                 fieldsize[row][col] = new TextField();
@@ -71,7 +72,7 @@ public final class Main extends Application {
         }
 
 
-        // Die Zahlen werden in das Sudoku gefüllt
+        // Fill text fields with numbers
         for (int row = 0; row < fieldsize.length; row++) {
             for (int col = 0; col < fieldsize[0].length; col++) {
                 fieldsize[row][col].setText("1");
@@ -83,14 +84,11 @@ public final class Main extends Application {
     }
 
 
-
-
     //public static void main(String[] args) {
     //    launch(args);
     //}
 
 }
-
 
 
 //        final TextField textField = new TextField(SudokuDisplayFields(puzzle) + " Schokoladenkuchen");
