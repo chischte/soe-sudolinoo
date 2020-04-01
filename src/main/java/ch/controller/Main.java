@@ -1,7 +1,6 @@
 package main.java.ch.controller;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -17,9 +16,9 @@ public final class Main extends Application {
     private static int[][] puzzle = {
             {5, 3, 4, 6, 7, 8, 9, 1, 2},
             {6, 7, 2, 1, 9, 5, 3, 4, 8},
-            {1, 9, 8, 3, 4, 2, 5, 6, 7},
+            {1, 0, 8, 3, 4, 2, 5, 6, 7},
             {8, 5, 9, 7, 6, 1, 4, 2, 3},
-            {4, 2, 6, 8, 5, 3, 7, 9, 1},
+            {4, 2, 6, 0, 5, 3, 7, 9, 1},
             {7, 1, 3, 9, 2, 4, 8, 5, 6},
             {9, 6, 1, 5, 3, 7, 2, 8, 4},
             {2, 8, 7, 4, 1, 9, 6, 3, 5},
@@ -27,7 +26,7 @@ public final class Main extends Application {
     };
 
 
-    private TextField[][] fieldsize = new TextField[9][9];
+    private Button[][] numberOfFields = new Button[9][9];
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -63,23 +62,26 @@ public final class Main extends Application {
 
 
         // Create text fields
-        for (int row = 0; row < fieldsize.length; row++) {
-            for (int col = 0; col < fieldsize[0].length; col++) {
-                fieldsize[row][col] = new TextField();
-                gridPane.getChildren().add(fieldsize[row][col]);
-                GridPane.setConstraints(fieldsize[row][col], row, col);
+        for (int row = 0; row < numberOfFields.length; row++) {
+            for (int col = 0; col < numberOfFields[0].length; col++) {
+                numberOfFields[row][col] = new Button();
+                gridPane.getChildren().add(numberOfFields[row][col]);
+                GridPane.setConstraints(numberOfFields[row][col], row, col);
             }
         }
 
 
         // Fill text fields with numbers
-        for (int row = 0; row < fieldsize.length; row++) {
-            for (int col = 0; col < fieldsize[0].length; col++) {
-                fieldsize[row][col].setText("1");
-                fieldsize[row][col].setText(puzzle[col][row] + "");
+        for (int row = 0; row < numberOfFields.length; row++) {
+            for (int col = 0; col < numberOfFields[0].length; col++) {
+                // Leave fields with value 0 empty
+                if (puzzle[row][col] != 0) {
+                    numberOfFields[row][col].setText(puzzle[col][row] + "");
+                } else {
+                    numberOfFields[row][col].setText("  ");
+                }
             }
         }
-
 
     }
 
