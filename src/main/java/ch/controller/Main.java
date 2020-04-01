@@ -31,11 +31,14 @@ public final class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
+        // Button to get a new Sudoku
+        Button getGameButton = new Button("Get Sudoku");
+
         // Button für die Eingabe
-        Button slv = new Button("Solve Sudoku");
+        Button solveButton = new Button("Solve Sudoku");
 
         //Komentar bei der Ausgabe
-        Label msg = new Label("Created by Roland Jaggi, Michael Wettstein, Joel Iselin");
+        Label createdByMsg = new Label("Created by Roland Jaggi, Michael Wettstein, Joel Iselin");
 
         // Das grundgerüst für die ausgabe
         Stage window = primaryStage;
@@ -47,9 +50,9 @@ public final class Main extends Application {
 
         VBox v = new VBox(0);
         VBox v2 = new VBox();
-        msg.setPadding(new Insets(10, 0, 0, 0));
+        createdByMsg.setPadding(new Insets(10, 0, 0, 0));
         v2.setAlignment(Pos.CENTER);
-        v2.getChildren().addAll(slv, msg);
+        v2.getChildren().addAll(getGameButton,solveButton, createdByMsg);
         v.getChildren().addAll(gpLayout, v2);
 
         // Grösse von dem Anzeige Fenser
@@ -77,9 +80,12 @@ public final class Main extends Application {
 
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+
+
+
+    //public static void main(String[] args) {
+    //    launch(args);
+    //}
 
 }
 
