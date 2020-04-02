@@ -3,6 +3,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
 <?import java.net.URL?>
+<?import javafx.scene.control.Button?>
 <GridPane xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
           styleClass="layout" gridLinesVisible="false">
     <padding>
@@ -14,6 +15,12 @@
               alignment="BASELINE_CENTER" styleClass="header">
             <Label text="SUDOKU SOLVER"/>
         </HBox>
+
+        <HBox spacing="10" alignment="bottom_right"
+              GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <Button text="Button in Fxml" onAction="#onSubmit"/>
+        </HBox>
+
     </children>
 
     <stylesheets>

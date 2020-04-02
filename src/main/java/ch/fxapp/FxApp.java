@@ -91,7 +91,7 @@ public final class FxApp extends Application {
 
         // Add all elements to mainVBox
         VBox mainVBox = new VBox(0);
-        mainVBox.getChildren().addAll(fxmlGrid, sudokuGrid, buttonVBox);
+        mainVBox.getChildren().addAll(sudokuGrid, fxmlGrid, buttonVBox);
 
         // Make mainVBox a scene
         Scene scene = new Scene(mainVBox, 600, 500);
@@ -100,5 +100,6 @@ public final class FxApp extends Application {
         primaryStage.setTitle("Sudoku Solver");
         primaryStage.setScene(scene);
         primaryStage.show();
+
     }
 }
