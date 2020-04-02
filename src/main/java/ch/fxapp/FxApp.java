@@ -1,4 +1,4 @@
-package main.java.ch.controller;
+package main.java.ch.fxapp;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;

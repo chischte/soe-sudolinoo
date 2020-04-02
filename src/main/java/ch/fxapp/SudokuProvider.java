@@ -1,4 +1,4 @@
-package main.java.ch.controller;
+package main.java.ch.fxapp;
 
 public class SudokuProvider {
 

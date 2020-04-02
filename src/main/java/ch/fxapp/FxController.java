@@ -1,4 +1,4 @@
-package main.java.ch.controller;
+package main.java.ch.fxapp;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
