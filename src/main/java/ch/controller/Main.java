@@ -3,6 +3,7 @@ package main.java.ch.controller;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -12,25 +13,46 @@ import javafx.scene.layout.VBox;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
 public final class Main extends Application {
-    private static int[][] puzzle = {
-            {5, 3, 4, 6, 7, 8, 9, 1, 2},
-            {6, 7, 2, 1, 9, 5, 3, 4, 8},
-            {1, 0, 8, 3, 4, 2, 5, 6, 7},
-            {8, 5, 9, 7, 6, 1, 4, 2, 3},
-            {4, 2, 6, 0, 5, 3, 7, 9, 1},
-            {7, 1, 3, 9, 2, 4, 8, 5, 6},
-            {9, 6, 1, 5, 3, 7, 2, 8, 4},
-            {2, 8, 7, 4, 1, 9, 6, 3, 5},
-            {3, 4, 5, 2, 8, 6, 1, 7, 9}
-    };
-
 
     private Button[][] sudokuFields = new Button[9][9];
 
+    // Get a new sudoku from sudokuProvider
+    SudokuProvider sudokuProvider = new SudokuProvider();
+    int[][] sudoku = sudokuProvider.getNewSudoku();
+
+
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        // Create grid pane to display sudoku
+        GridPane sudokuGrid = new GridPane();
+        sudokuGrid.setPadding(new Insets(20, 20, 20, 20));
+        sudokuGrid.setHgap(8);
+        sudokuGrid.setVgap(8);
+        sudokuGrid.setAlignment(Pos.CENTER);
+
+        // Create sudoku fields in grid pane
+        for (int row = 0; row < sudokuFields.length; row++) {
+            for (int col = 0; col < sudokuFields[0].length; col++) {
+                sudokuFields[row][col] = new Button();
+                sudokuFields[row][col].setStyle("-fx-background-color: POWDERBLUE; -fx-font-weight: bold");
+                sudokuGrid.getChildren().add(sudokuFields[row][col]);
+                GridPane.setConstraints(sudokuFields[row][col], row, col);
+            }
+        }
+
+        // Fill sudoku fields with numbers
+        for (int row = 0; row < sudokuFields.length; row++) {
+            for (int col = 0; col < sudokuFields[0].length; col++) {
+                // Leave fields with value 0 empty
+                if (sudoku[row][col] != 0) {
+                    sudokuFields[row][col].setText(sudoku[col][row] + "");
+                } else {
+                    sudokuFields[row][col].setText("  ");
+                }
+            }
+        }
 
         // Button to get a new Sudoku
         Button getGameButton = new Button("Get Sudoku");
@@ -52,98 +74,31 @@ public final class Main extends Application {
             }
         });
 
-        // Add a created by comment
+        // Create a "created by" comment
         Label createdByMsg = new Label("Created by Roland Jaggi, Michael Wettstein, Joel Iselin");
-
-        // Define grid pane
-        Stage window = primaryStage;
-        window.setTitle("Solve This Sudoku");
-        GridPane gridPane = new GridPane();
-        gridPane.setPadding(new Insets(20, 20, 20, 20));
-        gridPane.setHgap(8);
-        gridPane.setVgap(8);
-
-        // Define boxes
-        VBox outerVBox = new VBox(0);
-        VBox buttonVBox = new VBox();
         createdByMsg.setPadding(new Insets(10, 0, 0, 0));
+
+        // Put buttons and message in a VBox
+        VBox buttonVBox = new VBox();
         buttonVBox.setAlignment(Pos.CENTER);
         buttonVBox.getChildren().addAll(getGameButton, solveButton, createdByMsg);
-        outerVBox.getChildren().addAll(gridPane, buttonVBox);
 
-        // Define window size
-        window.setScene(new Scene(outerVBox, 350, 450));
-        window.show();
+        // Get fxml and add it to grid
+        FxController controller = new FxController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
+        loader.setController(controller);
+        GridPane fxmlGrid = loader.load();
 
+        // Add all elements to mainVBox
+        VBox mainVBox = new VBox(0);
+        mainVBox.getChildren().addAll(fxmlGrid, sudokuGrid, buttonVBox);
 
-        // Create text fields
-        for (int row = 0; row < sudokuFields.length; row++) {
-            for (int col = 0; col < sudokuFields[0].length; col++) {
-                sudokuFields[row][col] = new Button();
-                sudokuFields[row][col].setStyle("-fx-background-color: POWDERBLUE; -fx-font-weight: bold");
-                gridPane.getChildren().add(sudokuFields[row][col]);
-                GridPane.setConstraints(sudokuFields[row][col], row, col);
-            }
-        }
+        // Make mainVBox a scene
+        Scene scene = new Scene(mainVBox, 600, 500);
 
-
-        // Fill text fields with numbers
-        for (int row = 0; row < sudokuFields.length; row++) {
-            for (int col = 0; col < sudokuFields[0].length; col++) {
-                // Leave fields with value 0 empty
-                if (puzzle[row][col] != 0) {
-                    sudokuFields[row][col].setText(puzzle[col][row] + "");
-                } else {
-                    sudokuFields[row][col].setText("  ");
-                }
-            }
-        }
-
+        // Show scene @ primary stage
+        primaryStage.setTitle("Sudoku Solver");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
-
-
-    //public static void main(String[] args) {
-    //    launch(args);
-    //}
-
 }
-
-
-//        final TextField textField = new TextField(SudokuDisplayFields(puzzle) + " Schokoladenkuchen");
-//
-//        primaryStage.setScene( new javafx.scene.Scene( textField ));
-//        primaryStage.show();
-//    }
-
-//    private static int SudokuDisplayFields(int[][] puzzle){
-//        return puzzle[0][8];
-//
-//        for(int i = 0; i <9; i++){
-//            for(int j = 0; j <9; j++){
-//                //Anzeige in feld [i][j]
-//            }
-//        }
-//
-//    }
-//}
-
-//        Parent root = FXMLLoader.load(getClass().getResource("../javafx/Gui.fxml"));
-//        primaryStage.setTitle("Welcome to version " + Integer.toString(SudokuDisplayFields(puzzle)));
-//
-//        Text t = new Text();
-//        t.setText("This is a text sample");
-//        Button butt = new Button();
-//        butt.setText("Klick mich");
-//
-//        GridPane grid = new GridPane();
-//        grid.setHgap(5);
-//        grid.setVgap(5);
-//        grid.add(butt, 0, 0);
-//        grid.add(t, 0, 1);
-//        grid.setGridLinesVisible(false);
-//
-//
-//        primaryStage.setScene(new Scene(root, 300, 275));
-//        primaryStage.show();
-
-

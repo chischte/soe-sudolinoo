@@ -1,0 +1,22 @@
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import java.net.URL?>
+<GridPane xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
+          styleClass="layout" gridLinesVisible="false">
+    <padding>
+        <Insets top="25" right="25" bottom="10" left="25"/>
+    </padding>
+
+    <children>
+        <HBox GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="3"
+              alignment="BASELINE_CENTER" styleClass="header">
+            <Label text="SUDOKU SOLVER"/>
+        </HBox>
+    </children>
+
+    <stylesheets>
+        <URL value="@stylesheet.css"/>
+    </stylesheets>
+</GridPane>
