@@ -45,6 +45,12 @@ public final class Main extends Application {
 
         // Button to solve the Sudoku
         Button solveButton = new Button("Solve Sudoku");
+        solveButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+            }
+        });
 
         // Add a created by comment
         Label createdByMsg = new Label("Created by Roland Jaggi, Michael Wettstein, Joel Iselin");
