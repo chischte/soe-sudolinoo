@@ -1,6 +1,8 @@
 package main.java.ch.controller;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -32,6 +34,14 @@ public final class Main extends Application {
 
         // Button to get a new Sudoku
         Button getGameButton = new Button("Get Sudoku");
+
+        // Add function to Button:
+        getGameButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                sudokuFields[5][5].setText(":-) :-) :-)");
+            }
+        });
 
         // Button to solve the Sudoku
         Button solveButton = new Button("Solve Sudoku");
