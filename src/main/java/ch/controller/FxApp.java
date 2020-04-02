@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public final class Main extends Application {
+public final class FxApp extends Application {
 
     private Button[][] sudokuFields = new Button[9][9];
 
@@ -85,7 +85,7 @@ public final class Main extends Application {
 
         // Get fxml and add it to grid
         FxController controller = new FxController();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FxLayout.fxml"));
         loader.setController(controller);
         GridPane fxmlGrid = loader.load();
 

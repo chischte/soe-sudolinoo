@@ -17,6 +17,6 @@
     </children>
 
     <stylesheets>
-        <URL value="@stylesheet.css"/>
+        <URL value="@FxStyle.css"/>
     </stylesheets>
 </GridPane>
