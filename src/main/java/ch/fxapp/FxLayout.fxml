@@ -29,18 +29,7 @@
         </HBox>
 
 
-        <GridPane fx:id="button_grid" hgap="10" vgap="10">
-
-            <!--<Button GridPane.columnIndex="0" GridPane.rowIndex="1">Hello!</Button>-->
-
-            <!--<Button GridPane.columnIndex="1">Hiya!</Button>-->
-
-            <!--<Text text="Clickity!" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" />-->
-
-            <!--<Label text="Configuration Name:" GridPane.columnIndex="0" GridPane.rowIndex="1" />-->
-            <!--<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />-->
-
-            <!--<Button fx:id="test_button" text="Hello"></Button>-->
+        <GridPane fx:id="sudokuGrid" hgap="10" vgap="10">
 
         </GridPane>
 

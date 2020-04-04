@@ -8,8 +8,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 public class FxController {
-    int index ;
+    int index;
     int target = 10;
+    private Button[][] sudokuFields = new Button[9][9];
 
     @FXML
     private Label testlabeltarget;
@@ -18,21 +19,10 @@ public class FxController {
     private TextField name;
 
     @FXML
-    GridPane button_grid;
+    GridPane sudokuGrid;
 
     public void initialize() {
-        for (index = 2; index < target ; index++) {
-            addButton();
-        }
-    }
-
-    public void test(){
-        System.out.println("Testing");
-    }
-
-    public void addButton(){
-        Button sound_button = new Button("Button_" + index);
-        button_grid.add(sound_button, index,2);
+        generateSudokuGrid();
     }
 
     @FXML
@@ -43,5 +33,15 @@ public class FxController {
 
     }
 
+    public void generateSudokuGrid() {
+        for (int row = 0; row < sudokuFields.length; row++) {
+            for (int col = 0; col < sudokuFields.length; col++) {
+                sudokuFields[row][col] = new Button();
+                sudokuFields[row][col].setStyle("-fx-background-color: POWDERBLUE; -fx-font-weight: bold");
+                sudokuGrid.getChildren().add(sudokuFields[row][col]);
+                GridPane.setConstraints(sudokuFields[row][col], row, col);
+            }
+        }
+    }
 
 }
