@@ -12,18 +12,22 @@
 
     <children>
 
-        <HBox styleClass="header" alignment="CENTER" GridPane.rowIndex="0" GridPane.columnSpan="4" >
-            <Label text="SUDOKU SOLVER" />
+        <HBox styleClass="header" alignment="CENTER" GridPane.rowIndex="0" GridPane.columnSpan="4">
+            <Label text="SUDOKU SOLVER"/>
         </HBox>
 
-        <HBox spacing="5" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="4" >
+        <HBox spacing="5" alignment="CENTER" GridPane.rowIndex="1" GridPane.columnSpan="4">
             <Button text="Get Sudoku" onAction="#onSubmit"/>
             <Button text="Solve Sudoku"/>
         </HBox>
 
-        <HBox spacing="10" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="4">
+        <HBox spacing="10" alignment="CENTER" GridPane.rowIndex="2" GridPane.columnSpan="4">
             <Label text="Created by Roland Jaggi, Michael Wettstein, Joel Iselin"/>
         </HBox>
+        <HBox spacing="10" alignment="CENTER" GridPane.rowIndex="4" GridPane.columnSpan="4">
+            <Label fx:id="testlabeltarget" text="PASTE TEXT HERE"/>
+        </HBox>
+
 
     </children>
 

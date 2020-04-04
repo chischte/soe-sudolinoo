@@ -35,7 +35,6 @@ public final class FxApp extends Application {
         // Fill the fields with numbers:
         fillNumbersToFields();
 
-
         // Get fxml and add it to grid
         FxController controller = new FxController();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FxLayout.fxml"));

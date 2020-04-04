@@ -7,13 +7,14 @@ import javafx.scene.control.TextField;
 
 public class FxController {
     @FXML
-    private Label actiontarget;
+    private Label testlabeltarget;
 
     @FXML
     private TextField name;
 
     @FXML
     protected void onSubmit(ActionEvent event) {
+        testlabeltarget.setText("HAUDI");
 
     }
 }
