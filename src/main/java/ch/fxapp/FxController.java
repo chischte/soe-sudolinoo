@@ -15,12 +15,6 @@ public class FxController {
     int[][] sudoku = sudokuProvider.getNewSudoku();
 
     @FXML
-    private Label testlabeltarget;
-
-    @FXML
-    private TextField name;
-
-    @FXML
     GridPane sudokuGrid;
 
     public void initialize() {
@@ -36,7 +30,8 @@ public class FxController {
         for (int row = 0; row < sudokuFields.length; row++) {
             for (int col = 0; col < sudokuFields.length; col++) {
                 sudokuFields[row][col] = new Button();
-                sudokuFields[row][col].setStyle("-fx-background-color: POWDERBLUE; -fx-font-weight: bold");
+                sudokuFields[row][col].setStyle("-fx-border-width:1; -fx-border-color: black; -fx-min-width: 33; -fx-min-height: 33");
+                /* how to set style class? */
                 sudokuGrid.getChildren().add(sudokuFields[row][col]);
                 GridPane.setConstraints(sudokuFields[row][col], row, col);
             }
@@ -50,7 +45,7 @@ public class FxController {
                 if (sudoku[row][col] != 0) {
                     sudokuFields[row][col].setText(sudoku[col][row] + "");
                 } else {
-                    sudokuFields[row][col].setText("  ");
+                    sudokuFields[row][col].setText(" ");
                 }
             }
         }

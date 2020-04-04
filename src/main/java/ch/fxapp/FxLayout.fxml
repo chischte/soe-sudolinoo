@@ -17,19 +17,19 @@
         </HBox>
 
         <HBox spacing="10" alignment="CENTER" GridPane.rowIndex="1" GridPane.columnSpan="4">
-            <GridPane fx:id="sudokuGrid" hgap="10" vgap="10">
+            <GridPane fx:id="sudokuGrid" styleClass="sudokugrid">
                 <!---->
                 <!-- THIS IS THE GRID PANE FOR THE SUDOKU FIELDS -->
                 <!---->
             </GridPane>
         </HBox>
-        <HBox spacing="5" alignment="CENTER" GridPane.rowIndex="2" GridPane.columnSpan="4">
+        <HBox styleClass="clickbutton" spacing="10" alignment="CENTER" GridPane.rowIndex="2" GridPane.columnSpan="4">
             <Button text="Get Sudoku" onAction="#clickOnGetSudoku"/>
             <Button text="Solve Sudoku"/>
         </HBox>
 
-        <HBox spacing="10" alignment="CENTER" GridPane.rowIndex="3" GridPane.columnSpan="4">
-            <Label text="Created by Roland Jaggi, Michael Wettstein, Joel Iselin"/>
+        <HBox styleClass="createdby" spacing="10" alignment="CENTER" GridPane.rowIndex="4" GridPane.columnSpan="4">
+            <Label text="Created by Roland Jaggi, Michael Wettstein, Joel Iselin" textFill="#182b80"/>
         </HBox>
 
     </children>
