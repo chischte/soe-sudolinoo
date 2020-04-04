@@ -25,34 +25,15 @@ public final class FxApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        // Create grid pane to display sudoku
+
+        // Generate grid pane for sudoku:
         GridPane sudokuGrid = new GridPane();
-        sudokuGrid.setPadding(new Insets(20, 20, 20, 20));
-        sudokuGrid.setHgap(8);
-        sudokuGrid.setVgap(8);
-        sudokuGrid.setAlignment(Pos.CENTER);
 
-        // Create sudoku fields in grid pane
-        for (int row = 0; row < sudokuFields.length; row++) {
-            for (int col = 0; col < sudokuFields[0].length; col++) {
-                sudokuFields[row][col] = new Button();
-                sudokuFields[row][col].setStyle("-fx-background-color: POWDERBLUE; -fx-font-weight: bold");
-                sudokuGrid.getChildren().add(sudokuFields[row][col]);
-                GridPane.setConstraints(sudokuFields[row][col], row, col);
-            }
-        }
+        // Fill the grid pane with fields:
+        sudokuGrid = generateNumberFields();
 
-        // Fill sudoku fields with numbers
-        for (int row = 0; row < sudokuFields.length; row++) {
-            for (int col = 0; col < sudokuFields[0].length; col++) {
-                // Leave fields with value 0 empty
-                if (sudoku[row][col] != 0) {
-                    sudokuFields[row][col].setText(sudoku[col][row] + "");
-                } else {
-                    sudokuFields[row][col].setText("  ");
-                }
-            }
-        }
+        // Fill the fields with numbers:
+        fillNumbersToFields();
 
         // Button to get a new Sudoku
         Button getGameButton = new Button("Get Sudoku");
@@ -102,4 +83,40 @@ public final class FxApp extends Application {
         primaryStage.show();
 
     }
+
+    public GridPane generateNumberFields() {
+        // Create grid pane to display sudoku
+        GridPane sudokuGrid = new GridPane();
+        sudokuGrid.setPadding(new Insets(20, 20, 20, 20));
+        sudokuGrid.setHgap(8);
+        sudokuGrid.setVgap(8);
+        sudokuGrid.setAlignment(Pos.CENTER);
+
+        // Create sudoku fields in grid pane
+        for (int row = 0; row < sudokuFields.length; row++) {
+            for (int col = 0; col < sudokuFields[0].length; col++) {
+                sudokuFields[row][col] = new Button();
+                sudokuFields[row][col].setStyle("-fx-background-color: POWDERBLUE; -fx-font-weight: bold");
+                sudokuGrid.getChildren().add(sudokuFields[row][col]);
+                GridPane.setConstraints(sudokuFields[row][col], row, col);
+            }
+        }
+        return sudokuGrid;
+    }
+
+    public void fillNumbersToFields() {
+        // Fill sudoku fields with numbers
+        for (int row = 0; row < sudokuFields.length; row++) {
+            for (int col = 0; col < sudokuFields[0].length; col++) {
+                // Leave fields with value 0 empty
+                if (sudoku[row][col] != 0) {
+                    sudokuFields[row][col].setText(sudoku[col][row] + "");
+                } else {
+                    sudokuFields[row][col].setText("  ");
+                }
+            }
+        }
+    }
+
+
 }
