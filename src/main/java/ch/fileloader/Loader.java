@@ -1,8 +1,8 @@
 package main.java.ch.fileloader;
 
-public class Loader implements IFileLoader {
+public class Loader {
 
-    private static int[][] puzzle = {
+    private int puzzle[][] = {
             {5, 3, 4, 6, 7, 8, 9, 1, 2},
             {6, 7, 2, 1, 9, 5, 3, 4, 8},
             {1, 0, 8, 3, 4, 2, 5, 6, 7},
@@ -14,17 +14,9 @@ public class Loader implements IFileLoader {
             {3, 4, 5, 2, 8, 6, 1, 7, 9}
     };
 
-
-
-    public int[][] getNewSudoku(){
-        return this.puzzle;
-    }
-
-
-
-
-    public void loadSudokuArray()
-    {
+    public int[][] loadSudokuArray() {
         System.out.println("Loader Works");
+
+        return puzzle;
     }
 }

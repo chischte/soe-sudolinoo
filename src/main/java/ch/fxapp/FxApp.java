@@ -29,5 +29,4 @@ public final class FxApp extends Application {
 
     }
 
-
 }
