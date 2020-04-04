@@ -29,7 +29,6 @@ public class FxController {
 
     @FXML
     protected void clickOnGetSudoku(ActionEvent event) {
-        testlabeltarget.setText(String.valueOf(sudoku[1][1]));
         pasteNumbersToSudokuGrid();
     }
 
@@ -44,7 +43,7 @@ public class FxController {
         }
     }
 
-    public void pasteNumbersToSudokuGrid(){
+    public void pasteNumbersToSudokuGrid() {
         for (int row = 0; row < sudokuFields.length; row++) {
             for (int col = 0; col < sudokuFields[0].length; col++) {
                 // Leave fields with value 0 empty
