@@ -14,7 +14,6 @@ public class FxController {
 
     @FXML
     protected void onSubmit(ActionEvent event) {
-        String inputName = name.getText();
-        actiontarget.setText("Sign in button pressed, name is " + inputName);
+
     }
 }

@@ -7,18 +7,22 @@
 <GridPane xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
           styleClass="layout" gridLinesVisible="false">
     <padding>
-        <Insets top="25" right="25" bottom="10" left="25"/>
+        <Insets top="25" right="25" bottom="25" left="25"/>
     </padding>
 
     <children>
-        <HBox GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="3"
-              alignment="BASELINE_CENTER" styleClass="header">
-            <Label text="SUDOKU SOLVER"/>
+
+        <HBox styleClass="header" alignment="CENTER" GridPane.rowIndex="0" GridPane.columnSpan="4" >
+            <Label text="SUDOKU SOLVER" />
         </HBox>
 
-        <HBox spacing="10" alignment="bottom_right"
-              GridPane.columnIndex="2" GridPane.rowIndex="3">
-            <Button text="Button in Fxml" onAction="#onSubmit"/>
+        <HBox spacing="5" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="4" >
+            <Button text="Get Sudoku" onAction="#onSubmit"/>
+            <Button text="Solve Sudoku"/>
+        </HBox>
+
+        <HBox spacing="10" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="4">
+            <Label text="Created by Roland Jaggi, Michael Wettstein, Joel Iselin"/>
         </HBox>
 
     </children>

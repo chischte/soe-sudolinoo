@@ -35,34 +35,6 @@ public final class FxApp extends Application {
         // Fill the fields with numbers:
         fillNumbersToFields();
 
-        // Button to get a new Sudoku
-        Button getGameButton = new Button("Get Sudoku");
-
-        // Add function to Button:
-        getGameButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                sudokuFields[5][5].setText(":-) :-) :-)");
-            }
-        });
-
-        // Button to solve the Sudoku
-        Button solveButton = new Button("Solve Sudoku");
-        solveButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-
-            }
-        });
-
-        // Create a "created by" comment
-        Label createdByMsg = new Label("Created by Roland Jaggi, Michael Wettstein, Joel Iselin");
-        createdByMsg.setPadding(new Insets(10, 0, 0, 0));
-
-        // Put buttons and message in a VBox
-        VBox buttonVBox = new VBox();
-        buttonVBox.setAlignment(Pos.CENTER);
-        buttonVBox.getChildren().addAll(getGameButton, solveButton, createdByMsg);
 
         // Get fxml and add it to grid
         FxController controller = new FxController();
@@ -72,7 +44,7 @@ public final class FxApp extends Application {
 
         // Add all elements to mainVBox
         VBox mainVBox = new VBox(0);
-        mainVBox.getChildren().addAll(sudokuGrid, fxmlGrid, buttonVBox);
+        mainVBox.getChildren().addAll(sudokuGrid, fxmlGrid);
 
         // Make mainVBox a scene
         Scene scene = new Scene(mainVBox, 600, 500);
