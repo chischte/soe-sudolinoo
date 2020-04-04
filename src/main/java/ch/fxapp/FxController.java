@@ -11,6 +11,8 @@ public class FxController {
     int index;
     int target = 10;
     private Button[][] sudokuFields = new Button[9][9];
+    SudokuProvider sudokuProvider = new SudokuProvider();
+    int[][] sudoku = sudokuProvider.getNewSudoku();
 
     @FXML
     private Label testlabeltarget;
@@ -27,10 +29,8 @@ public class FxController {
 
     @FXML
     protected void clickOnGetSudoku(ActionEvent event) {
-        SudokuProvider sudokuProvider = new SudokuProvider();
-        int[][] sudoku = sudokuProvider.getNewSudoku();
         testlabeltarget.setText(String.valueOf(sudoku[1][1]));
-
+        pasteNumbersToSudokuGrid();
     }
 
     public void generateSudokuGrid() {
@@ -40,6 +40,19 @@ public class FxController {
                 sudokuFields[row][col].setStyle("-fx-background-color: POWDERBLUE; -fx-font-weight: bold");
                 sudokuGrid.getChildren().add(sudokuFields[row][col]);
                 GridPane.setConstraints(sudokuFields[row][col], row, col);
+            }
+        }
+    }
+
+    public void pasteNumbersToSudokuGrid(){
+        for (int row = 0; row < sudokuFields.length; row++) {
+            for (int col = 0; col < sudokuFields[0].length; col++) {
+                // Leave fields with value 0 empty
+                if (sudoku[row][col] != 0) {
+                    sudokuFields[row][col].setText(sudoku[col][row] + "");
+                } else {
+                    sudokuFields[row][col].setText("  ");
+                }
             }
         }
     }
