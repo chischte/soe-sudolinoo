@@ -11,8 +11,8 @@
 }
 
 .sudokugrid {
-    -fx-border-width: 0;
-    -fx-padding: 20px;
+    -fx-border-width: 1;
+    -fx-padding: 0px;
     -fx-border-color: black;
     -fx-hgap: 0;
     -fx-vgap: 0;
