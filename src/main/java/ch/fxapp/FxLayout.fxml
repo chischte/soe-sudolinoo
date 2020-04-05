@@ -25,7 +25,7 @@
         </HBox>
         <HBox styleClass="clickbutton" spacing="10" alignment="CENTER" GridPane.rowIndex="2" GridPane.columnSpan="4">
             <Button text="Get Sudoku" onAction="#clickOnGetSudoku"/>
-            <Button text="Solve Sudoku"/>
+            <Button text="Solve Sudoku" onAction="#clickOnSolveSudoku"/>
         </HBox>
 
         <HBox styleClass="createdby" spacing="10" alignment="CENTER" GridPane.rowIndex="4" GridPane.columnSpan="4">
