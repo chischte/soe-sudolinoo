@@ -11,8 +11,7 @@ public final class Main {
 
         System.out.println("Main luft");
         SudokuSolver test = new SudokuSolver();
-        test.solver();
-        test.testobdieVariableGespeichertWurde();
+        test.startsolver();
 
         // Launch the JavaFX Sudoku GUI:
         Application.launch(FxApp.class, args);

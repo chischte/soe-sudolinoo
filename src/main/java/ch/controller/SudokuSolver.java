@@ -21,17 +21,26 @@ public class SudokuSolver {
             {1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
 
+    public int [][] startsolver() {
+        // Create Loder
+        Loader createtLoader = new Loader();
 
-    public void testobdieVariableGespeichertWurde() {
-        SolvedSudoku = LoaderSudoku;
+        // Set the Loader return Value = the Local two dimentional Array
+        LoaderSudoku = createtLoader.loadSudokuArray();
+        System.out.println("Length is : " + LoaderSudoku.length);
+
         GirdsziseSudoku = LoaderSudoku.length;
 
-        System.out.println("Length is : " + SolvedSudoku.length);
+        if (solver()){
+            System.out.println("Der return der funktion solve wird gemacht");
+        }
+        return SolvedSudoku;
     }
 
 
     private boolean isFull() {
         System.out.println("Funktion is Full wird ausgeführt");
+
         boolean s = true;
         for (int x = 0; x < GirdsziseSudoku; x++) {
             for (int y = 0; y < GirdsziseSudoku; y++) {
@@ -56,21 +65,43 @@ public class SudokuSolver {
         System.out.println("Array posibilities wurde geöffnet");
         //Jeck if the Horizontal row is Valid
         System.out.println("Jeck if the Horizontal row is Valid");
+        System.out.println(row + "" + col);
+
+
         for (int x = 0; x < GirdsziseSudoku; x++) {
-            for (int a = 1; a < 10; a++)
-                if (LoaderSudoku[col][x] == a) {
-                    possibilityArray[x] = 1;
+            int b = 0;
+            for (int a = 1; a < 10; a++) {
+                if (LoaderSudoku[row][x] == a) {
+                    System.out.println(a);
+                    possibilityArray[b] = 1;
                 }
+                b++;
+            }
+        }
+
+        // just for test case
+        System.out.println("nach dem Horizontal test");
+        for (int a = 0; a < GirdsziseSudoku; a++){
+            System.out.println(possibilityArray[a] + "");
         }
 
         // Jeck if the vertical col is valid
         System.out.println("Jeck if the vertical col is valid");
         for (int y = 0; y < GirdsziseSudoku; y++) {
-            for (int a = 1; a < 10; a++)
-                if (LoaderSudoku[y][row] == a) {
-                    possibilityArray[y] = 1;
+            int b = 0;
+            for (int a = 1; a < 10; a++) {
+                if (LoaderSudoku[y][col] == a) {
+                    System.out.println(a);
+                    possibilityArray[b] = 1;
                 }
+                b++;
+            }
+        }
 
+        // just for test case
+        System.out.println("nach dem vertical test");
+        for (int a = 0; a < GirdsziseSudoku; a++){
+            System.out.println(possibilityArray[a] + "");
         }
 
         // Jeck if the 3x3 Sudoku rule is valid
@@ -83,7 +114,6 @@ public class SudokuSolver {
             k = 6;
         }
 
-        System.out.println("1");
         if (row >= 0 && row <= 2) {
             l = 0;
         } else if (row >= 3 && row <= 5) {
@@ -92,7 +122,6 @@ public class SudokuSolver {
             l = 6;
         }
 
-        System.out.println("2");
         for (int x = 0; x < 2; x++) {
             k = k + x;
             for (int y = 0; y < 2; y++) {
@@ -106,19 +135,24 @@ public class SudokuSolver {
                 }
             }
         }
-        System.out.println("3 Umwandlung");
-        // Das Array wieder umwandeln von den einsen in Zahlen die möglichwähren
-        for (int b = 0; b < GirdsziseSudoku; b++) {
-            int a = 1;
-                if (possibilityArray[b] == 1) {
-                    possibilityArray[b] = a;
-                    a++;
-
-                } else {
-                    possibilityArray[b] = 0;
-                    a++;
-                }
+        System.out.println("nach dem 3x3");
+        for (int a = 0; a < GirdsziseSudoku; a++){
+            System.out.println(possibilityArray[a] + "");
         }
+
+
+        System.out.println("Umwandlung");
+        // Das Array wieder umwandeln von den einsen in Zahlen die möglichwähren
+        int UmwandlungpossibilityArray = 1;
+        for (int b = 0; b < GirdsziseSudoku; b++) {
+                if (possibilityArray[b] == 1) {
+                    possibilityArray[b] = 0;
+                } else {
+                    possibilityArray[b] = UmwandlungpossibilityArray;
+                }
+                UmwandlungpossibilityArray++;
+        }
+
         for (int a = 0; a < GirdsziseSudoku; a++){
             System.out.println(possibilityArray[a] + "");
         }
@@ -126,52 +160,60 @@ public class SudokuSolver {
         return possibilityArray;
     }
 
-    public int[][] solver() {
-        int i = 0;
-        int j = 0;
+
+
+
+
+
+
+    public boolean solver() {
         int[] possibilities;
 
         // Jeck if Function is running
         System.out.println("Sudoku solver wird ausgeführt");
-
-        // Create Loder
-        Loader createtLoader = new Loader();
-
-        // Set the Loader return Value = the Local two dimentional Array
-        LoaderSudoku = createtLoader.loadSudokuArray();
-        System.out.println("Length is : " + LoaderSudoku.length);
 
 
         if (isFull()) {
             // this is the place where the solved sudoku goes to the Gui
             SolvedSudoku = LoaderSudoku;
             System.out.println("Das Sudoku ist voll");
-            // find first empty field
-        } else {
+            return true;
+
+        } else search:{
             System.out.println("Das Sudoku ist nicht voll");
+            // find first empty field
             for (int x = 0; x < GirdsziseSudoku; x++) {
                 for (int y = 0; y < GirdsziseSudoku; y++) {
                     if (LoaderSudoku[x][y] == 0) {
-                        i = x;
-                        j = y;
+                        System.out.println(LoaderSudoku[x][y]);
+                        row = x;
+                        col = y;
+                        break search;
                     }
                 }
             }
         }
 
+        System.out.println(row + "" + col);
         System.out.println("Array posibleEntries wird aufgerufen");
         possibilities = possibleEntries();
 
-        for (int a = 0; a < GirdsziseSudoku; a++) {
-            if (possibilities[a] == 0) {
-                LoaderSudoku[i][j] = possibilities[a];
-                solver();
-            } else {
-                LoaderSudoku[i][j] = 0;
-            }
+
+        System.out.println("test ob das Array an den solver übergeben wurde");
+        for (int a = 0; a < GirdsziseSudoku; a++){
+            System.out.println(possibilities[a] + "");
         }
 
-        System.out.println("Der return der funktion solve wird gemacht");
-        return puzzle;
+
+        for (int a = 0; a < 9; a++) {
+            if (possibilities[a] != 0) {
+                System.out.println(a + "");
+                LoaderSudoku[row][col] = possibilities[a];
+                solver();
+            } else {
+                LoaderSudoku[row][col] = 0;
+            }
+        }
+        return false;
     }
 }

@@ -19,7 +19,7 @@ public class FxController {
     private int [][] LoaderSudoku1 = createtLoader1.loadSudokuArray();
 
     SudokuSolver Solver1 = new SudokuSolver();
-    private int [][] SolverSudoku1 = Solver1.solver();
+    private int [][] SolverSudoku1 = Solver1.startsolver();
 
     //SudokuProvider sudokuProvider = new SudokuProvider();
     //int[][] sudoku = sudokuProvider.getNewSudoku();
