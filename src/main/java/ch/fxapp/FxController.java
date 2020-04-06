@@ -36,7 +36,6 @@ public class FxController {
         pasteSolutionToSudokuGrid();
     }
 
-
     public void generateSudokuGrid() {
         for (int row = 0; row < sudokuLength; row++) {
             for (int col = 0; col < sudokuLength; col++) {
