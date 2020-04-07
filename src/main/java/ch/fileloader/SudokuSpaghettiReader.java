@@ -10,7 +10,7 @@ public class SudokuSpaghettiReader {
     public static void main(String[] args) throws Exception {
 
         // parsing file "JSONExample.json"
-        Object obj = new JSONParser().parse(new FileReader("sudokuspaghetti.json"));
+        Object obj = new JSONParser().parse(new FileReader("newspagettistring.json"));
 
         // typecasting obj to JSONObject
         JSONObject jo = (JSONObject) obj;

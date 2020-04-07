@@ -1,6 +1,9 @@
-package main.java.ch.fileloader;
+// THIS CLASS IS TO CREATE NEW JSON STRINGS OUT OF A SUDOKU (int[][]) ARRAY
+// TO GENERATE A NEW STRING PASTE THE NEW ARRAY BELOW, AND LET THE CLASS RUN
+// THE NEWLY GENERATED STRING WILL BE STORED AS "newspagettistring.json"
 
-// download http://www.java2s.com/Code/Jar/j/Downloadjsonsimple11jar.htm and add it as a library
+
+package main.java.ch.fileloader;
 import org.json.simple.JSONObject;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -35,7 +38,7 @@ public class SudokuSpaghettiWriter {
         jsonObject.put("spaghettistring", sudokuSpaghetti);
 
         // Write JSON to file:
-        PrintWriter printWriter = new PrintWriter("sudokuspaghetti.json");
+        PrintWriter printWriter = new PrintWriter("newspagettistring.json");
         printWriter.write(jsonObject.toJSONString());
         printWriter.flush();
         printWriter.close();
