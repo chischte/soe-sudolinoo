@@ -9,13 +9,13 @@ import java.io.FileReader;
 public class SudokuSpaghettiReader {
     public static void main(String[] args) throws Exception {
 
-        // parsing file "JSONExample.json"
+        // Parse json file
         Object obj = new JSONParser().parse(new FileReader("newspagettistring.json"));
 
-        // typecasting obj to JSONObject
+        // Typecast obj to JSONObject
         JSONObject jo = (JSONObject) obj;
 
-        // getting firstName and lastName
+        // Getting string
         String spaghettistring = (String) jo.get("spaghettistring");
         System.out.println("here the string:");
         System.out.println(spaghettistring);
@@ -33,6 +33,7 @@ public class SudokuSpaghettiReader {
                 System.out.print(spaghettistring.charAt(charNumber));
             }
         }
+        System.out.println("");
         System.out.println("now the array");
 
         for (int row = 0; row < puzzle.length; row++) {

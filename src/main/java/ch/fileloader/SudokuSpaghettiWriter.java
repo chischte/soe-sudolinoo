@@ -6,7 +6,6 @@
 package main.java.ch.fileloader;
 
 import org.json.simple.JSONObject;
-
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 

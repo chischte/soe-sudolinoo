@@ -9,14 +9,14 @@ import java.io.FileReader;
 public class SudokuJsonParser {
     public static void main(String[] args) throws Exception {
 
-        // parsing file "JSONExample.json"
-        Object obj = new JSONParser().parse(new FileReader("newspagettistring.json"));
+        // Parse json file
+        Object obj = new JSONParser().parse(new FileReader("sudokustrings.json"));
 
-        // typecasting obj to JSONObject
+        // Typecast obj to JSONObject
         JSONObject jo = (JSONObject) obj;
 
-        // getting firstName and lastName
-        String spaghettistring = (String) jo.get("spaghettistring");
+        // Get string
+        String spaghettistring = (String) jo.get("puzzles");
         System.out.println("here the string:");
         System.out.println(spaghettistring);
         int sudokuLength = 9;
