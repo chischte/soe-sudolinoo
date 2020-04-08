@@ -8,8 +8,12 @@ import java.io.FileReader;
 public class SudokuLoader {
     private int[][]puzzle=new int[9][9];
 
-    public int[][] getPuzzle(String jsonName) throws Exception {
-        this.puzzle=parseJson(jsonName);
+    public int[][] getPuzzle(String jsonName)  {
+        try {
+            this.puzzle=parseJson(jsonName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return puzzle;
     }
 

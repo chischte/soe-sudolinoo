@@ -25,14 +25,14 @@ public class FxController {
     }
 
     @FXML
-    protected void clickOnGetSudoku(ActionEvent event) throws Exception {
+    protected void clickOnGetSudoku(ActionEvent event){
         SudokuLoader sudokuLoader = new SudokuLoader();
         this.unsolvedSudoku = sudokuLoader.getPuzzle("sudokustring_medium.json");
         pastePuzzleNumbersToSudokuGrid();
     }
 
     @FXML
-    protected void clickOnSolveSudoku(ActionEvent event) throws Exception {
+    protected void clickOnSolveSudoku(ActionEvent event){
         SudokuSolver sudokuSolver = new SudokuSolver();
         int[][] solvedSudoku = sudokuSolver.startSolvingSudoku(this.unsolvedSudoku);
         pasteSolutionToSudokuGrid(solvedSudoku);
