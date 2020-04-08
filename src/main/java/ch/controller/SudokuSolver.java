@@ -1,6 +1,6 @@
 package main.java.ch.controller;
 
-import main.java.ch.fileloader.Loader;
+import main.java.ch.fileloader.SudokuLoader;
 
 public class SudokuSolver {
 
@@ -11,9 +11,18 @@ public class SudokuSolver {
     private int col = 0;
 
 
-    public int[][] startSolvingSudoku() {
-        Loader createdLoader = new Loader();
-        loaderSudoku = createdLoader.getPuzzle();
+    // This is the constructor that is used by the gui
+    public int[][] startSolvingSudoku(int[][] puzzleToSolve) throws Exception {
+        loaderSudoku = puzzleToSolve;
+        gridSizeSudoku = loaderSudoku.length;
+        solver();
+        return solvedSudoku;
+    }
+
+    // This is the constructor to use the solver without the gui
+    public int[][] startSolvingSudoku() throws Exception {
+        SudokuLoader createdLoader = new SudokuLoader();
+        loaderSudoku = createdLoader.getPuzzle("sudokustring_medium.json");
         gridSizeSudoku = loaderSudoku.length;
 
         solver();
@@ -21,7 +30,7 @@ public class SudokuSolver {
         return solvedSudoku;
     }
 
-    private boolean isSudokuFullyFilledOut(int gridSize, int [][] loader) {
+    private boolean isSudokuFullyFilledOut(int gridSize, int[][] loader) {
         for (int y = 0; y < gridSize; y++) {
             for (int x = 0; x < gridSize; x++) {
                 if (loader[x][y] == 0) {
@@ -34,7 +43,7 @@ public class SudokuSolver {
     }
 
     // Check if the actual position is Valid
-    public int[] possibleEntries () {
+    public int[] possibleEntries() {
         int[] possibilityArray = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
         // Check if the horizontal row and if the vertical col is valid
@@ -50,7 +59,7 @@ public class SudokuSolver {
 
     }
 
-    private int[] changeToPossibleNumbers(int[] possibilityArray){
+    private int[] changeToPossibleNumbers(int[] possibilityArray) {
         int ConversionPossibilityArray = 1;
         for (int i = 0; i < gridSizeSudoku; i++) {
             if (possibilityArray[i] == 1) {
@@ -66,14 +75,14 @@ public class SudokuSolver {
 
     private int[] isTheThreeByThreeRuleValid(int threeByThreeRow, int threeByThreeCol, int[] possibilityArray) {
         int loader;
-        for (int row = 0; row < 3; row++){
-            for (int col = 0; col < 3; col++){
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
                 loader = loaderSudoku[threeByThreeRow + row][threeByThreeCol + col];
 
                 if (loader != 0) {
                     for (int a = 1; a < 10; a++) {
                         if (loader == a) {
-                            possibilityArray[a-1] = 1;
+                            possibilityArray[a - 1] = 1;
                             break;
                         }
                     }
@@ -87,7 +96,7 @@ public class SudokuSolver {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 1; j < 10; j++) {
                 if (loaderSudoku[i][col] == j) {
-                    possibilityArray[j-1] = 1;
+                    possibilityArray[j - 1] = 1;
                 }
             }
         }
@@ -98,8 +107,8 @@ public class SudokuSolver {
     private int[] checkIfHorizontalIsValid(int[] possibilityArray, int gridSize) {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 1; j < 10; j++) {
-                 if (loaderSudoku[row][i] == j) {
-                    possibilityArray[j-1] = 1;
+                if (loaderSudoku[row][i] == j) {
+                    possibilityArray[j - 1] = 1;
                 }
             }
         }
@@ -117,7 +126,7 @@ public class SudokuSolver {
         }
     }
 
-    public boolean solver () {
+    public boolean solver() {
         int rowsolver = 0;
         int colsolver = 0;
         int[] possibilityArraySolver = {0, 0, 0, 0, 0, 0, 0, 0, 0};
