@@ -6,6 +6,7 @@ import org.json.simple.parser.JSONParser;
 import java.io.FileReader;
 
 public class SudokuLoader {
+
     private int[][] puzzle = new int[9][9];
 
     public int[][] getPuzzle(String jsonName) {

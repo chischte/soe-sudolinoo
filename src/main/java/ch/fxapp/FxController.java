@@ -2,7 +2,6 @@ package main.java.ch.fxapp;
 
 import main.java.ch.fileloader.SudokuLoader;
 import main.java.ch.controller.SudokuSolver;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,7 +9,7 @@ import javafx.scene.layout.GridPane;
 
 public class FxController {
 
-    private int[][] unsolvedSudoku =new int[9][9];
+    private int[][] unsolvedSudoku = new int[9][9];
     int sudokuLength = unsolvedSudoku.length;
     private Button[][] sudokuFieldButtons = new Button[sudokuLength][sudokuLength];
 
@@ -25,14 +24,14 @@ public class FxController {
     }
 
     @FXML
-    protected void clickOnGetSudoku(ActionEvent event){
+    protected void clickOnGetSudoku(ActionEvent event) {
         SudokuLoader sudokuLoader = new SudokuLoader();
         this.unsolvedSudoku = sudokuLoader.getPuzzle("sudokustring_medium.json");
         pastePuzzleNumbersToSudokuGrid();
     }
 
     @FXML
-    protected void clickOnSolveSudoku(ActionEvent event){
+    protected void clickOnSolveSudoku(ActionEvent event) {
         SudokuSolver sudokuSolver = new SudokuSolver();
         int[][] solvedSudoku = sudokuSolver.startSolvingSudoku(this.unsolvedSudoku);
         pasteSolutionToSudokuGrid(solvedSudoku);
