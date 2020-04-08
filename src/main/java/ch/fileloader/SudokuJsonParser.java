@@ -10,13 +10,13 @@ public class SudokuJsonParser {
     public static void main(String[] args) throws Exception {
 
         // Parse json file
-        Object obj = new JSONParser().parse(new FileReader("sudokustrings.json"));
+        Object obj = new JSONParser().parse(new FileReader("src/main/java/ch/fileloader/sudokustring_easy.json"));
 
         // Typecast obj to JSONObject
         JSONObject jo = (JSONObject) obj;
 
         // Get string
-        String spaghettistring = (String) jo.get("puzzles");
+        String spaghettistring = (String) jo.get("puzzle");
         System.out.println("here the string:");
         System.out.println(spaghettistring);
         int sudokuLength = 9;
