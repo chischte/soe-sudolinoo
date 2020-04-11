@@ -68,7 +68,7 @@ public class SudokuSpaghettiWriter {
         JSONObject jsonObject = new JSONObject();
 
         // Put data to JSONObject
-        jsonObject.put("spaghettistring", sudokuSpaghetti);
+        jsonObject.put("puzzle", sudokuSpaghetti);
 
         // Write JSON to file:
         PrintWriter printWriter = new PrintWriter("newspagettistring.json");
