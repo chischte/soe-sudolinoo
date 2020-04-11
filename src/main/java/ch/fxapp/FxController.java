@@ -20,7 +20,6 @@ public class FxController {
     @FXML
     GridPane sudokuGrid;
 
-
     public FxController() throws Exception {
     }
 

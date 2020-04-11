@@ -11,7 +11,7 @@ public class SudokuSolver {
     private int col = 0;
 
 
-    // This is the constructor that is used by the gui
+    // This is the method that is used by the gui
     public int[][] startSolvingSudoku(int[][] puzzleToSolve) {
         loaderSudoku = puzzleToSolve;
         gridSizeSudoku = loaderSudoku.length;
@@ -19,10 +19,10 @@ public class SudokuSolver {
         return solvedSudoku;
     }
 
-    // This is the constructor to use the solver without the gui
+    // This is the method to use the solver without the gui
     public int[][] startSolvingSudoku() {
         SudokuLoader createdLoader = new SudokuLoader();
-        loaderSudoku = createdLoader.getPuzzle("sudokustring_medium.json");
+        loaderSudoku = createdLoader.getPuzzle("sudokustring_medium_1.json");
         gridSizeSudoku = loaderSudoku.length;
 
         solver();
