@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class FxController {
 
@@ -29,14 +30,9 @@ public class FxController {
 
     @FXML
     protected void clickOnGetSudoku(ActionEvent event) {
-
-        // Open a file chooser window to select json
-        final JFileChooser fc = new JFileChooser();
-        int returnVal = fc.showOpenDialog(fileChooserComponent);
-        System.out.println(fileChooserComponent);
-
+        String selectedFileName=getJsonFromFileChooser();
         SudokuLoader sudokuLoader = new SudokuLoader();
-        this.unsolvedSudoku = sudokuLoader.getPuzzle("sudokustring_medium.json");
+        this.unsolvedSudoku = sudokuLoader.getPuzzle(selectedFileName);
         pastePuzzleNumbersToSudokuGrid();
     }
 
@@ -47,7 +43,7 @@ public class FxController {
         pasteSolutionToSudokuGrid(solvedSudoku);
     }
 
-    public void generateSudokuGrid() {
+    private void generateSudokuGrid() {
         for (int row = 0; row < sudokuLength; row++) {
             for (int col = 0; col < sudokuLength; col++) {
                 sudokuFieldButtons[row][col] = new Button();
@@ -59,7 +55,16 @@ public class FxController {
         }
     }
 
-    public void pastePuzzleNumbersToSudokuGrid() {
+    private String getJsonFromFileChooser(){
+        // Open a file chooser window to select json
+        final JFileChooser fileChooser = new JFileChooser("src/main/java/ch/fileloader/sudokustrings");
+        int returnVal = fileChooser.showOpenDialog(fileChooserComponent);
+        File selectedFile = fileChooser.getSelectedFile();
+        String selectedFileName = selectedFile.getName();
+        return  selectedFileName;
+    }
+
+    private void pastePuzzleNumbersToSudokuGrid() {
         for (int row = 0; row < sudokuLength; row++) {
             for (int col = 0; col < sudokuLength; col++) {
                 // Leave fields with value 0 empty
@@ -73,7 +78,7 @@ public class FxController {
         }
     }
 
-    public void pasteSolutionToSudokuGrid(int[][] solvedSudoku) {
+    private void pasteSolutionToSudokuGrid(int[][] solvedSudoku) {
         for (int row = 0; row < sudokuLength; row++) {
             for (int col = 0; col < sudokuLength; col++) {
                 sudokuFieldButtons[row][col].setText(solvedSudoku[col][row] + "");

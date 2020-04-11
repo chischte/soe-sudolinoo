@@ -20,7 +20,7 @@ public class SudokuLoader {
 
     public static int[][] parseJson(String jsonName) throws Exception {
 
-        String puzzlePath = "src/main/java/ch/fileloader/";
+        String puzzlePath = "src/main/java/ch/fileloader/sudokustrings/";
         String puzzleName = jsonName;
 
         // Parse json file
