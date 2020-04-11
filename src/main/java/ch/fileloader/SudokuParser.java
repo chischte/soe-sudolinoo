@@ -3,28 +3,26 @@ package main.java.ch.fileloader;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import java.io.File;
 import java.io.FileReader;
 
-public class SudokuLoader {
+public class SudokuParser {
 
     private int[][] puzzle = new int[9][9];
 
-    public int[][] getPuzzle(String jsonName) {
+    public int[][] convertJsonToSudokuarray(File sudokuStringJson) {
         try {
-            this.puzzle = parseJson(jsonName);
+            this.puzzle = parseJson(sudokuStringJson);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return puzzle;
     }
 
-    public static int[][] parseJson(String jsonName) throws Exception {
-
-        String puzzlePath = "src/main/java/ch/fileloader/sudokustrings/";
-        String puzzleName = jsonName;
+    public static int[][] parseJson(File sudokuStringJson) throws Exception {
 
         // Parse json file
-        Object obj = new JSONParser().parse(new FileReader(puzzlePath + puzzleName));
+        Object obj = new JSONParser().parse(new FileReader(sudokuStringJson));
 
         // Typecast obj to JSONObject
         JSONObject jo = (JSONObject) obj;

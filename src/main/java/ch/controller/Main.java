@@ -7,10 +7,6 @@ public final class Main {
 
     public static void main(String[] args) {
 
-//        System.out.println("Main luft");
-//        SudokuSolver test = new SudokuSolver();
-//        test.startsolver();
-
         // Launch the JavaFX Sudoku GUI:
         Application.launch(FxApp.class, args);
 

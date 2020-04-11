@@ -1,7 +1,5 @@
 package main.java.ch.controller;
 
-import main.java.ch.fileloader.SudokuLoader;
-
 public class SudokuSolver {
 
     public int[][] loaderSudoku;
@@ -16,17 +14,6 @@ public class SudokuSolver {
         loaderSudoku = puzzleToSolve;
         gridSizeSudoku = loaderSudoku.length;
         solver();
-        return solvedSudoku;
-    }
-
-    // This is the method to use the solver without the gui
-    public int[][] startSolvingSudoku() {
-        SudokuLoader createdLoader = new SudokuLoader();
-        loaderSudoku = createdLoader.getPuzzle("sudokustring_medium_1.json");
-        gridSizeSudoku = loaderSudoku.length;
-
-        solver();
-
         return solvedSudoku;
     }
 

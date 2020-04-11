@@ -1,6 +1,6 @@
 package main.java.ch.fxapp;
 
-import main.java.ch.fileloader.SudokuLoader;
+import main.java.ch.fileloader.SudokuParser;
 import main.java.ch.controller.SudokuSolver;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,10 +29,14 @@ public class FxController {
 
     @FXML
     protected void clickOnGetSudoku(ActionEvent event) {
-        String selectedFileName=getJsonFromFileChooser();
-        SudokuLoader sudokuLoader = new SudokuLoader();
-        this.unsolvedSudoku = sudokuLoader.getPuzzle(selectedFileName);
-        pastePuzzleNumbersToSudokuGrid();
+        File selectedFile = getJsonFromFileChooser();
+        if (selectedFile != null) {
+            SudokuParser sudokuParser = new SudokuParser();
+            this.unsolvedSudoku = sudokuParser.convertJsonToSudokuarray(selectedFile);
+            pastePuzzleNumbersToSudokuGrid();
+        } else {
+            System.out.println("No file has been selected");
+        }
     }
 
     @FXML
@@ -54,13 +58,12 @@ public class FxController {
         }
     }
 
-    private String getJsonFromFileChooser(){
+    private File getJsonFromFileChooser() {
         // Open a file chooser window to select json
         final JFileChooser fileChooser = new JFileChooser("src/main/java/ch/fileloader/sudokustrings");
         int returnVal = fileChooser.showOpenDialog(fileChooserComponent);
-        File selectedFile = fileChooser.getSelectedFile();
-        String selectedFileName = selectedFile.getName();
-        return  selectedFileName;
+        File selectedJsonFile = fileChooser.getSelectedFile();
+        return selectedJsonFile;
     }
 
     private void pastePuzzleNumbersToSudokuGrid() {
