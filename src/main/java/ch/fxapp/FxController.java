@@ -7,14 +7,18 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class FxController {
 
     private int[][] unsolvedSudoku = new int[9][9];
     int sudokuLength = unsolvedSudoku.length;
     private Button[][] sudokuFieldButtons = new Button[sudokuLength][sudokuLength];
-
+    private Component fileChooserComponent;
     @FXML
     GridPane sudokuGrid;
+
 
     public FxController() throws Exception {
     }
@@ -25,6 +29,12 @@ public class FxController {
 
     @FXML
     protected void clickOnGetSudoku(ActionEvent event) {
+
+        // Open a file chooser window to select json
+        final JFileChooser fc = new JFileChooser();
+        int returnVal = fc.showOpenDialog(fileChooserComponent);
+        System.out.println(fileChooserComponent);
+
         SudokuLoader sudokuLoader = new SudokuLoader();
         this.unsolvedSudoku = sudokuLoader.getPuzzle("sudokustring_medium.json");
         pastePuzzleNumbersToSudokuGrid();
