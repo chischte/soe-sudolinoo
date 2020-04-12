@@ -1,10 +1,6 @@
-package main.java.ch.fxapp;
+package main.java.ch.fxapp.experimentalsolver;
 
-import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
-import org.w3c.dom.html.HTMLFieldSetElement;
-
-public class FieldClassMain {
+public class FieldsAsClassSolver {
     // This is an array containing an object for every sudoku field
     static FieldAsClass[] fieldAsClassArray = new FieldAsClass[81];
 
@@ -42,8 +38,7 @@ public class FieldClassMain {
                 }
                 if (row < 3) {
                     currentSector += 0;
-                }
-                else if (row < 6) {
+                } else if (row < 6) {
                     currentSector += 3;
                 } else {
                     currentSector += 6;
