@@ -38,6 +38,26 @@ public class SolverTools {
         }
     }
 
+    private int findOutSector(int row, int col) {
+        int sector;
+        if (col < 3) {
+            sector = 1;
+        } else if (col < 6) {
+            sector = 2;
+        } else {
+            sector = 3;
+        }
+        if (row < 3) {
+            sector += 0;
+        } else if (row < 6) {
+            sector += 3;
+        } else {
+            sector += 6;
+        }
+
+        return sector;
+    }
+
     public void removeSolvedNumbersFromOtherFields() {
         // Search solved fields in all fields
         for (int solvedField = 0; solvedField < noOfFields; solvedField++) {
@@ -96,29 +116,26 @@ public class SolverTools {
 
     public int countNoOfUnsolvedFields() {
         int noOfUnsolvedFields = 0;
+        for (int i = 0; i < noOfFields; i++) {
+            if (!fieldAsClassArray[i].isSolved()) {
+                noOfUnsolvedFields++;
+            }
+        }
+
+        System.out.println(noOfUnsolvedFields + " fields are not solved yet");
         return noOfUnsolvedFields;
     }
 
-
-    private int findOutSector(int row, int col) {
-        int sector;
-        if (col < 3) {
-            sector = 1;
-        } else if (col < 6) {
-            sector = 2;
-        } else {
-            sector = 3;
+    public int[][] getSolvedSudokuArray() {
+        int[][] solvedSudoku = new int[8][8];
+        for (int row = 0; row < solvedSudoku.length; row++) {
+            for (int col = 0; col < solvedSudoku.length; col++) {
+                int fieldNumber = row * solvedSudoku.length + col;
+                // Assign field values to array:)
+                solvedSudoku[row][col] = fieldAsClassArray[fieldNumber].getFieldValue();
+                System.out.print(fieldAsClassArray[fieldNumber].getFieldValue());
+            }
         }
-        if (row < 3) {
-            sector += 0;
-        } else if (row < 6) {
-            sector += 3;
-        } else {
-            sector += 6;
-        }
-
-        return sector;
+        return solvedSudoku;
     }
-
-
 }
