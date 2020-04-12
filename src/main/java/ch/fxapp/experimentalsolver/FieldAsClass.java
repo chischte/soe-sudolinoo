@@ -41,21 +41,28 @@ public class FieldAsClass {
 
     public void removePossibleNo(int numberToRemove) {
         this.possibilities.remove(numberToRemove);
+
     }
 
     public void setFieldValue(int fieldValue) {
         this.fieldValue = fieldValue;
+        System.out.println("Field value= " + fieldValue);
     }
+
 
     public void setSolved(boolean solved) {
         isSolved = solved;
+        //remove all possibilities
+        if(solved){
+            this.possibilities.clear();
+        }
         System.out.println("This Field is solved = " + solved);
     }
 
 
     //GETTER AND METHODS TO REQUEST VALUES :
 
-    public void printPossibleNo() {
+    public void getPossibleNo() {
         System.out.println(this.possibilities);
     }
 

@@ -18,7 +18,9 @@ public class Main {
         FieldsAsClassSolver solver = new FieldsAsClassSolver();
         // CONFIGURE ALL FIELDS
         solver.configureAllFields(puzzle);
+
         //REMOVE POSSIBILITIES IN ROW
+
 
         //REMOVE POSSIBILITIES IN COLUMN
 
