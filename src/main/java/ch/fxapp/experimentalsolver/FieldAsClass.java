@@ -6,11 +6,12 @@ public class FieldAsClass {
 
     // Properties of every field:
     private boolean isSolved = false;
-    private int rowNo;
-    private int columnNo;
+    private int fieldNo; // 0-80
+    private int rowNo; // 0-8
+    private int columnNo; // 0-8
 
     private int fieldValue;
-    private int sectorNo;
+    private int sectorNo; // 1-9
     private int remainingPossibilites = 9;
     private HashSet<Integer> possibilities = new HashSet<>();
 
@@ -23,6 +24,9 @@ public class FieldAsClass {
     }
 
     //SETTER AND METHODS TO CHANGE VALUES:
+    public void setFieldNo(int fieldNo) {
+        this.fieldNo = fieldNo;
+    }
 
     public void setRowNo(int rowNo) {
         this.rowNo = rowNo;
@@ -77,13 +81,21 @@ public class FieldAsClass {
         return fieldValue;
     }
 
+    public int countPossibleNumbers() {
+        int noOfPossibilities = possibilities.size();
+        return noOfPossibilities;
+    }
+
     public void printFieldInfo() {
-        System.out.print("RowNo=" + rowNo+" | ");
-        System.out.print("ColumnNo=" + columnNo+" | ");
-        System.out.print("SectorNo= " + sectorNo+" | ");
-        System.out.print("VALUE= " + fieldValue+" | ");
-        System.out.print("SOLVED=" + isSolved+" | ");
-        System.out.print("Possibilities:" + this.possibilities+" | ");
+
+        System.out.print("FieldNo=" + fieldNo + " | ");
+        System.out.print("RowNo=" + rowNo + " | ");
+        System.out.print("ColumnNo=" + columnNo + " | ");
+        System.out.print("SectorNo= " + sectorNo + " | ");
+        System.out.print("VALUE=" + fieldValue + " | ");
+        System.out.print("SOLVED=" + isSolved + " | ");
+        System.out.print("NoOfPossibilities=" + countPossibleNumbers() + " | ");
+        System.out.print("Possibilities:" + possibilities + " | ");
         System.out.println(" ");
     }
 }

@@ -27,14 +27,11 @@ public class MainSolver {
         printStarline("REMOVE SOLVED NUMBERS");
         solverTools.removeSolvedNumbersFromOtherFields();
 
-
-        //REMOVE POSSIBILITIES IN COLUMN
-
-        // REMOVE POSSIBILITIES IN SECTOR
-
         // FIND FIELD WITH THE LEAST POSSIBILITIES
         // ...SELECT A NUMBER
-        // ...AND MARE IT "SOLVED"
+        // ...AND MARK IT "SOLVED"
+        printStarline("SELECT NEXT SOLVED FIELD");
+        solverTools.selectNextSolvedField();
 
         // CHECK IF ALL FIELDS ARE SOLVED
         // ...AND REPEAT UNTIL ALL FIELDS ARE SOLVED
