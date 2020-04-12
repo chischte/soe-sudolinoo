@@ -4,8 +4,11 @@ import java.util.*;
 
 public class FieldAsClass {
 
-    // Properties of every field:
+    // PROPERTIRES OF EVERY SUDOKU FIELD:
     private boolean isSolved = false;
+
+    // Set "hasBeenProcessed" true if all fields in same row, column or sector have been cleared of the possibility of this number;
+    private boolean hasBeenProcessed = false;
     private int fieldNo; // 0-80
     private int rowNo; // 0-8
     private int columnNo; // 0-8
@@ -56,6 +59,9 @@ public class FieldAsClass {
         this.possibilities.clear();
     }
 
+    public void setProcessed() {
+        this.hasBeenProcessed = true;
+    }
     //GETTER AND METHODS TO REQUEST VALUES :
     public void getPossibleNo() {
         System.out.println(this.possibilities);
@@ -85,6 +91,10 @@ public class FieldAsClass {
         int noOfPossibilities = possibilities.size();
         return noOfPossibilities;
     }
+    public boolean hasBeenProcessed() {
+        return hasBeenProcessed;
+    }
+
 
     public void printFieldInfo() {
 

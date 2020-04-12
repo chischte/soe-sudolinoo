@@ -41,60 +41,63 @@ public class SolverTools {
     public void removeSolvedNumbersFromOtherFields() {
         // Search solved fields in all fields
         for (int solvedField = 0; solvedField < noOfFields; solvedField++) {
-            // When a solved field is found ...
-            if (fieldAsClassArray[solvedField].isSolved()) {
+            // When a solved and yet unprocessed field is found ...
+            if (fieldAsClassArray[solvedField].isSolved() && !fieldAsClassArray[solvedField].hasBeenProcessed()) {
                 // Clear this number from all other fields according to sudoku rules
                 for (int clearField = 0; clearField < noOfFields; clearField++) {
-                    boolean possibilityShouldBeCleared = false;
-                    // Check if field is in same row
-                    if (fieldAsClassArray[solvedField].getRowNo() == fieldAsClassArray[clearField].getRowNo()) {
-                        possibilityShouldBeCleared = true;
+                    // Check only unsolvedfields:
+                    if (!fieldAsClassArray[clearField].isSolved()) {
+                        boolean possibilityShouldBeCleared = false;
+                        // Check if field is in same row
+                        if (fieldAsClassArray[solvedField].getRowNo() == fieldAsClassArray[clearField].getRowNo()) {
+                            possibilityShouldBeCleared = true;
+                        }
+                        // Check if field is in same column
+                        else if (fieldAsClassArray[solvedField].getColumnNo() == fieldAsClassArray[clearField].getColumnNo()) {
+                            possibilityShouldBeCleared = true;
+                        }
+                        // Check if field is in same sector
+                        else if (fieldAsClassArray[solvedField].getSectorNo() == fieldAsClassArray[clearField].getSectorNo()) {
+                            possibilityShouldBeCleared = true;
+                        }
+                        // If one of the sudoku rules applies, clear possibility from field
+                        if (possibilityShouldBeCleared) {
+                            fieldAsClassArray[clearField].removePossibleNo(fieldAsClassArray[solvedField].getFieldValue());
+                        }
+                        fieldAsClassArray[clearField].printFieldInfo();
                     }
-                    // Check if field is in same column
-                    else if (fieldAsClassArray[solvedField].getColumnNo() == fieldAsClassArray[clearField].getColumnNo()) {
-                        possibilityShouldBeCleared = true;
-                    }
-                    // Check if field is in same sector
-                    else if (fieldAsClassArray[solvedField].getSectorNo() == fieldAsClassArray[clearField].getSectorNo()) {
-                        possibilityShouldBeCleared = true;
-                    }
-                    // If one of the sudoku rules applies, clear possibility from field
-                    if (possibilityShouldBeCleared) {
-                        fieldAsClassArray[clearField].removePossibleNo(fieldAsClassArray[solvedField].getFieldValue());
-                    }
-                    fieldAsClassArray[clearField].printFieldInfo();
                 }
-
+                // Mark the processed field as processed
+                fieldAsClassArray[solvedField].setProcessed();
             }
 
         }
     }
 
     public void selectNextSolvedField() {
-        int fieldWithMinimumPossibilities=0;
-        int minimumNoOfPossibilities=9; // bigger than 9 is not possible
+        int fieldWithMinimumPossibilities = 0;
+        int minimumNoOfPossibilities = 9; // bigger than 9 is not possible
         int solvedField = 0;
 
         // iterate all fields
         for (int i = 0; i < noOfFields; i++) {
             // check unsolved fields only
             if (!fieldAsClassArray[i].isSolved()) {
-                if (fieldAsClassArray[i].countPossibleNumbers() < minimumNoOfPossibilities){
-                    minimumNoOfPossibilities=fieldAsClassArray[i].countPossibleNumbers();
-                    fieldWithMinimumPossibilities=i;
+                if (fieldAsClassArray[i].countPossibleNumbers() < minimumNoOfPossibilities) {
+                    minimumNoOfPossibilities = fieldAsClassArray[i].countPossibleNumbers();
+                    fieldWithMinimumPossibilities = i;
                 }
             }
         }
-        System.out.println("The next field marked as solved is field No "+fieldWithMinimumPossibilities + " with " +minimumNoOfPossibilities+" possible numbers");
+        System.out.println("The next field marked as solved is field No " + fieldWithMinimumPossibilities + " with " + minimumNoOfPossibilities + " possible numbers");
         // Mark field as solved:
         fieldAsClassArray[fieldWithMinimumPossibilities].setSolved();
     }
 
-    public int countNoOfUnsolvedFields(){
-        int noOfUnsolvedFields=0;
+    public int countNoOfUnsolvedFields() {
+        int noOfUnsolvedFields = 0;
         return noOfUnsolvedFields;
     }
-
 
 
     private int findOutSector(int row, int col) {
