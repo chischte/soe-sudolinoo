@@ -110,6 +110,8 @@ public class SolverTools {
             }
         }
         System.out.println("The next field marked as solved is field No " + fieldWithMinimumPossibilities + " with " + minimumNoOfPossibilities + " possible numbers");
+        // Set a possibility value as field value
+        fieldAsClassArray[fieldWithMinimumPossibilities].setFieldValue(fieldAsClassArray[fieldWithMinimumPossibilities].getAPossibleValue());
         // Mark field as solved:
         fieldAsClassArray[fieldWithMinimumPossibilities].setSolved();
     }
