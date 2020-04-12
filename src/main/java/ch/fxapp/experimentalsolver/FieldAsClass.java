@@ -8,6 +8,7 @@ public class FieldAsClass {
     private boolean isSolved = false;
     private int rowNo;
     private int columnNo;
+
     private int fieldValue;
     private int sectorNo;
     private int remainingPossibilites = 9;
@@ -21,21 +22,17 @@ public class FieldAsClass {
         Collections.addAll(this.possibilities = new HashSet<Integer>(Arrays.asList(arr)));
     }
 
-
     //SETTER AND METHODS TO CHANGE VALUES:
 
     public void setRowNo(int rowNo) {
-        System.out.println("This Field is on row number= " + rowNo);
         this.rowNo = rowNo;
     }
 
     public void setColumNo(int columnNo) {
-        System.out.println("Sector= " + columnNo);
         this.columnNo = columnNo;
     }
 
     public void setSectorNo(int sectorNo) {
-        System.out.println("Sector= " + sectorNo);
         this.sectorNo = sectorNo;
     }
 
@@ -46,22 +43,16 @@ public class FieldAsClass {
 
     public void setFieldValue(int fieldValue) {
         this.fieldValue = fieldValue;
-        System.out.println("Field value= " + fieldValue);
+
     }
 
-
-    public void setSolved(boolean solved) {
-        isSolved = solved;
+    public void setSolved() {
+        isSolved = true;
         //remove all possibilities
-        if(solved){
-            this.possibilities.clear();
-        }
-        System.out.println("This Field is solved = " + solved);
+        this.possibilities.clear();
     }
-
 
     //GETTER AND METHODS TO REQUEST VALUES :
-
     public void getPossibleNo() {
         System.out.println(this.possibilities);
     }
@@ -80,5 +71,19 @@ public class FieldAsClass {
 
     public int getSectorNo() {
         return sectorNo;
+    }
+
+    public int getFieldValue() {
+        return fieldValue;
+    }
+
+    public void printFieldInfo() {
+        System.out.print("RowNo=" + rowNo+" | ");
+        System.out.print("ColumnNo=" + columnNo+" | ");
+        System.out.print("SectorNo= " + sectorNo+" | ");
+        System.out.print("VALUE= " + fieldValue+" | ");
+        System.out.print("SOLVED=" + isSolved+" | ");
+        System.out.print("Possibilities:" + this.possibilities+" | ");
+        System.out.println(" ");
     }
 }

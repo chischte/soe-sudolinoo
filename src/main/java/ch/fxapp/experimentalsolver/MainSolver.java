@@ -1,6 +1,6 @@
 package main.java.ch.fxapp.experimentalsolver;
 
-public class Main {
+public class MainSolver {
 
     static int puzzle[][] = {
             {8, 0, 1, 0, 0, 3, 9, 0, 6},
@@ -14,12 +14,18 @@ public class Main {
             {0, 0, 0, 4, 5, 2, 1, 9, 7}
     };
 
-    public static void main(String[] args){
-        FieldsAsClassSolver solver = new FieldsAsClassSolver();
-        // CONFIGURE ALL FIELDS
-        solver.configureAllFields(puzzle);
+    public static void main(String[] args) {
+        SolverTools solverTools = new SolverTools();
 
-        //REMOVE POSSIBILITIES IN ROW
+        // CONFIGURE ALL FIELDS
+        printStarline("CONFIGURE ALL FIELDS");
+        solverTools.configureAllFields(puzzle);
+
+        // ITERATE THROUGH ALL SOLVED FIELDS ...
+        // ...AND REMOVE THEIR NUMBERS FROM ALL FIELDS...
+        // ...IN SAME ROW, COLUMN, OR SECTOR;
+        printStarline("REMOVE SOLVED NUMBERS");
+        solverTools.removeSolvedNumbersFromOtherFields();
 
 
         //REMOVE POSSIBILITIES IN COLUMN
@@ -35,6 +41,14 @@ public class Main {
 
         // WRITE ARRAY OF OBJECTS TO SOLVED SUDOKU ARRAY
         // ...RETURN THE SOLVED SUDOK ARRAY
+
+    }
+
+    public static void printStarline(String chapter){
+        for(int i=0;i<3;i++) {
+            System.out.print("*****" + chapter + "******");
+        }
+        System.out.println("");
 
     }
 
