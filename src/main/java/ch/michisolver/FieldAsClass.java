@@ -4,7 +4,7 @@ import java.util.*;
 
 public class FieldAsClass {
 
-    // PROPERTIRES OF EVERY SUDOKU FIELD:
+    // PROPERTIES OF EVERY SUDOKU FIELD:
     private boolean isSolved = false;
 
     // Set "hasBeenProcessed" true if all fields in same row, column or sector have been cleared of the possibility of this number;
@@ -45,12 +45,10 @@ public class FieldAsClass {
 
     public void removePossibleNo(int numberToRemove) {
         this.possibilities.remove(numberToRemove);
-
     }
 
     public void setFieldValue(int fieldValue) {
         this.fieldValue = fieldValue;
-
     }
 
     public void setSolved() {
@@ -64,6 +62,7 @@ public class FieldAsClass {
     }
 
     //GETTER AND METHODS TO REQUEST VALUES :
+
     public void getPossibleNo() {
         System.out.println(this.possibilities);
     }

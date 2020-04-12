@@ -34,7 +34,7 @@ public class MichiSolver {
         // WRITE ARRAY OF OBJECTS TO SOLVED SUDOKU ARRAY
         int[][] solvedSudoku = solverTools.getSolvedSudokuArray();
 
-        // RETURN THE SOLVED SUDOK ARRAY
+        // RETURN THE SOLVED SUDOKU ARRAY
         return solvedSudoku;
     }
 
