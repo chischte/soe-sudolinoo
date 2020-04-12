@@ -1,4 +1,4 @@
-package main.java.ch.fxapp.experimentalsolver;
+package main.java.ch.michisolver;
 
 import java.util.*;
 
@@ -62,6 +62,7 @@ public class FieldAsClass {
     public void setProcessed() {
         this.hasBeenProcessed = true;
     }
+
     //GETTER AND METHODS TO REQUEST VALUES :
     public void getPossibleNo() {
         System.out.println(this.possibilities);
@@ -91,13 +92,18 @@ public class FieldAsClass {
         int noOfPossibilities = possibilities.size();
         return noOfPossibilities;
     }
+
     public boolean hasBeenProcessed() {
         return hasBeenProcessed;
     }
 
+    public int getAPossibleValue() {
+        int aPossibleValue = possibilities.iterator().next();
+        return aPossibleValue;
+    }
+
 
     public void printFieldInfo() {
-
         System.out.print("FieldNo=" + fieldNo + " | ");
         System.out.print("RowNo=" + rowNo + " | ");
         System.out.print("ColumnNo=" + columnNo + " | ");

@@ -1,4 +1,4 @@
-package main.java.ch.fxapp.experimentalsolver;
+package main.java.ch.michisolver;
 
 public class SolverTools {
     // This is an array containing an object for every sudoku field
@@ -90,7 +90,6 @@ public class SolverTools {
                 // Mark the processed field as processed
                 fieldAsClassArray[solvedField].setProcessed();
             }
-
         }
     }
 
@@ -103,7 +102,7 @@ public class SolverTools {
         for (int i = 0; i < noOfFields; i++) {
             // check unsolved fields only
             if (!fieldAsClassArray[i].isSolved()) {
-                if (fieldAsClassArray[i].countPossibleNumbers() < minimumNoOfPossibilities) {
+                if (fieldAsClassArray[i].countPossibleNumbers() <= minimumNoOfPossibilities) {
                     minimumNoOfPossibilities = fieldAsClassArray[i].countPossibleNumbers();
                     fieldWithMinimumPossibilities = i;
                 }
@@ -129,7 +128,7 @@ public class SolverTools {
     }
 
     public int[][] getSolvedSudokuArray() {
-        int[][] solvedSudoku = new int[8][8];
+        int[][] solvedSudoku = new int[9][9];
         for (int row = 0; row < solvedSudoku.length; row++) {
             for (int col = 0; col < solvedSudoku.length; col++) {
                 int fieldNumber = row * solvedSudoku.length + col;
