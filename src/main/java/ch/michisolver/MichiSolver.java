@@ -11,22 +11,22 @@ public class MichiSolver {
 
         int noOfUnsolvedFields = 81; // 81 is the maximum;
 
+        // REPEAT UNTIL ALL FIELDS ARE SOLVED
         while (noOfUnsolvedFields > 0) {
 
             // ITERATE THROUGH ALL SOLVED FIELDS ...
-            // ...AND REMOVE THEIR NUMBERS FROM ALL FIELDS...
-            // ...IN SAME ROW, COLUMN, OR SECTOR;
+            // AND REMOVE THEIR NUMBERS FROM ALL FIELDS...
+            // IN SAME ROW, COLUMN, OR SECTOR;
             //printStarline("REMOVE SOLVED NUMBERS");
             solverTools.removeSolvedNumbersFromOtherFields();
 
-            // FIND FIELD WITH THE LEAST POSSIBILITIES
-            // ...SELECT A NUMBER
-            // ...AND MARK IT "SOLVED"
+            // FIND FIELD WITH THE LEAST POSSIBILITIES ...
+            // SELECT A NUMBER BY RANDOM
+            // AND MARK IT "SOLVED"
             //printStarline("SELECT NEXT SOLVED FIELD");
             solverTools.selectNextSolvedField();
 
             // CHECK IF ALL FIELDS ARE SOLVED
-            // ...AND REPEAT UNTIL ALL FIELDS ARE SOLVED
             //printStarline("COUNT NUMBER OF UNSOLVED FIELDS");
             noOfUnsolvedFields = solverTools.countNoOfUnsolvedFields();
         }

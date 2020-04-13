@@ -98,7 +98,6 @@ public class SolverTools {
     public void selectNextSolvedField() {
         int fieldWithMinimumPossibilities = 0;
         int minimumNoOfPossibilities = 9; // bigger than 9 is not possible
-        int solvedField = 0;
 
         // iterate all fields
         for (int i = 0; i < noOfFields; i++) {
@@ -112,17 +111,16 @@ public class SolverTools {
         }
         System.out.println("The next field marked as solved is field No " + fieldWithMinimumPossibilities + " with " + minimumNoOfPossibilities + " possible numbers");
 
-        // IF minimumNoOfPossibilites=0 THE SOLVER HAS MOVED TO A DEAD-END AND HAS TO RESTART FROM SCRATCH
+        // IF minimumNoOfPossibilites==0 THE SOLVER HAS MOVED TO A DEAD-END AND HAS TO RESTART FROM SCRATCH
         if (minimumNoOfPossibilities == 0) {
             System.out.println("SOLVER HAS HIT A DEAD END! RESTART SOLVER WITH INTIAL SUDOKU");
             configureAllFields(unsolvedSudoku);
         } else {
-            // Set a possibility value as field value
+            // Set a random possibility value as field value
             fieldAsClassArray[fieldWithMinimumPossibilities].setFieldValue(fieldAsClassArray[fieldWithMinimumPossibilities].getAPossibleValueByRandom());
             // Mark field as solved:
             fieldAsClassArray[fieldWithMinimumPossibilities].setSolved();
         }
-
     }
 
     public int countNoOfUnsolvedFields() {
@@ -142,7 +140,7 @@ public class SolverTools {
         for (int row = 0; row < solvedSudoku.length; row++) {
             for (int col = 0; col < solvedSudoku.length; col++) {
                 int fieldNumber = row * solvedSudoku.length + col;
-                // Assign field values to array:)
+                // Assign field values to array
                 solvedSudoku[row][col] = fieldAsClassArray[fieldNumber].getFieldValue();
                 System.out.print(fieldAsClassArray[fieldNumber].getFieldValue());
             }
