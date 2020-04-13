@@ -37,23 +37,13 @@ public class SudokuSolver {
 
         // Check if the 3x3 Sudoku rule is valid
         possibilityArray = isTheThreeByThreeRuleValid(getTheThreeByTreeGrid(row), getTheThreeByTreeGrid(col), possibilityArray);
-//        System.out.println("Ausgabe von dem Possibility array 3x3 rule");
-//        for (int a = 0; a < possibilityArray.length; a++){
-//            System.out.println(possibilityArray[a]);
-//        }
+
 
         // Check if the horizontal row and if the vertical col is valid
         possibilityArray = checkIfHorizontalIsValid(possibilityArray, gridSizeSudoku);
-//        System.out.println("Ausgabe von dem Possibility array Horizontal");
-//        for (int a = 0; a < possibilityArray.length; a++){
-//            System.out.println(possibilityArray[a]);
-//        }
+
 
         possibilityArray = checkIfVerticalIsValid(possibilityArray, gridSizeSudoku);
-//        System.out.println("Ausgabe von dem Possibility array Vertical");
-//        for (int a = 0; a < possibilityArray.length; a++){
-//            System.out.println(possibilityArray[a]);
-//        }
 
 
         // Change the array to the possible numbers
@@ -159,17 +149,6 @@ public class SudokuSolver {
 
             possibilityArraySolver = possibleEntries();
 
-
-//            System.out.println(rowsolver + "row " + colsolver + "col " + " wo ist das nächste leere feld da sind wir nun ------------------------------------------------");
-////            System.out.println("Möglichkeiten in dem Array");
-////            System.out.println("------------------------------------");
-////            for (int a = 0; a < possibilityArraySolver.length; a++){
-////                System.out.println(possibilityArraySolver[a] + "");
-////            }
-////            System.out.println("------------------------------------");
-
-
-
             for (int i = 0; i < 10; i++) {
                 if (isSudokuFullyFilledOut(gridSizeSudoku, loaderSudoku)) {
                     break;
@@ -177,22 +156,12 @@ public class SudokuSolver {
 
                 if (i < 9 && possibilityArraySolver[i] != 0) {
                     loaderSudoku[rowsolver][colsolver] = possibilityArraySolver[i];
-                    System.out.println(rowsolver + "row " + colsolver + "col " + " Feld in dem wir uns befinden----");
-                    System.out.println(i + " die stelle in dem Möglichkeiten array");
-                    System.out.println(possibilityArraySolver[i] + " " + "geschriebene Zahl aus den Möglichkeiten");
-                    System.out.println("-----------------------------------------------");
-                    System.out.println(loaderSudoku[4][2] + " werr an der possiton 4/2");
-                    System.out.println("-----------------------------------------------");
-                    System.out.println(" ");
+
                     // ToDo get out of the loop when solver returns true
                     solver();
 
                 } else if (i == 8 || i == 9 ) {
-
-                    System.out.println(rowsolver + "row " + colsolver + "col " + " Feld in dem wir uns befinden --------------------------------------------");
-                    System.out.println("Die Probiere Zahl hat zu keiner Lösung geführt");
                     loaderSudoku[rowsolver][colsolver] = 0;
-                    System.out.println(loaderSudoku[rowsolver][colsolver] +"Der wert nach der löschung in dem Feld an der Possiton" + rowsolver + "_row" + colsolver + "_col");
                 }
             }
         }
