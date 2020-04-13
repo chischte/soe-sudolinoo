@@ -2,20 +2,20 @@ package main.java.ch.michisolver;
 
 public class SolverTools {
     // This is an array containing an object for every sudoku field
-    private FieldAsClass[] fieldAsClassArray = new FieldAsClass[81];
-    private int[][] unsolvedSudoku = new int[9][9];
-    private int sudokuLength = unsolvedSudoku.length;
-    private int noOfFields = 81; // A sudoku has 81 fields
+    private final int gridLength = 9; // A sudoku has a grid length of 9 Fields
+    private final int noOfFields = 81; // A sudoku has 81 fields
+    private int[][] unsolvedSudoku = new int[gridLength][gridLength];
+    private FieldAsClass[] fieldAsClassArray = new FieldAsClass[noOfFields];
 
 
     public void configureAllFields(int[][] sudokuArray) {
         // Store initial sudoku in case of the solver has to restart
         unsolvedSudoku = sudokuArray;
-        for (int row = 0; row < sudokuLength; row++) {
-            for (int col = 0; col < sudokuLength; col++) {
+        for (int row = 0; row < gridLength; row++) {
+            for (int col = 0; col < gridLength; col++) {
 
                 // Calculate current field number (0-80)
-                int currentFieldNo = row * sudokuLength + col;
+                int currentFieldNo = row * gridLength + col;
 
                 // Initialize a new object in fieldAsClassArray:
                 fieldAsClassArray[currentFieldNo] = new FieldAsClass();
