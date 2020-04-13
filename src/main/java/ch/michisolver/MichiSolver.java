@@ -16,18 +16,18 @@ public class MichiSolver {
             // ITERATE THROUGH ALL SOLVED FIELDS ...
             // ...AND REMOVE THEIR NUMBERS FROM ALL FIELDS...
             // ...IN SAME ROW, COLUMN, OR SECTOR;
-            printStarline("REMOVE SOLVED NUMBERS");
+            //printStarline("REMOVE SOLVED NUMBERS");
             solverTools.removeSolvedNumbersFromOtherFields();
 
             // FIND FIELD WITH THE LEAST POSSIBILITIES
             // ...SELECT A NUMBER
             // ...AND MARK IT "SOLVED"
-            printStarline("SELECT NEXT SOLVED FIELD");
+            //printStarline("SELECT NEXT SOLVED FIELD");
             solverTools.selectNextSolvedField();
 
             // CHECK IF ALL FIELDS ARE SOLVED
             // ...AND REPEAT UNTIL ALL FIELDS ARE SOLVED
-            printStarline("COUNT NUMBER OF UNSOLVED FIELDS");
+            //printStarline("COUNT NUMBER OF UNSOLVED FIELDS");
             noOfUnsolvedFields = solverTools.countNoOfUnsolvedFields();
         }
 

@@ -86,7 +86,7 @@ public class SolverTools {
                         if (possibilityShouldBeCleared) {
                             fieldAsClassArray[clearField].removePossibleNo(fieldAsClassArray[solvedField].getFieldValue());
                         }
-                        fieldAsClassArray[clearField].printFieldInfo();
+                        //fieldAsClassArray[clearField].printFieldInfo();
                     }
                 }
                 // Mark the processed field as processed
@@ -114,7 +114,7 @@ public class SolverTools {
 
         // IF minimumNoOfPossibilites=0 THE SOLVER HAS MOVED TO A DEAD-END AND HAS TO RESTART FROM SCRATCH
         if (minimumNoOfPossibilities == 0) {
-            System.out.println("SOLVER HAS HIT A DEAD END!!!!!! RESTART SOLVER WITH INTIAL SUDOKU");
+            System.out.println("SOLVER HAS HIT A DEAD END! RESTART SOLVER WITH INTIAL SUDOKU");
             configureAllFields(unsolvedSudoku);
         } else {
             // Set a possibility value as field value

@@ -18,6 +18,11 @@ public class FxController {
     int sudokuLength = unsolvedSudoku.length;
     private Button[][] sudokuFieldButtons = new Button[sudokuLength][sudokuLength];
     private Component fileChooserComponent;
+    private File selectedJsonFile;
+    SudokuParser sudokuParser = new SudokuParser();
+    SudokuSolver sudokuSolver = new SudokuSolver();
+    MichiSolver michiSolver = new MichiSolver();
+
     @FXML
     GridPane sudokuGrid;
 
@@ -31,9 +36,9 @@ public class FxController {
     @FXML
     protected void clickOnGetSudoku(ActionEvent event) {
         File selectedFile = getJsonFromFileChooser();
+        this.selectedJsonFile = selectedFile; // store the file in the class to use it with different solvers
         if (selectedFile != null) {
-            SudokuParser sudokuParser = new SudokuParser();
-            this.unsolvedSudoku = sudokuParser.convertJsonToSudokuarray(selectedFile);
+            this.unsolvedSudoku = sudokuParser.convertJsonToSudokuarray(this.selectedJsonFile);
             pastePuzzleNumbersToSudokuGrid();
         } else {
             System.out.println("No file has been selected");
@@ -42,14 +47,14 @@ public class FxController {
 
     @FXML
     protected void clickOnSolveSudoku(ActionEvent event) {
-        SudokuSolver sudokuSolver = new SudokuSolver();
+        this.unsolvedSudoku = sudokuParser.convertJsonToSudokuarray(this.selectedJsonFile);
         int[][] solvedSudoku = sudokuSolver.startSolvingSudoku(this.unsolvedSudoku);
         pasteSolutionToSudokuGrid(solvedSudoku);
     }
 
     @FXML
     protected void clickOnMichiSolver(ActionEvent event) {
-        MichiSolver michiSolver = new MichiSolver();
+        this.unsolvedSudoku = sudokuParser.convertJsonToSudokuarray(this.selectedJsonFile);
         int[][] solvedSudoku = michiSolver.solve(this.unsolvedSudoku);
         pasteSolutionToSudokuGrid(solvedSudoku);
     }
@@ -82,7 +87,7 @@ public class FxController {
                 if (currentNumber != 0) {
                     sudokuFieldButtons[col][row].setText(Integer.toString(currentNumber));
                 } else {
-                    sudokuFieldButtons[col][row].setText("");
+                    sudokuFieldButtons[col][row].setText(" ");
                 }
             }
         }
@@ -95,6 +100,16 @@ public class FxController {
             }
         }
     }
+
+    private void clearSudokuGrid() {
+        for (int row = 0; row < sudokuLength; row++) {
+            for (int col = 0; col < sudokuLength; col++) {
+                sudokuFieldButtons[col][row].setText(" ");
+
+            }
+        }
+    }
+
 }
 
 

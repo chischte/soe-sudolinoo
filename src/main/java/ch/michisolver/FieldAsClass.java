@@ -110,14 +110,14 @@ public class FieldAsClass {
 
 
     public void printFieldInfo() {
-        System.out.print("FieldNo=" + fieldNo + " | ");
-        System.out.print("RowNo=" + rowNo + " | ");
-        System.out.print("ColumnNo=" + columnNo + " | ");
-        System.out.print("SectorNo= " + sectorNo + " | ");
-        System.out.print("VALUE=" + fieldValue + " | ");
-        System.out.print("SOLVED=" + isSolved + " | ");
-        System.out.print("NoOfPossibilities=" + countPossibleNumbers() + " | ");
-        System.out.print("Possibilities:" + possibilities + " | ");
-        System.out.println(" ");
+//        System.out.print("FieldNo=" + fieldNo + " | ");
+//        System.out.print("RowNo=" + rowNo + " | ");
+//        System.out.print("ColumnNo=" + columnNo + " | ");
+//        System.out.print("SectorNo= " + sectorNo + " | ");
+//        System.out.print("VALUE=" + fieldValue + " | ");
+//        System.out.print("SOLVED=" + isSolved + " | ");
+//        System.out.print("NoOfPossibilities=" + countPossibleNumbers() + " | ");
+//        System.out.print("Possibilities:" + possibilities + " | ");
+//        System.out.println(" ");
     }
 }
