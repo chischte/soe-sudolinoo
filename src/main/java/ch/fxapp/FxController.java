@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import main.java.ch.michisolver.MichiSolver;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,6 +44,13 @@ public class FxController {
     protected void clickOnSolveSudoku(ActionEvent event) {
         SudokuSolver sudokuSolver = new SudokuSolver();
         int[][] solvedSudoku = sudokuSolver.startSolvingSudoku(this.unsolvedSudoku);
+        pasteSolutionToSudokuGrid(solvedSudoku);
+    }
+
+    @FXML
+    protected void clickOnMichiSolver(ActionEvent event) {
+        MichiSolver michiSolver = new MichiSolver();
+        int[][] solvedSudoku = michiSolver.solve(this.unsolvedSudoku);
         pasteSolutionToSudokuGrid(solvedSudoku);
     }
 

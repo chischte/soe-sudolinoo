@@ -9,6 +9,8 @@ public class SolverTools {
 
 
     public void configureAllFields(int[][] sudokuArray) {
+        // Store initial sudoku in case of the solver has to restart
+        unsolvedSudoku = sudokuArray;
         for (int row = 0; row < sudokuLength; row++) {
             for (int col = 0; col < sudokuLength; col++) {
 
@@ -109,10 +111,18 @@ public class SolverTools {
             }
         }
         System.out.println("The next field marked as solved is field No " + fieldWithMinimumPossibilities + " with " + minimumNoOfPossibilities + " possible numbers");
-        // Set a possibility value as field value
-        fieldAsClassArray[fieldWithMinimumPossibilities].setFieldValue(fieldAsClassArray[fieldWithMinimumPossibilities].getAPossibleValue());
-        // Mark field as solved:
-        fieldAsClassArray[fieldWithMinimumPossibilities].setSolved();
+
+        // IF minimumNoOfPossibilites=0 THE SOLVER HAS MOVED TO A DEAD-END AND HAS TO RESTART FROM SCRATCH
+        if (minimumNoOfPossibilities == 0) {
+            System.out.println("SOLVER HAS HIT A DEAD END!!!!!! RESTART SOLVER WITH INTIAL SUDOKU");
+            configureAllFields(unsolvedSudoku);
+        } else {
+            // Set a possibility value as field value
+            fieldAsClassArray[fieldWithMinimumPossibilities].setFieldValue(fieldAsClassArray[fieldWithMinimumPossibilities].getAPossibleValueByRandom());
+            // Mark field as solved:
+            fieldAsClassArray[fieldWithMinimumPossibilities].setSolved();
+        }
+
     }
 
     public int countNoOfUnsolvedFields() {

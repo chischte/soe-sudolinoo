@@ -101,8 +101,6 @@ public class FieldAsClass {
     public int getAPossibleValueByRandom() {
         int noOfPossibilities = possibilities.size();
         int random = ThreadLocalRandom.current().nextInt(0, noOfPossibilities);
-        System.out.println("RANDOM NO=" + random);
-
         Integer[] possibilityArray = new Integer[possibilities.size()];
         possibilities.toArray(possibilityArray);
 
