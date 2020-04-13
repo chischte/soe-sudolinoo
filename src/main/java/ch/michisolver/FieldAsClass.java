@@ -1,6 +1,7 @@
 package main.java.ch.michisolver;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class FieldAsClass {
 
@@ -16,14 +17,15 @@ public class FieldAsClass {
     private int fieldValue;
     private int sectorNo; // 1-9
     private int remainingPossibilites = 9;
-    private HashSet<Integer> possibilities = new HashSet<>();
+    private TreeSet<Integer> possibilities = new TreeSet<>();
 
     // THIS IS THE CONSTRUCTOR
     public FieldAsClass() {
+
         Integer arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
         // Paste content of array to set
-        Collections.addAll(this.possibilities = new HashSet<Integer>(Arrays.asList(arr)));
+        Collections.addAll(this.possibilities = new TreeSet<Integer>(Arrays.asList(arr)));
     }
 
     //SETTER AND METHODS TO CHANGE VALUES:
@@ -96,8 +98,15 @@ public class FieldAsClass {
         return hasBeenProcessed;
     }
 
-    public int getAPossibleValue() {
-        int aPossibleValue = possibilities.iterator().next();
+    public int getAPossibleValueByRandom() {
+        int noOfPossibilities = possibilities.size();
+        int random = ThreadLocalRandom.current().nextInt(0, noOfPossibilities);
+        System.out.println("RANDOM NO=" + random);
+
+        Integer[] possibilityArray = new Integer[possibilities.size()];
+        possibilities.toArray(possibilityArray);
+
+        int aPossibleValue = possibilityArray[random];
         return aPossibleValue;
     }
 
