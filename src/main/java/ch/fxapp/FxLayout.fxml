@@ -27,6 +27,7 @@
             <Button text="Get Sudoku" onAction="#clickOnGetSudoku" />
             <Button text="Test JoelSolver" onAction="#clickOnSolveSudoku" />
             <Button text="Test MichiSolver" onAction="#clickOnMichiSolver" />
+            <Button text="clear Sudoku" onAction="#clickOnClear" />
         </HBox>
 
         <HBox styleClass="createdby" spacing="10" alignment="CENTER" GridPane.rowIndex="4" GridPane.columnSpan="4">

@@ -59,6 +59,12 @@ public class FxController {
         pasteSolutionToSudokuGrid(solvedSudoku);
     }
 
+    @FXML
+    protected void clickOnClear(ActionEvent event) {
+        clearSudokuGrid();
+    }
+    
+
     private void generateSudokuGrid() {
         for (int row = 0; row < sudokuLength; row++) {
             for (int col = 0; col < sudokuLength; col++) {
