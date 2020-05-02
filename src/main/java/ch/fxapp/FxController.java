@@ -62,14 +62,25 @@ public class FxController {
     @FXML
     protected void clickOnClear(ActionEvent event) {
         clearSudokuGrid();
+        System.out.println("Cleared the grid");
     }
-    
 
     private void generateSudokuGrid() {
         for (int row = 0; row < sudokuLength; row++) {
             for (int col = 0; col < sudokuLength; col++) {
                 sudokuFieldButtons[row][col] = new Button();
-                sudokuFieldButtons[row][col].setStyle("-fx-border-width:1; -fx-border-color: black; -fx-min-width: 33; -fx-min-height: 33;");
+                sudokuFieldButtons[row][col].setStyle("-fx-border-width:1; -fx-border-color: grey; -fx-min-width: 34; -fx-min-height: 33; -fx-vgap: 1; -fx-hgap: 1");
+
+                if(col > 0 && col < sudokuLength && (col + 1) %3 == 0){
+                    sudokuFieldButtons[row][col].setStyle("-fx-border-width: 1 1 3 1; -fx-border-color: grey; -fx-min-width: 34; -fx-min-height: 33; -fx-vgap: 1; -fx-hgap: 1");
+                }
+                if(row > 0 && row < sudokuLength && (row + 1) %3 == 0){
+                    sudokuFieldButtons[row][col].setStyle("-fx-border-width: 1 3 1 1; -fx-border-color: grey; -fx-min-width: 34; -fx-min-height: 33; -fx-vgap: 1; -fx-hgap: 1");
+                }
+                if(row > 0 && row < sudokuLength && (row + 1) %3 == 0 && (col + 1) %3 == 0){
+                    sudokuFieldButtons[row][col].setStyle("-fx-border-width: 1 3 3 1; -fx-border-color: grey; -fx-min-width: 34; -fx-min-height: 33; -fx-vgap: 1; -fx-hgap: 1");
+                }
+
                 /* how to set style class? */
                 sudokuGrid.getChildren().add(sudokuFieldButtons[row][col]);
                 GridPane.setConstraints(sudokuFieldButtons[row][col], row, col);
@@ -80,7 +91,7 @@ public class FxController {
     private File getJsonFromFileChooser() {
         // Open a file chooser window to select json
         final JFileChooser fileChooser = new JFileChooser("src/main/java/ch/fileloader/sudokustrings");
-        int returnVal = fileChooser.showOpenDialog(fileChooserComponent);
+        fileChooser.showOpenDialog(fileChooserComponent);
         File selectedJsonFile = fileChooser.getSelectedFile();
         return selectedJsonFile;
     }
@@ -92,18 +103,26 @@ public class FxController {
                 int currentNumber = unsolvedSudoku[row][col];
                 if (currentNumber != 0) {
                     sudokuFieldButtons[col][row].setText(Integer.toString(currentNumber));
-                } else {
-                    sudokuFieldButtons[col][row].setText(" ");
+                }
+                else {
+                    sudokuFieldButtons[col][row].setText("");
                 }
             }
         }
     }
 
     private void pasteSolutionToSudokuGrid(int[][] solvedSudoku) {
-        for (int row = 0; row < sudokuLength; row++) {
-            for (int col = 0; col < sudokuLength; col++) {
-                sudokuFieldButtons[row][col].setText(solvedSudoku[col][row] + "");
+        try {
+            if(solvedSudoku != null && solvedSudoku.length > 0) {
+                for (int row = 0; row < sudokuLength; row++) {
+                    for (int col = 0; col < sudokuLength; col++) {
+                        sudokuFieldButtons[row][col].setText(solvedSudoku[col][row] + "");
+                    }
+                }
             }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -115,7 +134,4 @@ public class FxController {
             }
         }
     }
-
 }
-
-
