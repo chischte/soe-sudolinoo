@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
+          styleClass="layout" style="@FxStyle.css" gridLinesVisible="false">
+    <padding>
+        <Insets top="25" right="25" bottom="25" left="25"/>
+    </padding>
+
+    <children>
+
+        <HBox styleClass="header" alignment="CENTER" GridPane.rowIndex="0" GridPane.columnSpan="4">
+            <Label text="SUDOKU SOLVER"/>
+        </HBox>
+    </children>
+
+    <stylesheets>
+        <URL value="@FxStyle.css"/>
+    </stylesheets>
+</GridPane>

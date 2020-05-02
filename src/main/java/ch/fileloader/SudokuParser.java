@@ -16,6 +16,7 @@ public class SudokuParser {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return puzzle;
     }
 
@@ -42,8 +43,5 @@ public class SudokuParser {
         }
 
         return puzzle;
-
     }
 }
-
-

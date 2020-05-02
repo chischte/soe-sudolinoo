@@ -13,10 +13,13 @@ public class SudokuSolver {
     public int[][] startSolvingSudoku(int[][] puzzleToSolve) {
         loaderSudoku = puzzleToSolve;
         gridSizeSudoku = loaderSudoku.length;
-        solver();
-        return solvedSudoku;
-    }
+        if(solver())
+        {
+            return solvedSudoku;
+        }
 
+        return loaderSudoku;
+    }
 
     private boolean isSudokuFullyFilledOut(int gridSize, int[][] loader) {
         for (int y = 0; y < gridSize; y++) {
@@ -34,15 +37,12 @@ public class SudokuSolver {
     public int[] possibleEntries() {
         int[] possibilityArray = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-
         // Check if the 3x3 Sudoku rule is valid
         possibilityArray = isTheThreeByThreeRuleValid(getTheThreeByTreeGrid(row), getTheThreeByTreeGrid(col), possibilityArray);
 
 
         // Check if the horizontal row and if the vertical col is valid
         possibilityArray = checkIfHorizontalIsValid(possibilityArray, gridSizeSudoku);
-
-
         possibilityArray = checkIfVerticalIsValid(possibilityArray, gridSizeSudoku);
 
 
@@ -149,20 +149,25 @@ public class SudokuSolver {
 
             possibilityArraySolver = possibleEntries();
 
-            for (int i = 0; i < 10; i++) {
-                if (isSudokuFullyFilledOut(gridSizeSudoku, loaderSudoku)) {
-                    break;
+            try {
+                // It needs to be equal to the size of the Sudoku length otherwise the last field could not be check by all the Sudoku rules
+                for (int i = 0; i < 10; i++) {
+                    if (isSudokuFullyFilledOut(gridSizeSudoku, loaderSudoku)) {
+                        break;
+                    }
+
+                    if (i < 9 && possibilityArraySolver[i] != 0) {
+                        loaderSudoku[rowsolver][colsolver] = possibilityArraySolver[i];
+                        // ToDo get out of the loop when solver returns true
+                        solver();
+
+                    } else if (i == 8 || i == 9 ) {
+                        loaderSudoku[rowsolver][colsolver] = 0;
+                    }
                 }
-
-                if (i < 9 && possibilityArraySolver[i] != 0) {
-                    loaderSudoku[rowsolver][colsolver] = possibilityArraySolver[i];
-
-                    // ToDo get out of the loop when solver returns true
-                    solver();
-
-                } else if (i == 8 || i == 9 ) {
-                    loaderSudoku[rowsolver][colsolver] = 0;
-                }
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage());
             }
         }
 

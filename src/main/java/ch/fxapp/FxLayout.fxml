@@ -5,7 +5,7 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <GridPane xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
-          styleClass="layout" gridLinesVisible="false">
+          styleClass="layout" style="@FxStyle.css">
     <padding>
         <Insets top="25" right="25" bottom="25" left="25"/>
     </padding>
@@ -17,20 +17,20 @@
         </HBox>
 
         <HBox spacing="10" alignment="CENTER" GridPane.rowIndex="1" GridPane.columnSpan="4">
-            <GridPane fx:id="sudokuGrid" styleClass="sudokugrid">
+            <GridPane fx:id="sudokuGrid" styleClass="sudoku_grid">
                 <!---->
                 <!-- THIS IS THE GRID PANE FOR THE SUDOKU FIELDS -->
                 <!---->
             </GridPane>
         </HBox>
-        <HBox styleClass="clickbutton" spacing="10" alignment="CENTER" GridPane.rowIndex="2" GridPane.columnSpan="4">
+        <HBox styleClass="click_button" spacing="10" alignment="CENTER" GridPane.rowIndex="2" GridPane.columnSpan="4">
             <Button text="Get Sudoku" onAction="#clickOnGetSudoku" />
             <Button text="Test JoelSolver" onAction="#clickOnSolveSudoku" />
             <Button text="Test MichiSolver" onAction="#clickOnMichiSolver" />
             <Button text="clear Sudoku" onAction="#clickOnClear" />
         </HBox>
 
-        <HBox styleClass="createdby" spacing="10" alignment="CENTER" GridPane.rowIndex="4" GridPane.columnSpan="4">
+        <HBox styleClass="created_by" spacing="10" alignment="CENTER" GridPane.rowIndex="4" GridPane.columnSpan="4">
             <Label text="Created by Roland Jaggi, Michael Wettstein, Joel Iselin" textFill="#182b80"/>
         </HBox>
 
