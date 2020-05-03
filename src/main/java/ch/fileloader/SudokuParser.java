@@ -1,3 +1,14 @@
+/**
+ * This class is made for parsing strings to array. This array
+ * is later used to put on the sudoku grid with all the given
+ * numbers from the file.
+ *
+ * @author Michael Wettstein
+ * @version 0.1
+ * @since 03.05.2020
+ */
+
+
 package main.java.ch.fileloader;
 
 import org.json.simple.JSONObject;

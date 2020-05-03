@@ -1,3 +1,14 @@
+/**
+ * This controller shows of all of the button clicks.
+ * The generated fields where also styled in here
+ *
+ * @author Michael Wettstein
+ * @author Joel Iselin
+ * @author Roland Jaggi
+ * @version 0.5
+ * @since 03.05.2020
+ */
+
 package main.java.ch.fxapp;
 
 import main.java.ch.fileloader.SudokuParser;
@@ -26,7 +37,10 @@ public class FxController {
     @FXML
     GridPane sudokuGrid;
 
-    public FxController() throws Exception {
+    private StageManager stageManager;
+
+    public FxController(StageManager stageManager) {
+        this.stageManager = stageManager;
     }
 
     public void initialize() {
@@ -81,7 +95,6 @@ public class FxController {
                     sudokuFieldButtons[row][col].setStyle("-fx-border-width: 1 3 3 1; -fx-border-color: grey; -fx-min-width: 34; -fx-min-height: 33; -fx-vgap: 1; -fx-hgap: 1");
                 }
 
-                /* how to set style class? */
                 sudokuGrid.getChildren().add(sudokuFieldButtons[row][col]);
                 GridPane.setConstraints(sudokuFieldButtons[row][col], row, col);
             }
@@ -130,7 +143,6 @@ public class FxController {
         for (int row = 0; row < sudokuLength; row++) {
             for (int col = 0; col < sudokuLength; col++) {
                 sudokuFieldButtons[col][row].setText(" ");
-
             }
         }
     }

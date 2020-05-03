@@ -4,34 +4,30 @@
 <?import javafx.scene.control.Label?>
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Separator?>
 <GridPane xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
-          styleClass="layout" style="@FxStyle.css">
+          styleClass="layout" style="@FxStyle.css"
+          fx:id="welcomeGrid">
     <padding>
         <Insets top="25" right="25" bottom="25" left="25"/>
     </padding>
 
     <children>
 
-        <HBox styleClass="header" alignment="CENTER" GridPane.rowIndex="0" GridPane.columnSpan="4">
-            <Label text="SUDOKU SOLVER"/>
-        </HBox>
+        <VBox alignment="CENTER" GridPane.rowIndex="0" GridPane.columnSpan="4">
+            <Label styleClass="title_class_h1_style" text="Projektarbeit 'Sudoku'" />
+            <Separator />
+            <Label styleClass="title_class_h2_style" text="Software Engineering 2" />
+            <Label styleClass="title_class_h2_style" text="Klasse TS TSI 1809 A 04 SoE" />
+        </VBox>
 
         <HBox spacing="10" alignment="CENTER" GridPane.rowIndex="1" GridPane.columnSpan="4">
-            <GridPane fx:id="sudokuGrid" styleClass="sudoku_grid">
-                <!---->
-                <!-- THIS IS THE GRID PANE FOR THE SUDOKU FIELDS -->
-                <!---->
-            </GridPane>
-        </HBox>
-        <HBox styleClass="click_button" spacing="10" alignment="CENTER" GridPane.rowIndex="2" GridPane.columnSpan="4">
-            <Button text="Get Sudoku" onAction="#clickOnGetSudoku" />
-            <Button text="Test JoelSolver" onAction="#clickOnSolveSudoku" />
-            <Button text="Test MichiSolver" onAction="#clickOnMichiSolver" />
-            <Button text="clear Sudoku" onAction="#clickOnClear" />
+            <Button text="Get Sudoku" styleClass="start_button" onAction="#switchToSceneSudokuOverview" />
         </HBox>
 
-        <HBox styleClass="created_by" spacing="10" alignment="CENTER" GridPane.rowIndex="4" GridPane.columnSpan="4">
-            <Label text="Created by Roland Jaggi, Michael Wettstein, Joel Iselin" textFill="#182b80"/>
+        <HBox styleClass="created_by" spacing="10" alignment="CENTER" GridPane.rowIndex="2" GridPane.columnSpan="4">
+            <Label text="© Created and designed by Roland Jaggi, Michael Wettstein, Joel Iselin"/>
         </HBox>
 
     </children>

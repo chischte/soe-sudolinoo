@@ -1,30 +1,27 @@
+/**
+ * Main Method to start the whole Sudoku program.
+ * This Main starts an instance of the Stage Manager, because there is a multi Stage
+ * level design. Even if it's not necessary , it gives to the user
+ * a warm welcome
+ *
+ * @author Michael Wettstein
+ * @author Joel Iselin
+ * @author Roland Jaggi
+ * @version 0.1
+ * @since 03.05.2020
+ */
+
 package main.java.ch.fxapp;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.GridPane;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public final class FxApp extends Application {
-
     @Override
-    public void start(Stage primaryStage) throws Exception {
-
-        // Get fxml and add it to grid
-        FxController controller = new FxController();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FxLayout.fxml"));
-        loader.setController(controller);
-        GridPane fxmlGrid = loader.load();
-
-        // Make mainVBox a scene
-        Scene scene = new Scene(fxmlGrid, 600, 500);
-
-        // Show scene @ primary stage
-        primaryStage.setTitle("Sudoku Solver");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
+    public void start(Stage primaryStage) throws IOException {
+        StageManager stageManager = StageManager.getInstance(primaryStage);
+        stageManager.loadFirstStage();
     }
-
 }

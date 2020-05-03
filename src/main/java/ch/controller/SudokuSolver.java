@@ -1,3 +1,16 @@
+/**
+ * The brain of the logic behind the whole solver
+ * This class is providing all the needed steps to solve a sudoku
+ * the methods for example the 3by3 check are all in encapsulated for later use
+ *
+ * This class is multiple times refactored.
+ *
+ * @author Joel Iselin
+ * @author Roland Jaggi
+ * @version 0.5
+ * @since 03.05.2020
+ */
+
 package main.java.ch.controller;
 
 public class SudokuSolver {
@@ -9,7 +22,11 @@ public class SudokuSolver {
     private int col = 0;
 
 
-    // This is the method that is used by the gui
+    /**
+     * This is the method that is used by the gui
+     * @param puzzleToSolve
+     * @return returns a int array with the solved sudoku
+     */
     public int[][] startSolvingSudoku(int[][] puzzleToSolve) {
         loaderSudoku = puzzleToSolve;
         gridSizeSudoku = loaderSudoku.length;
@@ -21,6 +38,12 @@ public class SudokuSolver {
         return loaderSudoku;
     }
 
+    /**
+     * Checks if all of the fields are filled out
+     * @param gridSize size is normaly in a sudoku 9by9 but we can extend or decrease it with that
+     * @param loader is the filled out array of the sudoku
+     * @return true/false
+     */
     private boolean isSudokuFullyFilledOut(int gridSize, int[][] loader) {
         for (int y = 0; y < gridSize; y++) {
             for (int x = 0; x < gridSize; x++) {
@@ -33,8 +56,12 @@ public class SudokuSolver {
         return true;
     }
 
-    // Check if the actual position is Valid
-    public int[] possibleEntries() {
+    /**
+     * Check if the actual position is valid. It means that not a number can not be twice or more in the same row
+     * It checks also all the other rules
+     * @return returns the int[][] array with all the correct numbers in it
+     */
+    public int[] checkAllTheSudokuRulesOfTheEntries() {
         int[] possibilityArray = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
         // Check if the 3x3 Sudoku rule is valid
@@ -52,6 +79,11 @@ public class SudokuSolver {
 
     }
 
+    /**
+     * This method provides a change if a number is incorrect in this segment of the sudoku
+     * @param possibilityArray
+     * @return
+     */
     private int[] changeToPossibleNumbers(int[] possibilityArray) {
         int ConversionPossibilityArray = 1;
         for (int i = 0; i < gridSizeSudoku; i++) {
@@ -66,6 +98,13 @@ public class SudokuSolver {
         return possibilityArray;
     }
 
+    /**
+     * THis is one of a kind. It checks if the number 1 to 9 are in and no multipliers in the 3by 3 grid
+     * @param threeByThreeRow
+     * @param threeByThreeCol
+     * @param possibilityArray
+     * @return
+     */
     private int[] isTheThreeByThreeRuleValid(int threeByThreeRow, int threeByThreeCol, int[] possibilityArray) {
         int loader;
         for (int row = 0; row < 3; row++) {
@@ -85,6 +124,12 @@ public class SudokuSolver {
         return possibilityArray;
     }
 
+    /**
+     * This method provides if the vertical line contains only the number 1 to 9 and no multipliers
+     * @param possibilityArray
+     * @param gridSize
+     * @return
+     */
     private int[] checkIfVerticalIsValid(int[] possibilityArray, int gridSize) {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 1; j < 10; j++) {
@@ -97,6 +142,12 @@ public class SudokuSolver {
         return possibilityArray;
     }
 
+    /**
+     * This method provides if the horizontal line contains only the number 1 to 9 and no multipliers
+     * @param possibilityArray
+     * @param gridSize
+     * @return
+     */
     private int[] checkIfHorizontalIsValid(int[] possibilityArray, int gridSize) {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 1; j < 10; j++) {
@@ -147,7 +198,7 @@ public class SudokuSolver {
             row = rowsolver;
             col = colsolver;
 
-            possibilityArraySolver = possibleEntries();
+            possibilityArraySolver = checkAllTheSudokuRulesOfTheEntries();
 
             try {
                 // It needs to be equal to the size of the Sudoku length otherwise the last field could not be check by all the Sudoku rules

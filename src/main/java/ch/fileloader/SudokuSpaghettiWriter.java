@@ -1,7 +1,15 @@
-// THIS CLASS IS TO CREATE NEW JSON STRINGS OUT OF A SUDOKU (int[][]) ARRAY
-// TO GENERATE A NEW STRING PASTE THE NEW ARRAY BELOW, AND LET THE CLASS RUN
-// THE NEWLY GENERATED STRING WILL BE STORED AS "newspagettistring.json"
-
+/**
+ * Demo class
+ * This is to create new Json Strings out of a sudoku (int[][]) array
+ * To generate a new String past the new ARRAY below, abd let the class run
+ * The newly generated string will be stored as "newspaghettistring.json"
+ *
+ * @author Michael Wettstein
+ * @author Joel Iselin
+ * @author Roland Jaggi
+ * @version 0.6
+ * @since 03.05.2020
+ */
 
 package main.java.ch.fileloader;
 
