@@ -9,7 +9,6 @@ public class Field {
 
     // "hasBeenProcessed" is true if all fields in same row, column or sector have been cleared of the possibility of this number;
     private boolean hasBeenProcessed;
-    private int fieldNo; // 0-80
     private int rowNo; // 0-8
     private int columnNo; // 0-8
     private int fieldValue; // 1-9
@@ -26,10 +25,6 @@ public class Field {
 
     //SETTER AND METHODS TO CHANGE VALUES:
     //TODO: check if all getter/setter are necessary
-    public void setFieldNo(int fieldNo) {
-        this.fieldNo = fieldNo;
-    }
-
     public void setRowNo(int rowNo) {
         this.rowNo = rowNo;
     }

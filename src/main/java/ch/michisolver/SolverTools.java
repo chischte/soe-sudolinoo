@@ -6,20 +6,17 @@ public class SolverTools {
     private final int gridLength = 9; // A sudoku has a grid length of 9 Fields
     private final int noOfFields = 81; // A sudoku has 81 fields
     private int[][] unsolvedSudoku = new int[gridLength][gridLength];
-    private Field[] fieldAsClassArray = new Field[noOfFields];
+    private Field[] fieldArray = new Field[noOfFields];
 
 
     public void configureAllFields(int[][] sudokuArray) {
-        unsolvedSudoku = sudokuArray; // store initial sudoku in case solver has to restart
+        // store initial sudoku in case solver has to restart
+        unsolvedSudoku = sudokuArray;
         for (int row = 0; row < gridLength; row++) {
             for (int col = 0; col < gridLength; col++) {
 
-                // Calculate current field number (0-80)
-                int currentFieldNo = row * gridLength + col;
-
                 // Initialize a new object in fieldAsClassArray:
                 Field currentField = new Field();
-                fieldAsClassArray[currentFieldNo] = currentField;
 
                 // Get current field parameters
                 int currentSector = getSector(row, col);
@@ -27,22 +24,34 @@ public class SolverTools {
 
                 // Assign parameters to field:
                 //TODO: Make Method parametersToField
-                //TODO: Change sequence to configure Field, add to array (in two steps)
                 //TODO: Resulting method names: configureField, generateFieldArray ...
 
-                fieldAsClassArray[currentFieldNo].setFieldNo(currentFieldNo);
-                fieldAsClassArray[currentFieldNo].setRowNo(row);
-                fieldAsClassArray[currentFieldNo].setColumnNo(col);
-                fieldAsClassArray[currentFieldNo].setSectorNo(currentSector);
+                currentField.setRowNo(row);
+                currentField.setColumnNo(col);
+                currentField.setSectorNo(currentSector);
 
                 // Mark fields with a number other than 0 as solved
                 if (currentValue != 0) {
-                    fieldAsClassArray[currentFieldNo].setSolved();
-                    fieldAsClassArray[currentFieldNo].setFieldValue(currentValue);
+                    currentField.setSolved();
+                    currentField.setFieldValue(currentValue);
                 }
+                addFieldToFieldArray(row, col, currentField);
+                // Add current field to fieldArray
+
             }
         }
     }
+
+    private void addFieldToFieldArray(int row, int col, Field field) {
+        int fieldNo = calculateFieldNo(row, col);
+        fieldArray[fieldNo] = field;
+    }
+
+    private int calculateFieldNo(int row, int col) {
+        int fieldNo = row * gridLength + col;
+        return fieldNo;
+    }
+
 
     private int getSector(int row, int col) {
         int sector;
@@ -68,39 +77,39 @@ public class SolverTools {
         // Search solved fields in all fields
         for (int solvedField = 0; solvedField < noOfFields; solvedField++) {
             // When a solved and yet unprocessed field is found ...
-            if (fieldAsClassArray[solvedField].isSolved() && !fieldAsClassArray[solvedField].hasBeenProcessed()) {
+            if (fieldArray[solvedField].isSolved() && !fieldArray[solvedField].hasBeenProcessed()) {
                 // Clear this number from all other fields according to sudoku rules
                 for (int clearField = 0; clearField < noOfFields; clearField++) {
                     // Check only unsolvedfields:
-                    if (!fieldAsClassArray[clearField].isSolved()) {
+                    if (!fieldArray[clearField].isSolved()) {
                         boolean possibilityShouldBeCleared = false;
 
-                        possibilityShouldBeCleared = findRelatedFields(fieldAsClassArray[solvedField].getRowNo(), fieldAsClassArray[clearField].getRowNo());
+                        possibilityShouldBeCleared = findRelatedFields(fieldArray[solvedField].getRowNo(), fieldArray[clearField].getRowNo());
 
 
                         // Check if field is in same row
                         //TODO: make separate method 1 isFieldInSameRow
-                        if (fieldAsClassArray[solvedField].getRowNo() == fieldAsClassArray[clearField].getRowNo()) {
+                        if (fieldArray[solvedField].getRowNo() == fieldArray[clearField].getRowNo()) {
                             possibilityShouldBeCleared = true;
                         }
                         // Check if field is in same column
                         //TODO: make separate method 2 isFieldInSameColumn() ...call isEquivalent
-                        else if (fieldAsClassArray[solvedField].getColumnNo() == fieldAsClassArray[clearField].getColumnNo()) {
+                        else if (fieldArray[solvedField].getColumnNo() == fieldArray[clearField].getColumnNo()) {
                             possibilityShouldBeCleared = true;
                         }
                         // Check if field is in same sector
                         //TODO: make separate method 3 isFieldInSameSector
-                        else if (fieldAsClassArray[solvedField].getSectorNo() == fieldAsClassArray[clearField].getSectorNo()) {
+                        else if (fieldArray[solvedField].getSectorNo() == fieldArray[clearField].getSectorNo()) {
                             possibilityShouldBeCleared = true;
                         }
                         // If one of the sudoku rules applies, clear possibility from field
                         if (possibilityShouldBeCleared) {
-                            fieldAsClassArray[clearField].removePossibleNo(fieldAsClassArray[solvedField].getFieldValue());
+                            fieldArray[clearField].removePossibleNo(fieldArray[solvedField].getFieldValue());
                         }
                     }
                 }
                 // Mark the processed field as processed
-                fieldAsClassArray[solvedField].setProcessed();
+                fieldArray[solvedField].setProcessed();
             }
         }
     }
@@ -119,9 +128,9 @@ public class SolverTools {
         // iterate all fields
         for (int i = 0; i < noOfFields; i++) {
             // check unsolved fields only
-            if (!fieldAsClassArray[i].isSolved()) {
-                if (fieldAsClassArray[i].countPossibleNumbers() <= minimumNoOfPossibilities) {
-                    minimumNoOfPossibilities = fieldAsClassArray[i].countPossibleNumbers();
+            if (!fieldArray[i].isSolved()) {
+                if (fieldArray[i].countPossibleNumbers() <= minimumNoOfPossibilities) {
+                    minimumNoOfPossibilities = fieldArray[i].countPossibleNumbers();
                     fieldWithMinimumPossibilities = i;
                 }
             }
@@ -134,16 +143,16 @@ public class SolverTools {
             configureAllFields(unsolvedSudoku);
         } else {
             // Set a random possibility value as field value
-            fieldAsClassArray[fieldWithMinimumPossibilities].setFieldValue(fieldAsClassArray[fieldWithMinimumPossibilities].getAPossibleValueByRandom());
+            fieldArray[fieldWithMinimumPossibilities].setFieldValue(fieldArray[fieldWithMinimumPossibilities].getAPossibleValueByRandom());
             // Mark field as solved:
-            fieldAsClassArray[fieldWithMinimumPossibilities].setSolved();
+            fieldArray[fieldWithMinimumPossibilities].setSolved();
         }
     }
 
     public int countNoOfUnsolvedFields() {
         int noOfUnsolvedFields = 0;
         for (int i = 0; i < noOfFields; i++) {
-            if (!fieldAsClassArray[i].isSolved()) {
+            if (!fieldArray[i].isSolved()) {
                 noOfUnsolvedFields++;
             }
         }
@@ -158,8 +167,7 @@ public class SolverTools {
             for (int col = 0; col < solvedSudoku.length; col++) {
                 int fieldNumber = row * solvedSudoku.length + col;
                 // Assign field values to array
-                solvedSudoku[row][col] = fieldAsClassArray[fieldNumber].getFieldValue();
-                System.out.print(fieldAsClassArray[fieldNumber].getFieldValue());
+                solvedSudoku[row][col] = fieldArray[fieldNumber].getFieldValue();
             }
         }
         return solvedSudoku;
