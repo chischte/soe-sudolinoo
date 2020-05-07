@@ -10,8 +10,7 @@ public class SolverTools {
 
 
     public void configureAllFields(int[][] sudokuArray) {
-        // Store initial sudoku in case of the solver has to restart
-        unsolvedSudoku = sudokuArray;
+        unsolvedSudoku = sudokuArray; // store initial sudoku in case solver has to restart
         for (int row = 0; row < gridLength; row++) {
             for (int col = 0; col < gridLength; col++) {
 
@@ -19,7 +18,8 @@ public class SolverTools {
                 int currentFieldNo = row * gridLength + col;
 
                 // Initialize a new object in fieldAsClassArray:
-                fieldAsClassArray[currentFieldNo] = new Field();
+                Field currentField = new Field();
+                fieldAsClassArray[currentFieldNo] = currentField;
 
                 // Get current field parameters
                 int currentSector = getSector(row, col);
