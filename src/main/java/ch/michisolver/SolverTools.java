@@ -64,10 +64,15 @@ public class SolverTools {
     }
 
     public void removeSolvedNumbersFromOtherFields() {
+
+            //COMPARE SOLVED WITH ALL OTHER FIELDS FOR RELATION
+        //if (fieldIsRelated())
+        //REMOVE POSSIBILITY FROM POSSIBILITY ARRAY
+
         // Search solved fields in all fields
         for (int solvedField = 0; solvedField < noOfFields; solvedField++) {
-            // When a solved and yet unprocessed field is found ...
-            if (fieldArray[solvedField].isSolved() && !fieldArray[solvedField].hasBeenProcessed()) {
+            Field currentField=fieldArray[solvedField];
+            if(fieldIsSolvedAndUnprocessed(currentField)){
                 // Clear this number from all other fields according to sudoku rules
                 for (int clearField = 0; clearField < noOfFields; clearField++) {
                     // Check only unsolvedfields:
@@ -102,6 +107,10 @@ public class SolverTools {
                 fieldArray[solvedField].setProcessed();
             }
         }
+    }
+
+    private boolean fieldIsSolvedAndUnprocessed(Field field){
+        return(field.isSolved()&&!field.hasBeenProcessed());
     }
 
     private boolean findRelatedFields(int rowNo, int rowNo1) {
