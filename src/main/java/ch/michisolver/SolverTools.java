@@ -40,7 +40,6 @@ public class SolverTools {
                     fieldAsClassArray[currentFieldNo].setSolved();
                     fieldAsClassArray[currentFieldNo].setFieldValue(currentValue);
                 }
-                fieldAsClassArray[currentFieldNo].printFieldInfo();
             }
         }
     }
@@ -98,7 +97,6 @@ public class SolverTools {
                         if (possibilityShouldBeCleared) {
                             fieldAsClassArray[clearField].removePossibleNo(fieldAsClassArray[solvedField].getFieldValue());
                         }
-                        //fieldAsClassArray[clearField].printFieldInfo();
                     }
                 }
                 // Mark the processed field as processed

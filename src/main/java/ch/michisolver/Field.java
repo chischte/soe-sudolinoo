@@ -4,27 +4,23 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Field {
-
-
     // PROPERTIES OF EVERY SUDOKU FIELD:
     private boolean isSolved = false;
 
-    // Set "hasBeenProcessed" true if all fields in same row, column or sector have been cleared of the possibility of this number;
-    private boolean hasBeenProcessed = false;
+    // "hasBeenProcessed" is true if all fields in same row, column or sector have been cleared of the possibility of this number;
+    private boolean hasBeenProcessed;
     private int fieldNo; // 0-80
     private int rowNo; // 0-8
     private int columnNo; // 0-8
-
-    private int fieldValue;
+    private int fieldValue; // 1-9
     private int sectorNo; // 1-9
     private TreeSet<Integer> possibilities = new TreeSet<>();
 
     // THIS IS THE CONSTRUCTOR
     public Field() {
-        //TODO: initialize all fields in constructor
+        hasBeenProcessed = false;
+        // Create possibilities Set
         Integer arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-
-        // Paste content of array to set
         Collections.addAll(this.possibilities = new TreeSet<Integer>(Arrays.asList(arr)));
     }
 
@@ -56,8 +52,7 @@ public class Field {
 
     public void setSolved() {
         isSolved = true;
-        //remove all possibilities
-        this.possibilities.clear();
+        this.possibilities.clear(); // removes all possibilities
     }
 
     public void setProcessed() {
@@ -65,11 +60,6 @@ public class Field {
     }
 
     //GETTER AND METHODS TO REQUEST VALUES :
-
-    public void getPossibleNo() {
-        System.out.println(this.possibilities);
-    }
-
     public boolean isSolved() {
         return this.isSolved;
     }
@@ -104,21 +94,6 @@ public class Field {
         int random = ThreadLocalRandom.current().nextInt(0, noOfPossibilities);
         Integer[] possibilityArray = new Integer[possibilities.size()];
         possibilities.toArray(possibilityArray);
-
-        int aPossibleValue = possibilityArray[random];
-        return aPossibleValue;
-    }
-
-
-    public void printFieldInfo() {
-//        System.out.print("FieldNo=" + fieldNo + " | ");
-//        System.out.print("RowNo=" + rowNo + " | ");
-//        System.out.print("ColumnNo=" + columnNo + " | ");
-//        System.out.print("SectorNo= " + sectorNo + " | ");
-//        System.out.print("VALUE=" + fieldValue + " | ");
-//        System.out.print("SOLVED=" + isSolved + " | ");
-//        System.out.print("NoOfPossibilities=" + countPossibleNumbers() + " | ");
-//        System.out.print("Possibilities:" + possibilities + " | ");
-//        System.out.println(" ");
+        return possibilityArray[random];
     }
 }
