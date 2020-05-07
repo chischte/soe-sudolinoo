@@ -64,46 +64,60 @@ public class SolverTools {
     }
 
     public void removeSolvedNumbersFromOtherFields() {
+
+        //COMPARE SOLVED WITH ALL OTHER FIELDS FOR RELATION
+        //if (fieldIsRelated())
+        //REMOVE POSSIBILITY FROM POSSIBILITY ARRAY
+
         // Search solved fields in all fields
-        for (int fieldNo = 0; fieldNo < noOfFields; fieldNo++) {
-            Field currentField = fieldArray[fieldNo];
-            if (fieldIsSolvedAndUnprocessed(currentField)) {
-                clearNumberFromRelatedFields(currentField);
-            }
-            currentField.setProcessed();
-        }
-    }
+        for (int solvedField = 0; solvedField < noOfFields; solvedField++) {
+            Field currentField=fieldArray[solvedField];
+            if(fieldIsSolvedAndUnprocessed(currentField)){
+                // Clear this number from all other fields according to sudoku rules
+                for (int clearField = 0; clearField < noOfFields; clearField++) {
+                    // Check only unsolvedfields:
+                    if (!fieldArray[clearField].isSolved()) {
+                        boolean possibilityShouldBeCleared = false;
 
-    void clearNumberFromRelatedFields(Field solvedField) {
-        for (int fieldNo = 0; fieldNo < noOfFields; fieldNo++) {
-            Field currentField = fieldArray[fieldNo];
-            if (!currentField.isSolved()) {
-                if (fieldsAreRelated(solvedField, currentField)) {
-                    removePossibilityFromField(solvedField, currentField);
+                        possibilityShouldBeCleared = findRelatedFields(fieldArray[solvedField].getRowNo(), fieldArray[clearField].getRowNo());
+
+
+                        // Check if field is in same row
+                        //TODO: make separate method 1 isFieldInSameRow
+                        if (fieldArray[solvedField].getRowNo() == fieldArray[clearField].getRowNo()) {
+                            possibilityShouldBeCleared = true;
+                        }
+                        // Check if field is in same column
+                        //TODO: make separate method 2 isFieldInSameColumn() ...call isEquivalent
+                        else if (fieldArray[solvedField].getColumnNo() == fieldArray[clearField].getColumnNo()) {
+                            possibilityShouldBeCleared = true;
+                        }
+                        // Check if field is in same sector
+                        //TODO: make separate method 3 isFieldInSameSector
+                        else if (fieldArray[solvedField].getSectorNo() == fieldArray[clearField].getSectorNo()) {
+                            possibilityShouldBeCleared = true;
+                        }
+                        // If one of the sudoku rules applies, clear possibility from field
+                        if (possibilityShouldBeCleared) {
+                            fieldArray[clearField].removePossibleNo(fieldArray[solvedField].getFieldValue());
+                        }
+                    }
                 }
+                // Mark the processed field as processed
+                fieldArray[solvedField].setProcessed();
             }
         }
     }
 
-    private boolean fieldIsSolvedAndUnprocessed(Field field) {
-        return (field.isSolved() && !field.hasBeenProcessed());
+    private boolean fieldIsSolvedAndUnprocessed(Field field){
+        return(field.isSolved()&&!field.hasBeenProcessed());
     }
 
-    boolean fieldsAreRelated(Field fieldA, Field fieldB) {
-        if (fieldA.getColumnNo() == fieldB.getColumnNo()) {
-            return true;
-        }
-        if (fieldA.getRowNo() == fieldB.getRowNo()) {
-            return true;
-        }
-        if (fieldA.getSectorNo() == fieldB.getSectorNo()) {
+    private boolean findRelatedFields(int rowNo, int rowNo1) {
+        if (rowNo == rowNo1) {
             return true;
         }
         return false;
-    }
-
-    void removePossibilityFromField(Field solvedField, Field otherField) {
-        otherField.removePossibleNo(solvedField.getFieldValue());
     }
 
     public void selectNextSolvedField() {
