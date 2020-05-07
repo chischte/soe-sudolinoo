@@ -10,7 +10,7 @@ public class SolverTools {
 
 
     public void configureAllFields(int[][] sudokuArray) {
-        // store initial sudoku in case solver has to restart
+        // store initial sudoku in case solver has to restart:
         unsolvedSudoku = sudokuArray;
         for (int row = 0; row < gridLength; row++) {
             for (int col = 0; col < gridLength; col++) {
@@ -18,26 +18,18 @@ public class SolverTools {
                 // Initialize a new object in fieldAsClassArray:
                 Field currentField = new Field();
 
-                // Get current field parameters
-                int currentSector = getSector(row, col);
-                int currentValue = sudokuArray[row][col];
-
-                // Assign parameters to field:
-                //TODO: Make Method parametersToField
-                //TODO: Resulting method names: configureField, generateFieldArray ...
-
+                // Configure current Field:
                 currentField.setRowNo(row);
                 currentField.setColumnNo(col);
-                currentField.setSectorNo(currentSector);
+                currentField.setSectorNo(getSector(row, col));
 
-                // Mark fields with a number other than 0 as solved
+                int currentValue = sudokuArray[row][col];
                 if (currentValue != 0) {
                     currentField.setSolved();
                     currentField.setFieldValue(currentValue);
                 }
+                // Add current field to fieldArray:
                 addFieldToFieldArray(row, col, currentField);
-                // Add current field to fieldArray
-
             }
         }
     }
@@ -51,7 +43,6 @@ public class SolverTools {
         int fieldNo = row * gridLength + col;
         return fieldNo;
     }
-
 
     private int getSector(int row, int col) {
         int sector;
@@ -69,7 +60,6 @@ public class SolverTools {
         } else {
             sector += 6;
         }
-
         return sector;
     }
 
