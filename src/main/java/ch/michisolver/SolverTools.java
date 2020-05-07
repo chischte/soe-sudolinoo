@@ -1,11 +1,12 @@
 package main.java.ch.michisolver;
 
 public class SolverTools {
+    //TODO: check if different tool classes make sense or rename to Tool ("SudokuInitializer...)
     // This is an array containing an object for every sudoku field
     private final int gridLength = 9; // A sudoku has a grid length of 9 Fields
     private final int noOfFields = 81; // A sudoku has 81 fields
     private int[][] unsolvedSudoku = new int[gridLength][gridLength];
-    private FieldAsClass[] fieldAsClassArray = new FieldAsClass[noOfFields];
+    private Field[] fieldAsClassArray = new Field[noOfFields];
 
 
     public void configureAllFields(int[][] sudokuArray) {
@@ -18,16 +19,20 @@ public class SolverTools {
                 int currentFieldNo = row * gridLength + col;
 
                 // Initialize a new object in fieldAsClassArray:
-                fieldAsClassArray[currentFieldNo] = new FieldAsClass();
+                fieldAsClassArray[currentFieldNo] = new Field();
 
                 // Get current field parameters
-                int currentSector = findOutSector(row, col);
+                int currentSector = getSector(row, col);
                 int currentValue = sudokuArray[row][col];
 
-                // Asign parameters to field:
+                // Assign parameters to field:
+                //TODO: Make Method parametersToField
+                //TODO: Change sequence to configure Field, add to array (in two steps)
+                //TODO: Resulting method names: configureField, generateFieldArray ...
+
                 fieldAsClassArray[currentFieldNo].setFieldNo(currentFieldNo);
                 fieldAsClassArray[currentFieldNo].setRowNo(row);
-                fieldAsClassArray[currentFieldNo].setColumNo(col);
+                fieldAsClassArray[currentFieldNo].setColumnNo(col);
                 fieldAsClassArray[currentFieldNo].setSectorNo(currentSector);
 
                 // Mark fields with a number other than 0 as solved
@@ -40,7 +45,7 @@ public class SolverTools {
         }
     }
 
-    private int findOutSector(int row, int col) {
+    private int getSector(int row, int col) {
         int sector;
         if (col < 3) {
             sector = 1;
@@ -70,15 +75,22 @@ public class SolverTools {
                     // Check only unsolvedfields:
                     if (!fieldAsClassArray[clearField].isSolved()) {
                         boolean possibilityShouldBeCleared = false;
+
+                        possibilityShouldBeCleared = findRelatedFields(fieldAsClassArray[solvedField].getRowNo(), fieldAsClassArray[clearField].getRowNo());
+
+
                         // Check if field is in same row
+                        //TODO: make separate method 1 isFieldInSameRow
                         if (fieldAsClassArray[solvedField].getRowNo() == fieldAsClassArray[clearField].getRowNo()) {
                             possibilityShouldBeCleared = true;
                         }
                         // Check if field is in same column
+                        //TODO: make separate method 2 isFieldInSameColumn() ...call isEquivalent
                         else if (fieldAsClassArray[solvedField].getColumnNo() == fieldAsClassArray[clearField].getColumnNo()) {
                             possibilityShouldBeCleared = true;
                         }
                         // Check if field is in same sector
+                        //TODO: make separate method 3 isFieldInSameSector
                         else if (fieldAsClassArray[solvedField].getSectorNo() == fieldAsClassArray[clearField].getSectorNo()) {
                             possibilityShouldBeCleared = true;
                         }
@@ -93,6 +105,13 @@ public class SolverTools {
                 fieldAsClassArray[solvedField].setProcessed();
             }
         }
+    }
+
+    private boolean findRelatedFields(int rowNo, int rowNo1) {
+        if (rowNo == rowNo1) {
+            return true;
+        }
+        return false;
     }
 
     public void selectNextSolvedField() {

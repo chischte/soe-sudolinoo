@@ -3,7 +3,8 @@ package main.java.ch.michisolver;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class FieldAsClass {
+public class Field {
+
 
     // PROPERTIES OF EVERY SUDOKU FIELD:
     private boolean isSolved = false;
@@ -16,12 +17,11 @@ public class FieldAsClass {
 
     private int fieldValue;
     private int sectorNo; // 1-9
-    private int remainingPossibilites = 9;
     private TreeSet<Integer> possibilities = new TreeSet<>();
 
     // THIS IS THE CONSTRUCTOR
-    public FieldAsClass() {
-
+    public Field() {
+        //TODO: initialize all fields in constructor
         Integer arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
         // Paste content of array to set
@@ -29,6 +29,7 @@ public class FieldAsClass {
     }
 
     //SETTER AND METHODS TO CHANGE VALUES:
+    //TODO: check if all getter/setter are necessary
     public void setFieldNo(int fieldNo) {
         this.fieldNo = fieldNo;
     }
@@ -37,7 +38,7 @@ public class FieldAsClass {
         this.rowNo = rowNo;
     }
 
-    public void setColumNo(int columnNo) {
+    public void setColumnNo(int columnNo) {
         this.columnNo = columnNo;
     }
 
