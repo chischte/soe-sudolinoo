@@ -71,35 +71,16 @@ public class SolverTools {
 
         // Search solved fields in all fields
         for (int solvedField = 0; solvedField < noOfFields; solvedField++) {
-            Field currentField=fieldArray[solvedField];
-            if(fieldIsSolvedAndUnprocessed(currentField)){
+            Field currentField = fieldArray[solvedField];
+            if (fieldIsSolvedAndUnprocessed(currentField)) {
                 // Clear this number from all other fields according to sudoku rules
-                for (int clearField = 0; clearField < noOfFields; clearField++) {
+                for (int fieldNo = 0; fieldNo < noOfFields; fieldNo++) {
+                    Field clearField = fieldArray[fieldNo];
                     // Check only unsolvedfields:
-                    if (!fieldArray[clearField].isSolved()) {
-                        boolean possibilityShouldBeCleared = false;
-
-                        possibilityShouldBeCleared = findRelatedFields(fieldArray[solvedField].getRowNo(), fieldArray[clearField].getRowNo());
-
-
-                        // Check if field is in same row
-                        //TODO: make separate method 1 isFieldInSameRow
-                        if (fieldArray[solvedField].getRowNo() == fieldArray[clearField].getRowNo()) {
-                            possibilityShouldBeCleared = true;
-                        }
-                        // Check if field is in same column
-                        //TODO: make separate method 2 isFieldInSameColumn() ...call isEquivalent
-                        else if (fieldArray[solvedField].getColumnNo() == fieldArray[clearField].getColumnNo()) {
-                            possibilityShouldBeCleared = true;
-                        }
-                        // Check if field is in same sector
-                        //TODO: make separate method 3 isFieldInSameSector
-                        else if (fieldArray[solvedField].getSectorNo() == fieldArray[clearField].getSectorNo()) {
-                            possibilityShouldBeCleared = true;
-                        }
+                    if (!fieldArray[fieldNo].isSolved()) {
                         // If one of the sudoku rules applies, clear possibility from field
-                        if (possibilityShouldBeCleared) {
-                            fieldArray[clearField].removePossibleNo(fieldArray[solvedField].getFieldValue());
+                        if (fieldsAreRelated(currentField, clearField)) {
+                            fieldArray[fieldNo].removePossibleNo(fieldArray[solvedField].getFieldValue());
                         }
                     }
                 }
@@ -109,8 +90,22 @@ public class SolverTools {
         }
     }
 
-    private boolean fieldIsSolvedAndUnprocessed(Field field){
-        return(field.isSolved()&&!field.hasBeenProcessed());
+    boolean fieldsAreRelated(Field fieldA, Field fieldB) {
+        if (fieldA.getColumnNo() == fieldB.getColumnNo()) {
+            return true;
+        }
+        if (fieldA.getRowNo() == fieldB.getRowNo()) {
+            return true;
+        }
+        if (fieldA.getSectorNo() == fieldB.getSectorNo()) {
+            return true;
+        }
+        return false;
+    }
+
+
+    private boolean fieldIsSolvedAndUnprocessed(Field field) {
+        return (field.isSolved() && !field.hasBeenProcessed());
     }
 
     private boolean findRelatedFields(int rowNo, int rowNo1) {
