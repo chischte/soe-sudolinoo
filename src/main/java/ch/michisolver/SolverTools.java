@@ -64,28 +64,23 @@ public class SolverTools {
     }
 
     public void removeSolvedNumbersFromOtherFields() {
-
-        //COMPARE SOLVED WITH ALL OTHER FIELDS FOR RELATION
-        //if (fieldIsRelated())
-        //REMOVE POSSIBILITY FROM POSSIBILITY ARRAY
-
         // Search solved fields in all fields
-        for (int solvedField = 0; solvedField < noOfFields; solvedField++) {
-            Field currentField = fieldArray[solvedField];
+        for (int fieldNo = 0; fieldNo < noOfFields; fieldNo++) {
+            Field currentField = fieldArray[fieldNo];
             if (fieldIsSolvedAndUnprocessed(currentField)) {
-                // Clear this number from all other fields according to sudoku rules
-                for (int fieldNo = 0; fieldNo < noOfFields; fieldNo++) {
-                    Field clearField = fieldArray[fieldNo];
-                    // Check only unsolvedfields:
-                    if (!fieldArray[fieldNo].isSolved()) {
-                        // If one of the sudoku rules applies, clear possibility from field
-                        if (fieldsAreRelated(currentField, clearField)) {
-                            removePossibilityFromField(currentField,clearField);
-                        }
-                    }
+               clearNumberFromRelatedFields(currentField);
+               currentField.setProcessed();
+            }
+        }
+    }
+
+    void clearNumberFromRelatedFields(Field solvedField) {
+        for (int fieldNo = 0; fieldNo < noOfFields; fieldNo++) {
+            Field currentField = fieldArray[fieldNo];
+            if (!currentField.isSolved()) {
+                if (fieldsAreRelated(solvedField, currentField)) {
+                    removePossibilityFromField(solvedField, currentField);
                 }
-                // Mark the processed field as processed
-                fieldArray[solvedField].setProcessed();
             }
         }
     }
@@ -102,10 +97,10 @@ public class SolverTools {
         }
         return false;
     }
+
     void removePossibilityFromField(Field solvedField, Field otherField) {
         otherField.removePossibleNo(solvedField.getFieldValue());
     }
-
 
     private boolean fieldIsSolvedAndUnprocessed(Field field) {
         return (field.isSolved() && !field.hasBeenProcessed());
@@ -134,7 +129,7 @@ public class SolverTools {
         }
         System.out.println("The next field marked as solved is field No " + fieldWithMinimumPossibilities + " with " + minimumNoOfPossibilities + " possible numbers");
 
-        // IF minimumNoOfPossibilites==0 THE SOLVER HAS MOVED TO A DEAD-END AND HAS TO RESTART FROM SCRATCH
+        // IF THE SOLVER HAS MOVED TO A DEAD-END AND HAS TO RESTART FROM SCRATCH
         if (minimumNoOfPossibilities == 0) {
             System.out.println("SOLVER HAS HIT A DEAD END! RESTART SOLVER WITH INTIAL SUDOKU");
             configureAllFields(unsolvedSudoku);
