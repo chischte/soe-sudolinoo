@@ -80,7 +80,7 @@ public class SolverTools {
                     if (!fieldArray[fieldNo].isSolved()) {
                         // If one of the sudoku rules applies, clear possibility from field
                         if (fieldsAreRelated(currentField, clearField)) {
-                            fieldArray[fieldNo].removePossibleNo(fieldArray[solvedField].getFieldValue());
+                            removePossibilityFromField(currentField,clearField);
                         }
                     }
                 }
@@ -101,6 +101,9 @@ public class SolverTools {
             return true;
         }
         return false;
+    }
+    void removePossibilityFromField(Field solvedField, Field otherField) {
+        otherField.removePossibleNo(solvedField.getFieldValue());
     }
 
 
