@@ -65,7 +65,7 @@ public class SudokuSolver {
         int[] possibilityArray = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
         // Check if the 3x3 Sudoku rule is valid
-        possibilityArray = isTheThreeByThreeRuleValid(getTheThreeByTreeGrid(row), getTheThreeByTreeGrid(col), possibilityArray);
+        possibilityArray = isTheThreeByThreeRuleValid(getTheThreeByThreeGrid(row), getTheThreeByThreeGrid(col), possibilityArray);
 
 
         // Check if the horizontal row and if the vertical col is valid
@@ -99,7 +99,7 @@ public class SudokuSolver {
     }
 
     /**
-     * THis is one of a kind. It checks if the number 1 to 9 are in and no multipliers in the 3by 3 grid
+     * This is one of a kind. It checks if the number 1 to 9 are in and no multipliers in the 3by 3 grid
      * @param threeByThreeRow
      * @param threeByThreeCol
      * @param possibilityArray
@@ -160,7 +160,7 @@ public class SudokuSolver {
         return possibilityArray;
     }
 
-    private int getTheThreeByTreeGrid(int number) {
+    private int getTheThreeByThreeGrid(int number) {
         if (number >= 0 && number <= 2) {
             return 0;
         } else if (number >= 3 && number <= 5) {

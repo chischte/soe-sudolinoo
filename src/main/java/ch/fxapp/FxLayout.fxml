@@ -7,14 +7,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Separator?>
 <GridPane xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
-          styleClass="layout" style="@FxStyle.css"
-          fx:id="welcomeGrid">
+          fx:id="welcomeGrid"
+          styleClass="layout">
     <padding>
         <Insets top="25" right="25" bottom="25" left="25"/>
     </padding>
 
     <children>
-
         <VBox alignment="CENTER" GridPane.rowIndex="0" GridPane.columnSpan="4">
             <Label styleClass="title_class_h1_style" text="Projektarbeit 'Sudoku'" />
             <Separator />
@@ -29,7 +28,6 @@
         <HBox styleClass="created_by" spacing="10" alignment="CENTER" GridPane.rowIndex="2" GridPane.columnSpan="4">
             <Label text="© Created and designed by Roland Jaggi, Michael Wettstein, Joel Iselin"/>
         </HBox>
-
     </children>
 
     <stylesheets>
