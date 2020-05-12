@@ -21,15 +21,19 @@ public class SolverTools {
                 currentField.setColumnNo(col);
                 currentField.setSectorNo(getSector(row, col));
                 currentField.setFieldNo(calculateFieldNo(row, col));
+                currentField.setFieldValue(sudokuArray[row][col]);
+                markSolvedFieldsAsSolved(currentField);
 
-                int currentValue = sudokuArray[row][col];
-                if (currentValue != 0) {
-                    currentField.setSolved();
-                    currentField.setFieldValue(currentValue);
-                }
+
                 // Add current field to fieldArray:
                 addFieldToFieldArray(row, col, currentField);
             }
+        }
+    }
+
+    private void markSolvedFieldsAsSolved(Field field) {
+        if (field.getFieldValue() != 0) {
+            field.setSolved();
         }
     }
 
