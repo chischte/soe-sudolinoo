@@ -22,16 +22,13 @@ public class SolverTools {
                 currentField.setSectorNo(getSector(row, col));
                 currentField.setFieldNo(calculateFieldNo(row, col));
                 currentField.setFieldValue(sudokuArray[row][col]);
-                markSolvedFieldsAsSolved(currentField);
-
-
-                // Add current field to fieldArray:
+                markSolvedFieldAsSolved(currentField);
                 addFieldToFieldArray(row, col, currentField);
             }
         }
     }
 
-    private void markSolvedFieldsAsSolved(Field field) {
+    private void markSolvedFieldAsSolved(Field field) {
         if (field.getFieldValue() != 0) {
             field.setSolved();
         }
@@ -66,18 +63,18 @@ public class SolverTools {
         return sector;
     }
 
-    public void removeSolvedNumbersFromOtherFields() {
+    public void processSolvedFields() {
         // Search solved fields in all fields:
         for (int fieldNo = 0; fieldNo < noOfFields; fieldNo++) {
             Field currentField = fieldArray[fieldNo];
             if (fieldIsSolvedAndUnprocessed(currentField)) {
-                clearNumberFromRelatedFields(currentField);
+                removePossibilityFromRelatedFields(currentField);
                 currentField.setProcessed();
             }
         }
     }
 
-    void clearNumberFromRelatedFields(Field solvedField) {
+    void removePossibilityFromRelatedFields(Field solvedField) {
         for (int fieldNo = 0; fieldNo < noOfFields; fieldNo++) {
             Field currentField = fieldArray[fieldNo];
             if (fieldsAreRelated(solvedField, currentField)) {
@@ -104,17 +101,19 @@ public class SolverTools {
     }
 
     private boolean fieldIsSolvedAndUnprocessed(Field field) {
-        return (field.isSolved() && !field.hasBeenProcessed());
+        if(field.isSolved() && !field.hasBeenProcessed()) {
+            return true;
+        }
+        return false;
     }
 
     public void selectNextSolvedField() {
         Field nextSolvedField = fieldArray[0];
         int minimumNoOfPossibilities = 9; // 9 is the maximum
 
-        // iterate all fields
+        // Iterate through all fields:
         for (int i = 0; i < noOfFields; i++) {
             Field currentField = fieldArray[i];
-            // check unsolved fields only
             if (!currentField.isSolved()) {
                 if (currentField.countPossibleNumbers() < minimumNoOfPossibilities) {
                     minimumNoOfPossibilities = currentField.countPossibleNumbers();

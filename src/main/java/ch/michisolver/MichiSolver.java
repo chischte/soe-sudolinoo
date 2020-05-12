@@ -14,14 +14,14 @@ public class MichiSolver {
         while (noOfUnsolvedFields > 0) {
 
             // ITERATE THROUGH ALL SOLVED FIELDS AND
-            // REMOVE THEIR NUMBERS FROM ALL RELATED FIELDS:
-            solverTools.removeSolvedNumbersFromOtherFields();
+            // REMOVE NUMBER IN SOLVED FIELDS FROM RELATED FIELDS:
+            solverTools.processSolvedFields();
 
             // FIND FIELD WITH THE LEAST POSSIBILITIES AND
             // SELECT A POSSIBLE NUMBER *BY RANDOM*:
             solverTools.selectNextSolvedField();
 
-            // COUNT SOLVED FIELDS:
+            // COUNT UNSOLVED FIELDS:
             noOfUnsolvedFields = solverTools.countNoOfUnsolvedFields();
         }
 
