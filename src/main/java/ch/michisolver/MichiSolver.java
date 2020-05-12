@@ -25,6 +25,8 @@ public class MichiSolver {
             noOfUnsolvedFields = solverTools.countNoOfUnsolvedFields();
         }
 
+        System.out.println("*** SUDOKU SOLVED ***");
+
         // GENERATE SOLVED SUDOKU ARRAY:
         int[][] solvedSudoku = solverTools.getSolvedSudokuArray();
 

@@ -6,6 +6,7 @@ public class SolverTools {
     private final int noOfFields = 81; // A sudoku has 81 fields
     private int[][] unsolvedSudoku = new int[gridLength][gridLength];
     private Field[] fieldArray = new Field[noOfFields];
+    private int solverAttemptNo = 1;
 
     public void configureAllFields(int[][] sudokuArray) {
         // Store initial sudoku in case solver has to restart:
@@ -101,7 +102,7 @@ public class SolverTools {
     }
 
     private boolean fieldIsSolvedAndUnprocessed(Field field) {
-        if(field.isSolved() && !field.hasBeenProcessed()) {
+        if (field.isSolved() && !field.hasBeenProcessed()) {
             return true;
         }
         return false;
@@ -121,13 +122,24 @@ public class SolverTools {
                 }
             }
         }
-        if (minimumNoOfPossibilities == 0) {
-            System.out.println("SOLVER HAS HIT A DEAD END! RESTART WITH INITIAL SUDOKU");
+        detectSolverDeadEnd(nextSolvedField);
+    }
+
+    private void detectSolverDeadEnd(Field field) {
+        if (field.countPossibleNumbers() == 0) {
+            solverAttemptNo++;
+            printDeadEndMessage();
             configureAllFields(unsolvedSudoku);
         } else {
-            nextSolvedField.setAPossibleValueByRandom();
-            nextSolvedField.setSolved();
+            field.setAPossibleValueByRandom();
+            field.setSolved();
         }
+    }
+
+    private void printDeadEndMessage() {
+        System.out.print("SOLVER HAS HIT A DEAD END WITH " + countNoOfUnsolvedFields() + " FIELDS UNSOLVED! ");
+        System.out.print("RESTART WITH INITIAL SUDOKU. ");
+        System.out.print("SOLVING ATTEMPT NO: " + solverAttemptNo + "\n");
     }
 
     public int countNoOfUnsolvedFields() {
@@ -137,7 +149,6 @@ public class SolverTools {
                 noOfUnsolvedFields++;
             }
         }
-        System.out.println(noOfUnsolvedFields + " fields are not solved yet");
         return noOfUnsolvedFields;
     }
 
