@@ -6,43 +6,28 @@ public class MichiSolver {
         SolverTools solverTools = new SolverTools();
 
         // CONFIGURE ALL FIELDS
-        printStarline("CONFIGURE ALL FIELDS");
         solverTools.configureAllFields(puzzle);
 
         int noOfUnsolvedFields = 81; // 81 is the maximum;
 
-        // REPEAT UNTIL ALL FIELDS ARE SOLVED
+        // REPEAT THIS LOOP UNTIL ALL FIELDS ARE SOLVED:
         while (noOfUnsolvedFields > 0) {
 
-            // ITERATE THROUGH ALL SOLVED FIELDS ...
-            // AND REMOVE THEIR NUMBERS FROM ALL FIELDS...
-            // IN SAME ROW, COLUMN, OR SECTOR;
-            //printStarline("REMOVE SOLVED NUMBERS");
+            // ITERATE THROUGH ALL SOLVED FIELDS AND
+            // REMOVE THEIR NUMBERS FROM ALL RELATED FIELDS:
             solverTools.removeSolvedNumbersFromOtherFields();
 
-            // FIND FIELD WITH THE LEAST POSSIBILITIES ...
-            // SELECT A NUMBER BY RANDOM
-            // AND MARK IT "SOLVED"
-            //printStarline("SELECT NEXT SOLVED FIELD");
+            // FIND FIELD WITH THE LEAST POSSIBILITIES AND
+            // SELECT A POSSIBLE NUMBER *BY RANDOM*:
             solverTools.selectNextSolvedField();
 
-            // CHECK IF ALL FIELDS ARE SOLVED
-            //printStarline("COUNT NUMBER OF UNSOLVED FIELDS");
+            // COUNT SOLVED FIELDS:
             noOfUnsolvedFields = solverTools.countNoOfUnsolvedFields();
         }
 
-        // WRITE ARRAY OF OBJECTS TO SOLVED SUDOKU ARRAY
+        // GENERATE SOLVED SUDOKU ARRAY:
         int[][] solvedSudoku = solverTools.getSolvedSudokuArray();
 
-        // RETURN THE SOLVED SUDOKU ARRAY
         return solvedSudoku;
-    }
-
-    public static void printStarline(String chapter) {
-        for (int i = 0; i < 3; i++) {
-            System.out.print("*****" + chapter + "******");
-        }
-        System.out.println("");
-
     }
 }
