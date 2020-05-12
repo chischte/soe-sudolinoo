@@ -4,27 +4,25 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Field {
-    // PROPERTIES OF EVERY SUDOKU FIELD:
-    private boolean isSolved = false;
 
-    // "hasBeenProcessed" is true if all fields in same row, column or sector have been cleared of the possibility of this number;
-    private boolean hasBeenProcessed;
+    private boolean isSolved;
+    private boolean hasBeenProcessed; // true if solved and related fields processed
     private int rowNo; // 0-8
     private int columnNo; // 0-8
     private int fieldValue; // 1-9
     private int sectorNo; // 1-9
     private TreeSet<Integer> possibilities = new TreeSet<>();
 
-    // THIS IS THE CONSTRUCTOR
     public Field() {
+        isSolved = false;
         hasBeenProcessed = false;
-        // Create possibilities Set
+        // Create possibilities Set:
         Integer arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         Collections.addAll(this.possibilities = new TreeSet<Integer>(Arrays.asList(arr)));
     }
 
-    //SETTER AND METHODS TO CHANGE VALUES:
-    //TODO: check if all getter/setter are necessary
+    // SETTER AND METHODS TO CHANGE VALUES:
+
     public void setRowNo(int rowNo) {
         this.rowNo = rowNo;
     }
@@ -54,7 +52,8 @@ public class Field {
         this.hasBeenProcessed = true;
     }
 
-    //GETTER AND METHODS TO REQUEST VALUES :
+    // GETTER AND METHODS TO REQUEST VALUES :
+
     public boolean isSolved() {
         return this.isSolved;
     }

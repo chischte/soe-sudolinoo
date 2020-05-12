@@ -68,8 +68,8 @@ public class SolverTools {
         for (int fieldNo = 0; fieldNo < noOfFields; fieldNo++) {
             Field currentField = fieldArray[fieldNo];
             if (fieldIsSolvedAndUnprocessed(currentField)) {
-               clearNumberFromRelatedFields(currentField);
-               currentField.setProcessed();
+                clearNumberFromRelatedFields(currentField);
+                currentField.setProcessed();
             }
         }
     }
@@ -77,10 +77,8 @@ public class SolverTools {
     void clearNumberFromRelatedFields(Field solvedField) {
         for (int fieldNo = 0; fieldNo < noOfFields; fieldNo++) {
             Field currentField = fieldArray[fieldNo];
-            if (!currentField.isSolved()) {
-                if (fieldsAreRelated(solvedField, currentField)) {
-                    removePossibilityFromField(solvedField, currentField);
-                }
+            if (fieldsAreRelated(solvedField, currentField)) {
+                removePossibilityFromField(solvedField, currentField);
             }
         }
     }
