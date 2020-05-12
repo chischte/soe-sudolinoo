@@ -7,10 +7,11 @@ public class Field {
 
     private boolean isSolved;
     private boolean hasBeenProcessed; // true if solved and related fields processed
+    private int fieldNo; // 0-80
     private int rowNo; // 0-8
     private int columnNo; // 0-8
-    private int fieldValue; // 1-9
     private int sectorNo; // 1-9
+    private int fieldValue; // 1-9
     private TreeSet<Integer> possibilities = new TreeSet<>();
 
     public Field() {
@@ -22,6 +23,10 @@ public class Field {
     }
 
     // SETTER AND METHODS TO CHANGE VALUES:
+
+    public void setFieldNo(int fieldNo) {
+        this.fieldNo = fieldNo;
+    }
 
     public void setRowNo(int rowNo) {
         this.rowNo = rowNo;
@@ -50,6 +55,14 @@ public class Field {
 
     public void setProcessed() {
         this.hasBeenProcessed = true;
+    }
+
+    public void setAPossibleValueByRandom() {
+        int noOfPossibilities = possibilities.size();
+        int randomNo = ThreadLocalRandom.current().nextInt(0, noOfPossibilities);
+        Integer[] possibilityArray = new Integer[possibilities.size()];
+        possibilities.toArray(possibilityArray);
+        setFieldValue(possibilityArray[randomNo]);
     }
 
     // GETTER AND METHODS TO REQUEST VALUES :
@@ -81,13 +94,5 @@ public class Field {
 
     public boolean hasBeenProcessed() {
         return hasBeenProcessed;
-    }
-
-    public int getAPossibleValueByRandom() {
-        int noOfPossibilities = possibilities.size();
-        int random = ThreadLocalRandom.current().nextInt(0, noOfPossibilities);
-        Integer[] possibilityArray = new Integer[possibilities.size()];
-        possibilities.toArray(possibilityArray);
-        return possibilityArray[random];
     }
 }

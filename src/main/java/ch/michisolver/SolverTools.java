@@ -1,16 +1,14 @@
 package main.java.ch.michisolver;
 
 public class SolverTools {
-    //TODO: check if different tool classes make sense or rename to Tool ("SudokuInitializer...)
-    // This is an array containing an object for every sudoku field
+
     private final int gridLength = 9; // A sudoku has a grid length of 9 Fields
     private final int noOfFields = 81; // A sudoku has 81 fields
     private int[][] unsolvedSudoku = new int[gridLength][gridLength];
     private Field[] fieldArray = new Field[noOfFields];
 
-
     public void configureAllFields(int[][] sudokuArray) {
-        // store initial sudoku in case solver has to restart:
+        // Store initial sudoku in case solver has to restart:
         unsolvedSudoku = sudokuArray;
         for (int row = 0; row < gridLength; row++) {
             for (int col = 0; col < gridLength; col++) {
@@ -22,6 +20,7 @@ public class SolverTools {
                 currentField.setRowNo(row);
                 currentField.setColumnNo(col);
                 currentField.setSectorNo(getSector(row, col));
+                currentField.setFieldNo(calculateFieldNo(row, col));
 
                 int currentValue = sudokuArray[row][col];
                 if (currentValue != 0) {
@@ -64,7 +63,7 @@ public class SolverTools {
     }
 
     public void removeSolvedNumbersFromOtherFields() {
-        // Search solved fields in all fields
+        // Search solved fields in all fields:
         for (int fieldNo = 0; fieldNo < noOfFields; fieldNo++) {
             Field currentField = fieldArray[fieldNo];
             if (fieldIsSolvedAndUnprocessed(currentField)) {
@@ -104,38 +103,27 @@ public class SolverTools {
         return (field.isSolved() && !field.hasBeenProcessed());
     }
 
-    private boolean findRelatedFields(int rowNo, int rowNo1) {
-        if (rowNo == rowNo1) {
-            return true;
-        }
-        return false;
-    }
-
     public void selectNextSolvedField() {
-        int fieldWithMinimumPossibilities = 0;
-        int minimumNoOfPossibilities = 9; // bigger than 9 is not possible
+        Field nextSolvedField = fieldArray[0];
+        int minimumNoOfPossibilities = 9; // 9 is the maximum
 
         // iterate all fields
         for (int i = 0; i < noOfFields; i++) {
+            Field currentField = fieldArray[i];
             // check unsolved fields only
-            if (!fieldArray[i].isSolved()) {
-                if (fieldArray[i].countPossibleNumbers() <= minimumNoOfPossibilities) {
-                    minimumNoOfPossibilities = fieldArray[i].countPossibleNumbers();
-                    fieldWithMinimumPossibilities = i;
+            if (!currentField.isSolved()) {
+                if (currentField.countPossibleNumbers() < minimumNoOfPossibilities) {
+                    minimumNoOfPossibilities = currentField.countPossibleNumbers();
+                    nextSolvedField = currentField;
                 }
             }
         }
-        System.out.println("The next field marked as solved is field No " + fieldWithMinimumPossibilities + " with " + minimumNoOfPossibilities + " possible numbers");
-
-        // IF THE SOLVER HAS MOVED TO A DEAD-END AND HAS TO RESTART FROM SCRATCH
         if (minimumNoOfPossibilities == 0) {
-            System.out.println("SOLVER HAS HIT A DEAD END! RESTART SOLVER WITH INTIAL SUDOKU");
+            System.out.println("SOLVER HAS HIT A DEAD END! RESTART WITH INITIAL SUDOKU");
             configureAllFields(unsolvedSudoku);
         } else {
-            // Set a random possibility value as field value
-            fieldArray[fieldWithMinimumPossibilities].setFieldValue(fieldArray[fieldWithMinimumPossibilities].getAPossibleValueByRandom());
-            // Mark field as solved:
-            fieldArray[fieldWithMinimumPossibilities].setSolved();
+            nextSolvedField.setAPossibleValueByRandom();
+            nextSolvedField.setSolved();
         }
     }
 
@@ -146,17 +134,16 @@ public class SolverTools {
                 noOfUnsolvedFields++;
             }
         }
-
         System.out.println(noOfUnsolvedFields + " fields are not solved yet");
         return noOfUnsolvedFields;
     }
 
     public int[][] getSolvedSudokuArray() {
-        int[][] solvedSudoku = new int[9][9];
-        for (int row = 0; row < solvedSudoku.length; row++) {
-            for (int col = 0; col < solvedSudoku.length; col++) {
-                int fieldNumber = row * solvedSudoku.length + col;
-                // Assign field values to array
+        int[][] solvedSudoku = new int[gridLength][gridLength];
+        for (int row = 0; row < gridLength; row++) {
+            for (int col = 0; col < gridLength; col++) {
+                int fieldNumber = row * gridLength + col;
+                // Assign field values to array:
                 solvedSudoku[row][col] = fieldArray[fieldNumber].getFieldValue();
             }
         }
