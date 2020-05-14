@@ -25,9 +25,9 @@
         </HBox>
         <HBox styleClass="click_button" spacing="10" alignment="CENTER" GridPane.rowIndex="2" GridPane.columnSpan="4">
             <Button text="Get Sudoku" onAction="#clickOnGetSudoku" />
-            <Button text="solver Backtracking" onAction="#clickOnSolveSudoku" />
-            <Button text="solver random number" onAction="#clickOnMichiSolver" />
-            <Button text="clear Sudoku" onAction="#clickOnClear" />
+            <Button text="Solver Backtracking" onAction="#clickOnSolveSudoku" />
+            <Button text="Solver random number" onAction="#clickOnMichiSolver" />
+            <Button text="Clear Sudoku" onAction="#clickOnClear" />
         </HBox>
 
         <HBox styleClass="created_by" spacing="10" alignment="CENTER" GridPane.rowIndex="4" GridPane.columnSpan="4">
