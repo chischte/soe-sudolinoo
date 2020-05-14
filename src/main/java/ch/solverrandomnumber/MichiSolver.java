@@ -4,7 +4,7 @@ package main.java.ch.solverrandomnumber;
  * The MichiSolver solves a Sudoku by determing the possible numbers according to Sudoku rules.
  * If the solver cannot reduce the possible numbers in any field to a single one,
  * it simply guesses by random.
- * In case the solver guessed wrong, an hit a dead end, the solver restarts with the initial Sudoku puzzle.
+ * In case the solver guessed wrong, and hits a dead end, the solver restarts with the initial Sudoku puzzle.
  *
  * The random functionality is implemented in the method setAPossibleValueByRandom() of class Field.
  *
