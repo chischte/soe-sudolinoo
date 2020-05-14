@@ -55,6 +55,7 @@ public class StageManager {
     private void setupSudokuStage() throws IOException {
         sudokuStage = new Stage();
 
+
         FxController controller = new FxController(this);
         FXMLLoader loaderFxLayoutSudokuSolverScene= new FXMLLoader(getClass().getResource("FxLayoutSudokuSolverScene.fxml"));
         loaderFxLayoutSudokuSolverScene.setController(controller);

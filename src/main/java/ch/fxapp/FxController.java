@@ -12,12 +12,12 @@
 package main.java.ch.fxapp;
 
 import main.java.ch.fileloader.SudokuParser;
-import main.java.ch.controller.SudokuSolver;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import main.java.ch.michisolver.MichiSolver;
+import main.java.ch.solverrandomnumber.MichiSolver;
+import main.java.ch.solverbacktracking.SudokuSolver;
 
 import javax.swing.*;
 import java.awt.*;
