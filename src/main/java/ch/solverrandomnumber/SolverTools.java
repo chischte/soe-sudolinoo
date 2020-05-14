@@ -1,5 +1,10 @@
 package main.java.ch.solverrandomnumber;
 
+/**
+ * The SolverTools class contains several methods that are used by the solver.
+ *
+ * @author Michael Wettstein
+ */
 public class SolverTools {
 
     private final int gridLength = 9; // A sudoku has a grid length of 9 Fields
@@ -75,7 +80,7 @@ public class SolverTools {
         }
     }
 
-    void removePossibilityFromRelatedFields(Field solvedField) {
+    private void removePossibilityFromRelatedFields(Field solvedField) {
         for (int fieldNo = 0; fieldNo < noOfFields; fieldNo++) {
             Field currentField = fieldArray[fieldNo];
             if (fieldsAreRelated(solvedField, currentField)) {
@@ -84,7 +89,7 @@ public class SolverTools {
         }
     }
 
-    boolean fieldsAreRelated(Field fieldA, Field fieldB) {
+    private boolean fieldsAreRelated(Field fieldA, Field fieldB) {
         if (fieldA.getColumnNo() == fieldB.getColumnNo()) {
             return true;
         }
@@ -97,7 +102,7 @@ public class SolverTools {
         return false;
     }
 
-    void removePossibilityFromField(Field solvedField, Field otherField) {
+    private void removePossibilityFromField(Field solvedField, Field otherField) {
         otherField.removePossibleNo(solvedField.getFieldValue());
     }
 
