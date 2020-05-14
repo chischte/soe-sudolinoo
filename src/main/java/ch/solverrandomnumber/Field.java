@@ -1,4 +1,4 @@
-package main.java.ch.michisolver;
+package main.java.ch.solverrandomnumber;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;

@@ -11,7 +11,7 @@
  * @since 03.05.2020
  */
 
-package main.java.ch.controller;
+package main.java.ch.solverbacktracking;
 
 public class SudokuSolver {
 

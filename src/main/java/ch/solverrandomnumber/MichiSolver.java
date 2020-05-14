@@ -1,4 +1,4 @@
-package main.java.ch.michisolver;
+package main.java.ch.solverrandomnumber;
 
 public class MichiSolver {
 
