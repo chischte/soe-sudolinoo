@@ -2,7 +2,7 @@
  * The brain of the logic behind the whole solver
  * This class is providing all the needed steps to solve a sudoku
  * the methods for example the 3by3 check are all in encapsulated for later use
- *
+ * <p>
  * This class is multiple times refactored.
  *
  * @author Joel Iselin
@@ -30,8 +30,7 @@ public class SudokuSolver {
     public int[][] startSolvingSudoku(int[][] puzzleToSolve) {
         loaderSudoku = puzzleToSolve;
         gridSizeSudoku = loaderSudoku.length;
-        if(solver())
-        {
+        if (solver()) {
             return solvedSudoku;
         }
 
@@ -82,7 +81,7 @@ public class SudokuSolver {
     /**
      * This method provides a change if a number is incorrect in this segment of the sudoku
      * @param possibilityArray
-     * @return
+     * @return possibilityArray
      */
     private int[] changeToPossibleNumbers(int[] possibilityArray) {
         int ConversionPossibilityArray = 1;
@@ -103,7 +102,7 @@ public class SudokuSolver {
      * @param threeByThreeRow
      * @param threeByThreeCol
      * @param possibilityArray
-     * @return
+     * @return possibilityArray
      */
     private int[] isTheThreeByThreeRuleValid(int threeByThreeRow, int threeByThreeCol, int[] possibilityArray) {
         int loader;
@@ -128,7 +127,7 @@ public class SudokuSolver {
      * This method provides if the vertical line contains only the number 1 to 9 and no multipliers
      * @param possibilityArray
      * @param gridSize
-     * @return
+     * @return possibilityArray
      */
     private int[] checkIfVerticalIsValid(int[] possibilityArray, int gridSize) {
         for (int i = 0; i < gridSize; i++) {
@@ -146,7 +145,7 @@ public class SudokuSolver {
      * This method provides if the horizontal line contains only the number 1 to 9 and no multipliers
      * @param possibilityArray
      * @param gridSize
-     * @return
+     * @return possibilityArray
      */
     private int[] checkIfHorizontalIsValid(int[] possibilityArray, int gridSize) {
         for (int i = 0; i < gridSize; i++) {
@@ -212,12 +211,11 @@ public class SudokuSolver {
                         // ToDo get out of the loop when solver returns true
                         solver();
 
-                    } else if (i == 8 || i == 9 ) {
+                    } else if (i == 8 || i == 9) {
                         loaderSudoku[rowsolver][colsolver] = 0;
                     }
                 }
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }

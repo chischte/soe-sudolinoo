@@ -3,6 +3,11 @@ package main.java.ch.solverrandomnumber;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * An object of the Field class represents a single field with all the attributes that are required by the solver.
+ *
+ * @author Michael Wettstein
+ */
 public class Field {
 
     private boolean isSolved;
@@ -57,6 +62,10 @@ public class Field {
         this.hasBeenProcessed = true;
     }
 
+    /**
+     * This method is used if the solver cannot reduce the number of possibilites to a single number.
+     * In this case this method simply guesses a number.
+     */
     public void setAPossibleValueByRandom() {
         int noOfPossibilities = possibilities.size();
         int randomNo = ThreadLocalRandom.current().nextInt(0, noOfPossibilities);
