@@ -6,7 +6,7 @@
  * @since 03.05.2020
  */
 
-package main.java.ch.fxapp;
+package main.java.ch.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,9 +21,6 @@ public class FxWelcomeController {
 
     @FXML
     protected void switchToSceneSudokuOverview(ActionEvent event) {
-        stageManager.loadSecondStage();
+        stageManager.loadSudokuStage();
     }
 }
-
-
-

@@ -22,7 +22,7 @@
         </VBox>
 
         <HBox spacing="10" alignment="CENTER" GridPane.rowIndex="1" GridPane.columnSpan="4">
-            <Button text="Get Sudoku" styleClass="start_button" onAction="#switchToSceneSudokuOverview" />
+            <Button text="Los geht's" styleClass="start_button" onAction="#switchToSceneSudokuOverview" />
         </HBox>
 
         <HBox styleClass="created_by" spacing="10" alignment="CENTER" GridPane.rowIndex="2" GridPane.columnSpan="4">
@@ -31,6 +31,6 @@
     </children>
 
     <stylesheets>
-        <URL value="@FxStyle.css"/>
+        <URL value="@style/FxStyle.css"/>
     </stylesheets>
 </GridPane>

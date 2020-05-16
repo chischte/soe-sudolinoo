@@ -10,7 +10,7 @@
  * @since 03.05.2020
  */
 
-package main.java.ch.fxapp;
+package main.java.ch.controller;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -27,7 +27,7 @@ public class StageManager {
     private Stage sudokuStage;
 
     public static StageManager getInstance(Stage primaryStage) throws IOException {
-        if(instance == null) {
+        if (instance == null) {
             instance = new StageManager(primaryStage);
         }
 
@@ -36,15 +36,15 @@ public class StageManager {
 
     private StageManager(Stage primaryStage) throws IOException {
         this.welcomeStage = primaryStage;
-        setupWelcomeStage();
-        setupSudokuStage();
+        setUpWelcomeStage();
+        setUpSudokuStage();
     }
 
-    private void setupWelcomeStage() throws IOException {
+    private void setUpWelcomeStage() throws IOException {
         firstStage = new Stage();
 
         FxWelcomeController controllerFxLayout = new FxWelcomeController(this);
-        FXMLLoader loaderFxLayout = new FXMLLoader(getClass().getResource("FxLayout.fxml"));
+        FXMLLoader loaderFxLayout = new FXMLLoader(getClass().getResource("../fxml/FxLayout.fxml"));
         loaderFxLayout.setController(controllerFxLayout);
         GridPane fxmlGrid = loaderFxLayout.load();
         firstStage.setTitle("Projektarbeit, TS TSI 1809 A 04 SoE");
@@ -52,28 +52,25 @@ public class StageManager {
         firstStage.setScene(scene);
     }
 
-    private void setupSudokuStage() throws IOException {
+    private void setUpSudokuStage() throws IOException {
         sudokuStage = new Stage();
 
-
         FxController controller = new FxController(this);
-        FXMLLoader loaderFxLayoutSudokuSolverScene= new FXMLLoader(getClass().getResource("FxLayoutSudokuSolverScene.fxml"));
+        FXMLLoader loaderFxLayoutSudokuSolverScene = new FXMLLoader(getClass().getResource("../fxml/FxLayoutSudokuSolverScene.fxml"));
         loaderFxLayoutSudokuSolverScene.setController(controller);
         GridPane fxmlGrid = loaderFxLayoutSudokuSolverScene.load();
         sudokuStage.setTitle("Sudoku Solver");
-        sudokuStage.setX(600);
-        sudokuStage.setY(500);
         Scene scene = new Scene(fxmlGrid, 600, 500);
         sudokuStage.setScene(scene);
     }
 
-    public void loadFirstStage() {
+    public void loadWelcomeStage() {
         closeActiveStage();
         welcomeStage = firstStage;
         welcomeStage.show();
     }
 
-    public void loadSecondStage() {
+    public void loadSudokuStage() {
         closeActiveStage();
         welcomeStage = sudokuStage;
         welcomeStage.show();

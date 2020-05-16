@@ -13,15 +13,17 @@ package main.java.ch.fileloader;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 
 public class SudokuParser {
 
     private int[][] puzzle = new int[9][9];
 
-    public int[][] convertJsonToSudokuarray(File sudokuStringJson) {
+    public int[][] convertJsonToSudokuArray(File sudokuStringJson) {
         try {
             this.puzzle = parseJson(sudokuStringJson);
         } catch (Exception e) {
@@ -31,28 +33,34 @@ public class SudokuParser {
         return puzzle;
     }
 
-    public static int[][] parseJson(File sudokuStringJson) throws Exception {
-
-        // Parse json file
-        Object obj = new JSONParser().parse(new FileReader(sudokuStringJson));
-
-        // Typecast obj to JSONObject
-        JSONObject jo = (JSONObject) obj;
-
-        // Get spaghettistring
-        String spaghettistring = (String) jo.get("puzzle");
-
+    public int[][] parseJson(File sudokuStringJson) {
+        Object object;
         int[][] puzzle = new int[9][9];
 
-        // Create sudoku array from spaghettistring:
-        for (int row = 0; row < puzzle.length; row++) {
-            for (int col = 0; col < puzzle.length; col++) {
-                int charNumber = row * puzzle.length + col;
-                // Select a char from the string, convert it to a string and parse it as an integer :)
-                puzzle[row][col] = Integer.parseInt(String.valueOf(spaghettistring.charAt(charNumber)));
-            }
-        }
+        // Parse json file
+        try {
+            object = new JSONParser().parse(new FileReader(sudokuStringJson));// Typecast obj to JSONObject
+            JSONObject jo = (JSONObject) object;
 
+            String sudokuInputStringFromFile = (String) jo.get("puzzle");
+
+            if (sudokuInputStringFromFile.length() == 81) {
+                // Create sudoku array from sudokuInputStringFromFile:
+                for (int row = 0; row < puzzle.length; row++) {
+                    for (int col = 0; col < puzzle.length; col++) {
+                        int charNumber = row * puzzle.length + col;
+                        // Select a char from the string, convert it to a string and parse it as an integer :)
+                        puzzle[row][col] = Integer.parseInt(String.valueOf(sudokuInputStringFromFile.charAt(charNumber)));
+                    }
+                }
+            }
+
+            return puzzle;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return puzzle;
     }
 }

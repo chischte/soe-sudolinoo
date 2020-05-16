@@ -37,6 +37,6 @@
     </children>
 
     <stylesheets>
-        <URL value="@FxStyle.css"/>
+        <URL value="@style/FxStyle.css"/>
     </stylesheets>
 </GridPane>

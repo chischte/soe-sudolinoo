@@ -2,7 +2,7 @@
     -fx-background-color: rgba(189, 226, 238, 1);
     -fx-font-family: Consolas;
     -fx-font-weight: bold;
-    -fx-background-image: url("../image/background.jpg");
+    -fx-background-image: url("../../../../../images/background.jpg");
 }
 
 .title_class_h1_style {

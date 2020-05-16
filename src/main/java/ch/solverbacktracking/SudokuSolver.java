@@ -14,13 +14,11 @@
 package main.java.ch.solverbacktracking;
 
 public class SudokuSolver {
-
     public int[][] loaderSudoku;
     public int[][] solvedSudoku;
     private int gridSizeSudoku;
     private int row = 0;
     private int col = 0;
-
 
     /**
      * This is the method that is used by the gui
@@ -66,11 +64,9 @@ public class SudokuSolver {
         // Check if the 3x3 Sudoku rule is valid
         possibilityArray = isTheThreeByThreeRuleValid(getTheThreeByThreeGrid(row), getTheThreeByThreeGrid(col), possibilityArray);
 
-
         // Check if the horizontal row and if the vertical col is valid
         possibilityArray = checkIfHorizontalIsValid(possibilityArray, gridSizeSudoku);
         possibilityArray = checkIfVerticalIsValid(possibilityArray, gridSizeSudoku);
-
 
         // Change the array to the possible numbers
         possibilityArray = changeToPossibleNumbers(possibilityArray);

@@ -11,7 +11,7 @@
  * @since 03.05.2020
  */
 
-package main.java.ch.fxapp;
+package main.java.ch.controller;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -22,6 +22,6 @@ public final class FxApp extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         StageManager stageManager = StageManager.getInstance(primaryStage);
-        stageManager.loadFirstStage();
+        stageManager.loadWelcomeStage();
     }
 }
