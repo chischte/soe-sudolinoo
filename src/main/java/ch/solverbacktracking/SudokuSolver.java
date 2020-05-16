@@ -70,8 +70,8 @@ public class SudokuSolver {
 
         // Change the array to the possible numbers
         possibilityArray = changeToPossibleNumbers(possibilityArray);
-        return possibilityArray;
 
+        return possibilityArray;
     }
 
     /**
@@ -116,6 +116,7 @@ public class SudokuSolver {
                 }
             }
         }
+
         return possibilityArray;
     }
 
@@ -173,8 +174,8 @@ public class SudokuSolver {
         if (isSudokuFullyFilledOut(gridSizeSudoku, loaderSudoku)) {
             // this is the place where the solved sudoku goes to the Gui
             solvedSudoku = loaderSudoku;
-            return true;
 
+            return true;
         } else {
             search:
             {
