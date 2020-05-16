@@ -17,8 +17,14 @@ public class SudokuSolver {
     public int[][] loaderSudoku;
     public int[][] solvedSudoku;
     private int gridSizeSudoku;
-    private int row = 0;
-    private int col = 0;
+    private int row;
+    private int col;
+
+    public SudokuSolver(){
+        gridSizeSudoku = 81;
+        row = 0;
+        col = 0;
+    }
 
     /**
      * This is the method that is used by the gui
@@ -99,7 +105,7 @@ public class SudokuSolver {
      * It checks also all the other rules
      * @return returns the int[][] array with all the correct numbers in it
      */
-    public int[] checkAllTheSudokuRulesOfTheEntries() {
+    private int[] checkAllTheSudokuRulesOfTheEntries() {
         int[] possibilityArray = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
         // Check if the 3x3 Sudoku rule is valid

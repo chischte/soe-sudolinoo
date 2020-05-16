@@ -17,7 +17,7 @@ public class Field {
     private int columnNo; // 0-8
     private int sectorNo; // 1-9
     private int fieldValue; // 1-9
-    private TreeSet<Integer> possibilities = new TreeSet<>();
+    private TreeSet<Integer> possibilities;
 
     public Field() {
         isSolved = false;
@@ -28,7 +28,6 @@ public class Field {
     }
 
     // SETTER AND METHODS TO CHANGE VALUES:
-
     public void setFieldNo(int fieldNo) {
         this.fieldNo = fieldNo;
     }
