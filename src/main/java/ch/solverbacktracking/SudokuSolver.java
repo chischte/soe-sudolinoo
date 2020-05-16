@@ -28,6 +28,7 @@ public class SudokuSolver {
     public int[][] startSolvingSudoku(int[][] puzzleToSolve) {
         loaderSudoku = puzzleToSolve;
         gridSizeSudoku = loaderSudoku.length;
+
         if (solver()) {
             return solvedSudoku;
         }
@@ -36,21 +37,61 @@ public class SudokuSolver {
     }
 
     /**
-     * Checks if all of the fields are filled out
-     * @param gridSize size is normaly in a sudoku 9by9 but we can extend or decrease it with that
-     * @param loader is the filled out array of the sudoku
-     * @return true/false
+     * Main solver method with the method of backtracking to the last set number
+     * @return returns a 2 dimensional array with the solved sudoku
      */
-    private boolean isSudokuFullyFilledOut(int gridSize, int[][] loader) {
-        for (int y = 0; y < gridSize; y++) {
-            for (int x = 0; x < gridSize; x++) {
-                if (loader[x][y] == 0) {
-                    return false;
+    public boolean solver() {
+        int rowsolver = 0;
+        int colsolver = 0;
+        int[] possibilityArraySolver = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+        if (isSudokuFullyFilledOut(gridSizeSudoku, loaderSudoku)) {
+            // this is the place where the solved sudoku goes to the Gui
+            solvedSudoku = loaderSudoku;
+
+            return true;
+        } else {
+            search:
+            {
+                // detect first empty field
+                for (int x = 0; x < gridSizeSudoku; x++) {
+                    for (int y = 0; y < gridSizeSudoku; y++) {
+                        if (loaderSudoku[x][y] == 0) {
+                            rowsolver = x;
+                            colsolver = y;
+                            break search;
+                        }
+                    }
                 }
+            }
+
+            row = rowsolver;
+            col = colsolver;
+
+            possibilityArraySolver = checkAllTheSudokuRulesOfTheEntries();
+
+            try {
+                // It needs to be equal to the size of the Sudoku length otherwise the last field could not be check by all the Sudoku rules
+                for (int i = 0; i < 10; i++) {
+                    if (isSudokuFullyFilledOut(gridSizeSudoku, loaderSudoku)) {
+                        break;
+                    }
+
+                    if (i < 9 && possibilityArraySolver[i] != 0) {
+                        loaderSudoku[rowsolver][colsolver] = possibilityArraySolver[i];
+                        // ToDo get out of the loop when solver returns true
+                        solver();
+
+                    } else if (i == 8 || i == 9) {
+                        loaderSudoku[rowsolver][colsolver] = 0;
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
         }
 
-        return true;
+        return false;
     }
 
     /**
@@ -139,6 +180,24 @@ public class SudokuSolver {
     }
 
     /**
+     * Checks if all of the fields are filled out
+     * @param gridSize size is normaly in a sudoku 9by9 but we can extend or decrease it with that
+     * @param loader is the filled out array of the sudoku
+     * @return true/false
+     */
+    private boolean isSudokuFullyFilledOut(int gridSize, int[][] loader) {
+        for (int y = 0; y < gridSize; y++) {
+            for (int x = 0; x < gridSize; x++) {
+                if (loader[x][y] == 0) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * This method provides if the horizontal line contains only the number 1 to 9 and no multipliers
      * @param possibilityArray
      * @param gridSize
@@ -164,59 +223,5 @@ public class SudokuSolver {
         } else {
             return 6;
         }
-    }
-
-    public boolean solver() {
-        int rowsolver = 0;
-        int colsolver = 0;
-        int[] possibilityArraySolver = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-
-        if (isSudokuFullyFilledOut(gridSizeSudoku, loaderSudoku)) {
-            // this is the place where the solved sudoku goes to the Gui
-            solvedSudoku = loaderSudoku;
-
-            return true;
-        } else {
-            search:
-            {
-                // detect first empty field
-                for (int x = 0; x < gridSizeSudoku; x++) {
-                    for (int y = 0; y < gridSizeSudoku; y++) {
-                        if (loaderSudoku[x][y] == 0) {
-                            rowsolver = x;
-                            colsolver = y;
-                            break search;
-                        }
-                    }
-                }
-            }
-
-            row = rowsolver;
-            col = colsolver;
-
-            possibilityArraySolver = checkAllTheSudokuRulesOfTheEntries();
-
-            try {
-                // It needs to be equal to the size of the Sudoku length otherwise the last field could not be check by all the Sudoku rules
-                for (int i = 0; i < 10; i++) {
-                    if (isSudokuFullyFilledOut(gridSizeSudoku, loaderSudoku)) {
-                        break;
-                    }
-
-                    if (i < 9 && possibilityArraySolver[i] != 0) {
-                        loaderSudoku[rowsolver][colsolver] = possibilityArraySolver[i];
-                        // ToDo get out of the loop when solver returns true
-                        solver();
-
-                    } else if (i == 8 || i == 9) {
-                        loaderSudoku[rowsolver][colsolver] = 0;
-                    }
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-
-        return false;
     }
 }
