@@ -1,5 +1,9 @@
 package main.java.ch.solverrandomnumber;
 
+import main.java.ch.solverbacktracking.SudokuSolver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * The MichiSolver solves a Sudoku by determing the possible numbers according to Sudoku rules.
  * If the solver cannot reduce the possible numbers in any field to a single one,
@@ -13,8 +17,9 @@ package main.java.ch.solverrandomnumber;
  * @return solvedSudoku the solved Sudoku array
  */
 public class MichiSolver {
+    Logger logger = LoggerFactory.getLogger(MichiSolver.class);
 
-    public static int[][] solve(int[][] puzzle) {
+    public  int[][] solve(int[][] puzzle) {
         SolverTools solverTools = new SolverTools();
 
         solverTools.configureAllFields(puzzle);
@@ -22,6 +27,7 @@ public class MichiSolver {
         int noOfUnsolvedFields = 81; // 81 is the maximum;
 
         // REPEAT THIS LOOP UNTIL ALL FIELDS ARE SOLVED:
+        logger.debug("Michi solver started");
         while (noOfUnsolvedFields > 0) {
 
             // ITERATE THROUGH ALL SOLVED FIELDS AND
@@ -36,7 +42,7 @@ public class MichiSolver {
             noOfUnsolvedFields = solverTools.countNoOfUnsolvedFields();
         }
 
-        System.out.println("*** SUDOKU SOLVED ***");
+        logger.debug("*** SUDOKU SOLVED ***");
 
         // GENERATE SOLVED SUDOKU ARRAY:
         int[][] solvedSudoku = solverTools.getSolvedSudokuArray();

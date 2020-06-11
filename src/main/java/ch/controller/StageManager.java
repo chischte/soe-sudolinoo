@@ -16,11 +16,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import main.java.ch.solverbacktracking.SudokuSolver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 public class StageManager {
     private static StageManager instance;
+    final Logger logger = LoggerFactory.getLogger(StageManager.class);
 
     private Stage welcomeStage;
     private Stage firstStage;
@@ -41,6 +45,7 @@ public class StageManager {
     }
 
     private void setUpWelcomeStage() throws IOException {
+        logger.debug("setUpWelcomeStage");
         firstStage = new Stage();
 
         FxWelcomeController controllerFxLayout = new FxWelcomeController(this);
@@ -53,6 +58,7 @@ public class StageManager {
     }
 
     private void setUpSudokuStage() throws IOException {
+        logger.debug("setUpSudokuStage");
         sudokuStage = new Stage();
 
         FxController controller = new FxController(this);
@@ -65,18 +71,21 @@ public class StageManager {
     }
 
     public void loadWelcomeStage() {
+        logger.debug("loadWelcomeStage");
         closeActiveStage();
         welcomeStage = firstStage;
         welcomeStage.show();
     }
 
     public void loadSudokuStage() {
+        logger.debug("loadSudokuStage");
         closeActiveStage();
         welcomeStage = sudokuStage;
         welcomeStage.show();
     }
 
     private void closeActiveStage() {
+        logger.debug("closeActiveStage");
         welcomeStage.close();
     }
 }

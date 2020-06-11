@@ -13,7 +13,11 @@
 
 package main.java.ch.solverbacktracking;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class SudokuSolver {
+    final Logger logger = LoggerFactory.getLogger(SudokuSolver.class);
     public int[][] loaderSudoku;
     public int[][] solvedSudoku;
     private int gridSizeSudoku;
@@ -47,6 +51,7 @@ public class SudokuSolver {
      * @return returns a 2 dimensional array with the solved sudoku
      */
     public boolean solver() {
+        logger.debug("solver started");
         int rowsolver = 0;
         int colsolver = 0;
         int[] possibilityArraySolver = {0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -54,6 +59,7 @@ public class SudokuSolver {
         if (isSudokuFullyFilledOut(gridSizeSudoku, loaderSudoku)) {
             // this is the place where the solved sudoku goes to the Gui
             solvedSudoku = loaderSudoku;
+            logger.debug("isSudokuFullyFilledOut == true, sudoku is fully filled and passed all rules");
 
             return true;
         } else {
@@ -106,6 +112,7 @@ public class SudokuSolver {
      * @return returns the int[][] array with all the correct numbers in it
      */
     private int[] checkAllTheSudokuRulesOfTheEntries() {
+        logger.debug("Rulechecker");
         int[] possibilityArray = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
         // Check if the 3x3 Sudoku rule is valid
@@ -148,6 +155,7 @@ public class SudokuSolver {
      * @return possibilityArray
      */
     private int[] isTheThreeByThreeRuleValid(int threeByThreeRow, int threeByThreeCol, int[] possibilityArray) {
+        logger.debug("check 3x3");
         int loader;
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
@@ -174,6 +182,7 @@ public class SudokuSolver {
      * @return possibilityArray
      */
     private int[] checkIfVerticalIsValid(int[] possibilityArray, int gridSize) {
+        logger.debug("vertical checker");
         for (int i = 0; i < gridSize; i++) {
             for (int j = 1; j < 10; j++) {
                 if (loaderSudoku[i][col] == j) {
@@ -210,6 +219,7 @@ public class SudokuSolver {
      * @return possibilityArray
      */
     private int[] checkIfHorizontalIsValid(int[] possibilityArray, int gridSize) {
+        logger.debug("horizintal checker");
         for (int i = 0; i < gridSize; i++) {
             for (int j = 1; j < 10; j++) {
                 if (loaderSudoku[row][i] == j) {
